@@ -1,3 +1,5 @@
+
+//A Class for testing a OBJ bluetooth device
 public class Bluetooth {
 
     private Data data;

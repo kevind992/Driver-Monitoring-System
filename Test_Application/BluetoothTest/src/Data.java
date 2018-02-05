@@ -1,5 +1,6 @@
 public class Data {
 
+
     private String hex;
 
     public Data(){
