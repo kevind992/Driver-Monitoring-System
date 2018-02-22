@@ -1,4 +1,4 @@
-package com.mongotest.mongotest;
+package com.mongospringdemo.springdemo;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -13,11 +13,13 @@ public class DbSeeder implements CommandLineRunner {
     private HotelRepository hotelRepository;
 
     public DbSeeder(HotelRepository hotelRepository) {
+
         this.hotelRepository = hotelRepository;
     }
 
     @Override
     public void run(String... strings) throws Exception {
+
         Hotel marriot = new Hotel(
                 "Marriot",
                 130,

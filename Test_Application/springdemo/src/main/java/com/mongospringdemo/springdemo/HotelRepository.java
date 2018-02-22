@@ -1,4 +1,4 @@
-package com.mongotest.mongotest;
+package com.mongospringdemo.springdemo;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;

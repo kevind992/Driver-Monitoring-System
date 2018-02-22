@@ -1,4 +1,4 @@
-package com.mongotest.mongotest;
+package com.mongospringdemo.springdemo;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +9,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/hotels")
 public class HotelController {
+
     private HotelRepository hotelRepository;
 
     public HotelController(HotelRepository hotelRepository) {

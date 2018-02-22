@@ -1,4 +1,4 @@
-package com.mongotest.mongotest;
+package com.mongospringdemo.springdemo;
 
 public class Review {
 
