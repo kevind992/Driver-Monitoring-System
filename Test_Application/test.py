@@ -9,7 +9,11 @@ connection = obd.OBD("\\.\\COM5")
 print(connection.status())
 
 # send the command, and parse the response
-cmd = obd.commands["SPEED"]
+cmd = obd.commands["PIDS_A"]
 response = connection.query(cmd, force=False) 
 print(response.value) 
-print(response.value.to("mph"))
+#print(response.value.to("mph"))
+
+#cmd1 = obd.commands["RPM"]
+#response1 = connection.query(cmd1, force=False) 
+#print(response1.value) 
