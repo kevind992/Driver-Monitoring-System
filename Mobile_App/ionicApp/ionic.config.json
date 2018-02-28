@@ -1,0 +1,8 @@
+{
+  "name": "obdii",
+  "app_id": "a2167ebe",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
