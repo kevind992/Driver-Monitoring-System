@@ -9,18 +9,29 @@
 
 <ion-content padding>
   <button ion-button full (click)="loadLogs()">Load Data</button>
+  
   <ion-list>
-    <ion-card ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
+    <ion-card>
       <ion-card-header>
-          {{item.day}}
+        <!-- {{item.date}} -->
+        [Trip Date]
       </ion-card-header>
-      <ion-card-content>
-          <ion-icon [name]="item.icon" item-start></ion-icon>
-          <!-- {{item.day}} -->
-          <div class="item-note" item-end>
-            {{item.time}}
-          </div>
+      <ion-card-content ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
+          <ion-item-group>
+            <ion-item-divider color="light">{{item.type}}</ion-item-divider>
+            <!-- <div class="item-note" item-end>
+              {{item.type}}
+            </div> -->
+              <div class="item-note" item-end>
+                <br>
+                {{item.value}}
+              </div>
+          </ion-item-group>
       </ion-card-content>
     </ion-card>
+
+
+
   </ion-list>
+
 </ion-content>
