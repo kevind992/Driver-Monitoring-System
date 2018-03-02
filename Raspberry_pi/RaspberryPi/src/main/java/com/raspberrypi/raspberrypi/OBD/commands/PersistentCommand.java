@@ -37,11 +37,6 @@ public abstract class PersistentCommand extends ObdCommand {
         super(command);
     }
 
-    /**
-     * <p>Constructor for PersistentCommand.</p>
-     *
-     * @param other a {@link com.github.pires.obd.commands.ObdCommand} object.
-     */
     public PersistentCommand(ObdCommand other) {
         this(other.cmd);
     }

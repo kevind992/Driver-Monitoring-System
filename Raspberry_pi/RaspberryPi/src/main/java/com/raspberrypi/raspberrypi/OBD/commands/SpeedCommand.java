@@ -12,7 +12,8 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands;
 
-import com.github.pires.obd.enums.AvailableCommandNames;
+
+import com.raspberrypi.raspberrypi.OBD.enums.AvailableCommandNames;
 
 /**
  * Current speed.
@@ -29,11 +30,6 @@ public class SpeedCommand extends ObdCommand implements SystemOfUnits {
         super("01 0D");
     }
 
-    /**
-     * Copy ctor.
-     *
-     * @param other a {@link com.github.pires.obd.commands.SpeedCommand} object.
-     */
     public SpeedCommand(SpeedCommand other) {
         super(other);
     }

@@ -12,8 +12,8 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands.control;
 
-import com.github.pires.obd.commands.ObdCommand;
-import com.github.pires.obd.enums.AvailableCommandNames;
+import com.raspberrypi.raspberrypi.OBD.commands.ObdCommand;
+import com.raspberrypi.raspberrypi.OBD.enums.AvailableCommandNames;
 
 /**
  * <p>ModuleVoltageCommand class.</p>
@@ -31,11 +31,6 @@ public class ModuleVoltageCommand extends ObdCommand {
         super("01 42");
     }
 
-    /**
-     * Copy ctor.
-     *
-     * @param other a {@link com.github.pires.obd.commands.control.ModuleVoltageCommand} object.
-     */
     public ModuleVoltageCommand(ModuleVoltageCommand other) {
         super(other);
     }

@@ -17,10 +17,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-/**
- * Container for multiple {@link com.github.pires.obd.commands.ObdMultiCommand} instances.
- *
- */
+
 public class ObdMultiCommand {
 
     private ArrayList<ObdCommand> commands;
@@ -32,20 +29,10 @@ public class ObdMultiCommand {
         this.commands = new ArrayList<>();
     }
 
-    /**
-     * Add ObdCommand to list of ObdCommands.
-     *
-     * @param command a {@link com.github.pires.obd.commands.ObdCommand} object.
-     */
     public void add(ObdCommand command) {
         this.commands.add(command);
     }
 
-    /**
-     * Removes ObdCommand from the list of ObdCommands.
-     *
-     * @param command a {@link com.github.pires.obd.commands.ObdCommand} object.
-     */
     public void remove(ObdCommand command) {
         this.commands.remove(command);
     }

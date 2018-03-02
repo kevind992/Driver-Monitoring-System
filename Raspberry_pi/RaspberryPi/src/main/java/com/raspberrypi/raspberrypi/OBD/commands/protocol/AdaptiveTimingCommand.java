@@ -30,11 +30,7 @@ public class AdaptiveTimingCommand extends ObdProtocolCommand {
         super("AT AT" + mode);
     }
 
-    /**
-     * <p>Constructor for AdaptiveTimingCommand.</p>
-     *
-     * @param other a {@link com.github.pires.obd.commands.protocol.AdaptiveTimingCommand} object.
-     */
+
     public AdaptiveTimingCommand(AdaptiveTimingCommand other) {
         super(other);
     }

@@ -12,8 +12,8 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands.control;
 
-import com.github.pires.obd.commands.PersistentCommand;
-import com.github.pires.obd.enums.AvailableCommandNames;
+import com.raspberrypi.raspberrypi.OBD.commands.PersistentCommand;
+import com.raspberrypi.raspberrypi.OBD.enums.AvailableCommandNames;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,11 +29,7 @@ public class VinCommand extends PersistentCommand {
         super("09 02");
     }
 
-    /**
-     * Copy ctor.
-     *
-     * @param other a {@link com.github.pires.obd.commands.control.VinCommand} object.
-     */
+
     public VinCommand(VinCommand other) {
         super(other);
     }

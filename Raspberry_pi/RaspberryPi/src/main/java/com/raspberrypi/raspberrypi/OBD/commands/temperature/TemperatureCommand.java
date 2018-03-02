@@ -12,8 +12,8 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands.temperature;
 
-import com.github.pires.obd.commands.ObdCommand;
-import com.github.pires.obd.commands.SystemOfUnits;
+import com.raspberrypi.raspberrypi.OBD.commands.ObdCommand;
+import com.raspberrypi.raspberrypi.OBD.commands.SystemOfUnits;
 
 /**
  * Abstract temperature command.
@@ -33,11 +33,6 @@ public abstract class TemperatureCommand extends ObdCommand implements
         super(cmd);
     }
 
-    /**
-     * Copy ctor.
-     *
-     * @param other a {@link com.github.pires.obd.commands.temperature.TemperatureCommand} object.
-     */
     public TemperatureCommand(TemperatureCommand other) {
         super(other);
     }

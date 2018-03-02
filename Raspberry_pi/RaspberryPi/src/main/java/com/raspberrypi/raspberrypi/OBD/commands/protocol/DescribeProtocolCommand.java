@@ -10,9 +10,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.raspberrypi.raspberrypi.OBD.commands.protocol;
 
-import com.github.pires.obd.enums.AvailableCommandNames;
+
+import com.raspberrypi.raspberrypi.OBD.commands.protocol.ObdProtocolCommand;
+import com.raspberrypi.raspberrypi.OBD.enums.AvailableCommandNames;
 
 /**
  * Describe the current Protocol.

@@ -12,7 +12,8 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands.protocol;
 
-import com.github.pires.obd.commands.ObdCommand;
+
+import com.raspberrypi.raspberrypi.OBD.commands.ObdCommand;
 
 /**
  * Reset trouble codes.

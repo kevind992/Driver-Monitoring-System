@@ -12,8 +12,9 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands.engine;
 
-import com.github.pires.obd.commands.ObdCommand;
-import com.github.pires.obd.enums.AvailableCommandNames;
+
+import com.raspberrypi.raspberrypi.OBD.commands.ObdCommand;
+import com.raspberrypi.raspberrypi.OBD.enums.AvailableCommandNames;
 
 /**
  * Mass Air Flow (MAF)
@@ -30,11 +31,7 @@ public class MassAirFlowCommand extends ObdCommand {
         super("01 10");
     }
 
-    /**
-     * Copy ctor.
-     *
-     * @param other a {@link com.github.pires.obd.commands.engine.MassAirFlowCommand} object.
-     */
+
     public MassAirFlowCommand(MassAirFlowCommand other) {
         super(other);
     }

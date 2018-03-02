@@ -29,11 +29,7 @@ public class TimeoutCommand extends ObdProtocolCommand {
         super("AT ST " + Integer.toHexString(0xFF & timeout));
     }
 
-    /**
-     * <p>Constructor for TimeoutCommand.</p>
-     *
-     * @param other a {@link com.github.pires.obd.commands.protocol.TimeoutCommand} object.
-     */
+
     public TimeoutCommand(TimeoutCommand other) {
         super(other);
     }

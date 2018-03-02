@@ -12,8 +12,8 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands.control;
 
-import com.github.pires.obd.commands.PercentageObdCommand;
-import com.github.pires.obd.enums.AvailableCommandNames;
+import com.raspberrypi.raspberrypi.OBD.commands.PercentageObdCommand;
+import com.raspberrypi.raspberrypi.OBD.enums.AvailableCommandNames;
 
 /**
  * Timing Advance
@@ -28,11 +28,7 @@ public class TimingAdvanceCommand extends PercentageObdCommand {
         super("01 0E");
     }
 
-    /**
-     * <p>Constructor for TimingAdvanceCommand.</p>
-     *
-     * @param other a {@link com.github.pires.obd.commands.control.TimingAdvanceCommand} object.
-     */
+
     public TimingAdvanceCommand(TimingAdvanceCommand other) {
         super(other);
     }

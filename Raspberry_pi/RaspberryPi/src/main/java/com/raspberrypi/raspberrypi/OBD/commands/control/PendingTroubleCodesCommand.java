@@ -12,8 +12,8 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands.control;
 
-import com.github.pires.obd.commands.ObdCommand;
-import com.github.pires.obd.enums.AvailableCommandNames;
+import com.raspberrypi.raspberrypi.OBD.commands.ObdCommand;
+import com.raspberrypi.raspberrypi.OBD.enums.AvailableCommandNames;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,11 +43,7 @@ public class PendingTroubleCodesCommand extends ObdCommand {
         codes = new StringBuilder();
     }
 
-    /**
-     * Copy ctor.
-     *
-     * @param other a {@link com.github.pires.obd.commands.control.PendingTroubleCodesCommand} object.
-     */
+
     public PendingTroubleCodesCommand(PendingTroubleCodesCommand other) {
         super(other);
         codes = new StringBuilder();

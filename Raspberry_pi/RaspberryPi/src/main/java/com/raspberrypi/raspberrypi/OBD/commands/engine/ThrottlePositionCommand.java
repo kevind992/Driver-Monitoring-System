@@ -12,8 +12,8 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands.engine;
 
-import com.github.pires.obd.commands.PercentageObdCommand;
-import com.github.pires.obd.enums.AvailableCommandNames;
+import com.raspberrypi.raspberrypi.OBD.commands.PercentageObdCommand;
+import com.raspberrypi.raspberrypi.OBD.enums.AvailableCommandNames;
 
 /**
  * Read the throttle position in percentage.
@@ -28,11 +28,7 @@ public class ThrottlePositionCommand extends PercentageObdCommand {
         super("01 11");
     }
 
-    /**
-     * Copy ctor.
-     *
-     * @param other a {@link com.github.pires.obd.commands.engine.ThrottlePositionCommand} object.
-     */
+
     public ThrottlePositionCommand(ThrottlePositionCommand other) {
         super(other);
     }

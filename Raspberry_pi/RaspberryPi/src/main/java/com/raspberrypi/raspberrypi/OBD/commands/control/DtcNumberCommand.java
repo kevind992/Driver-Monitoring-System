@@ -12,8 +12,8 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands.control;
 
-import com.github.pires.obd.commands.ObdCommand;
-import com.github.pires.obd.enums.AvailableCommandNames;
+import com.raspberrypi.raspberrypi.OBD.commands.ObdCommand;
+import com.raspberrypi.raspberrypi.OBD.enums.AvailableCommandNames;
 
 /**
  * This command will for now read MIL (check engine light) state and number of
@@ -36,11 +36,7 @@ public class DtcNumberCommand extends ObdCommand {
         super("01 01");
     }
 
-    /**
-     * Copy ctor.
-     *
-     * @param other a {@link com.github.pires.obd.commands.control.DtcNumberCommand} object.
-     */
+
     public DtcNumberCommand(DtcNumberCommand other) {
         super(other);
     }

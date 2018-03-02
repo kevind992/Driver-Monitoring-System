@@ -12,8 +12,8 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands.engine;
 
-import com.github.pires.obd.commands.ObdCommand;
-import com.github.pires.obd.enums.AvailableCommandNames;
+import com.raspberrypi.raspberrypi.OBD.commands.ObdCommand;
+import com.raspberrypi.raspberrypi.OBD.enums.AvailableCommandNames;
 
 /**
  * Displays the current engine revolutions per minute (RPM).
@@ -30,11 +30,7 @@ public class RPMCommand extends ObdCommand {
         super("01 0C");
     }
 
-    /**
-     * Copy ctor.
-     *
-     * @param other a {@link com.github.pires.obd.commands.engine.RPMCommand} object.
-     */
+
     public RPMCommand(RPMCommand other) {
         super(other);
     }

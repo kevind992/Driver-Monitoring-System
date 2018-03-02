@@ -12,8 +12,8 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands.engine;
 
-import com.github.pires.obd.commands.PercentageObdCommand;
-import com.github.pires.obd.enums.AvailableCommandNames;
+import com.raspberrypi.raspberrypi.OBD.commands.PercentageObdCommand;
+import com.raspberrypi.raspberrypi.OBD.enums.AvailableCommandNames;
 
 /**
  * <p>AbsoluteLoadCommand class.</p>
@@ -28,11 +28,7 @@ public class AbsoluteLoadCommand extends PercentageObdCommand {
         super("01 43");
     }
 
-    /**
-     * Copy ctor.
-     *
-     * @param other a {@link com.github.pires.obd.commands.engine.AbsoluteLoadCommand} object.
-     */
+
     public AbsoluteLoadCommand(AbsoluteLoadCommand other) {
         super(other);
     }

@@ -12,7 +12,7 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands.protocol;
 
-import com.github.pires.obd.enums.AvailableCommandNames;
+import com.raspberrypi.raspberrypi.OBD.enums.AvailableCommandNames;
 
 /**
  * Retrieve available PIDs ranging from 01 to 20.
@@ -27,11 +27,7 @@ public class AvailablePidsCommand_01_20 extends AvailablePidsCommand {
         super("01 00");
     }
 
-    /**
-     * Copy ctor.
-     *
-     * @param other a {@link com.github.pires.obd.commands.protocol.AvailablePidsCommand} object.
-     */
+
     public AvailablePidsCommand_01_20(AvailablePidsCommand_01_20 other) {
         super(other);
     }

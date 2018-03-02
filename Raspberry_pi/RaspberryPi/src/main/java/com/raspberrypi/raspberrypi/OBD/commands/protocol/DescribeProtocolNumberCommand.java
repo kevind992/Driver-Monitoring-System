@@ -12,9 +12,9 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands.protocol;
 
-import com.github.pires.obd.commands.ObdCommand;
-import com.github.pires.obd.enums.AvailableCommandNames;
-import com.github.pires.obd.enums.ObdProtocols;
+import com.raspberrypi.raspberrypi.OBD.commands.ObdCommand;
+import com.raspberrypi.raspberrypi.OBD.enums.AvailableCommandNames;
+import com.raspberrypi.raspberrypi.OBD.enums.ObdProtocols;
 
 /**
  * Describe the Protocol by Number.
@@ -77,11 +77,7 @@ public class DescribeProtocolNumberCommand extends ObdCommand {
         return AvailableCommandNames.DESCRIBE_PROTOCOL_NUMBER.getValue();
     }
 
-    /**
-     * <p>Getter for the field <code>obdProtocol</code>.</p>
-     *
-     * @return a {@link com.github.pires.obd.enums.ObdProtocols} object.
-     */
+
     public ObdProtocols getObdProtocol() {
         return obdProtocol;
     }

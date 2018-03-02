@@ -12,8 +12,8 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands.fuel;
 
-import com.github.pires.obd.commands.ObdCommand;
-import com.github.pires.obd.enums.AvailableCommandNames;
+import com.raspberrypi.raspberrypi.OBD.commands.ObdCommand;
+import com.raspberrypi.raspberrypi.OBD.enums.AvailableCommandNames;
 
 /**
  * Fuel Consumption Rate per hour.
@@ -30,11 +30,6 @@ public class ConsumptionRateCommand extends ObdCommand {
         super("01 5E");
     }
 
-    /**
-     * <p>Constructor for ConsumptionRateCommand.</p>
-     *
-     * @param other a {@link com.github.pires.obd.commands.fuel.ConsumptionRateCommand} object.
-     */
     public ConsumptionRateCommand(ConsumptionRateCommand other) {
         super(other);
     }

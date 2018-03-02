@@ -12,9 +12,9 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands.fuel;
 
-import com.github.pires.obd.commands.ObdCommand;
-import com.github.pires.obd.enums.AvailableCommandNames;
-import com.github.pires.obd.enums.FuelType;
+import com.raspberrypi.raspberrypi.OBD.commands.ObdCommand;
+import com.raspberrypi.raspberrypi.OBD.enums.AvailableCommandNames;
+import com.raspberrypi.raspberrypi.OBD.enums.FuelType;
 
 /**
  * This command is intended to determine the vehicle fuel type.
@@ -31,11 +31,7 @@ public class FindFuelTypeCommand extends ObdCommand {
         super("01 51");
     }
 
-    /**
-     * Copy ctor
-     *
-     * @param other a {@link com.github.pires.obd.commands.fuel.FindFuelTypeCommand} object.
-     */
+
     public FindFuelTypeCommand(FindFuelTypeCommand other) {
         super(other);
     }

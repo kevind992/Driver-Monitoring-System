@@ -12,7 +12,7 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands.temperature;
 
-import com.github.pires.obd.enums.AvailableCommandNames;
+import com.raspberrypi.raspberrypi.OBD.enums.AvailableCommandNames;
 
 /**
  * Temperature of intake air.
@@ -27,11 +27,7 @@ public class AirIntakeTemperatureCommand extends TemperatureCommand {
         super("01 0F");
     }
 
-    /**
-     * <p>Constructor for AirIntakeTemperatureCommand.</p>
-     *
-     * @param other a {@link com.github.pires.obd.commands.temperature.AirIntakeTemperatureCommand} object.
-     */
+
     public AirIntakeTemperatureCommand(AirIntakeTemperatureCommand other) {
         super(other);
     }

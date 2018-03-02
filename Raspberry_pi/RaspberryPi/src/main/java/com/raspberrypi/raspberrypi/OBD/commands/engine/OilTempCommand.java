@@ -12,8 +12,8 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands.engine;
 
-import com.github.pires.obd.commands.temperature.TemperatureCommand;
-import com.github.pires.obd.enums.AvailableCommandNames;
+import com.raspberrypi.raspberrypi.OBD.commands.temperature.TemperatureCommand;
+import com.raspberrypi.raspberrypi.OBD.enums.AvailableCommandNames;
 
 /**
  * Displays the current engine Oil temperature.
@@ -28,11 +28,7 @@ public class OilTempCommand extends TemperatureCommand {
         super("01 5C");
     }
 
-    /**
-     * Copy ctor.
-     *
-     * @param other a {@link com.github.pires.obd.commands.engine.OilTempCommand} object.
-     */
+
     public OilTempCommand(OilTempCommand other) {
         super(other);
     }

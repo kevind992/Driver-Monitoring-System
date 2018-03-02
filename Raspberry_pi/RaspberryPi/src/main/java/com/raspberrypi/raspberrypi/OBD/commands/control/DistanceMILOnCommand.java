@@ -12,9 +12,9 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands.control;
 
-import com.github.pires.obd.commands.ObdCommand;
-import com.github.pires.obd.commands.SystemOfUnits;
-import com.github.pires.obd.enums.AvailableCommandNames;
+import com.raspberrypi.raspberrypi.OBD.commands.ObdCommand;
+import com.raspberrypi.raspberrypi.OBD.commands.SystemOfUnits;
+import com.raspberrypi.raspberrypi.OBD.enums.AvailableCommandNames;
 
 /**
  * <p>DistanceMILOnCommand class.</p>
@@ -32,11 +32,7 @@ public class DistanceMILOnCommand extends ObdCommand
         super("01 21");
     }
 
-    /**
-     * Copy ctor.
-     *
-     * @param other a {@link com.github.pires.obd.commands.control.DistanceMILOnCommand} object.
-     */
+
     public DistanceMILOnCommand(
             DistanceMILOnCommand other) {
         super(other);

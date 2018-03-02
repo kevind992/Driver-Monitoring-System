@@ -12,7 +12,8 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands.pressure;
 
-import com.github.pires.obd.enums.AvailableCommandNames;
+
+import com.raspberrypi.raspberrypi.OBD.enums.AvailableCommandNames;
 
 /**
  * <p>FuelRailPressureCommand class.</p>
@@ -27,11 +28,7 @@ public class FuelRailPressureCommand extends PressureCommand {
         super("01 23");
     }
 
-    /**
-     * <p>Constructor for FuelRailPressureCommand.</p>
-     *
-     * @param other a {@link com.github.pires.obd.commands.pressure.FuelRailPressureCommand} object.
-     */
+
     public FuelRailPressureCommand(FuelRailPressureCommand other) {
         super(other);
     }

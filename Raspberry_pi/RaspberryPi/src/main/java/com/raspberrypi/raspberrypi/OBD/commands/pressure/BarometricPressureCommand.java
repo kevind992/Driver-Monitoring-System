@@ -12,7 +12,8 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands.pressure;
 
-import com.github.pires.obd.enums.AvailableCommandNames;
+
+import com.raspberrypi.raspberrypi.OBD.enums.AvailableCommandNames;
 
 /**
  * Barometric pressure.
@@ -27,11 +28,6 @@ public class BarometricPressureCommand extends PressureCommand {
         super("01 33");
     }
 
-    /**
-     * <p>Constructor for BarometricPressureCommand.</p>
-     *
-     * @param other a {@link com.github.pires.obd.commands.pressure.PressureCommand} object.
-     */
     public BarometricPressureCommand(PressureCommand other) {
         super(other);
     }

@@ -12,7 +12,7 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands;
 
-import com.github.pires.obd.exceptions.*;
+import com.raspberrypi.raspberrypi.OBD.exceptions.*;
 
 import java.io.IOException;
 import java.io.InputStream;

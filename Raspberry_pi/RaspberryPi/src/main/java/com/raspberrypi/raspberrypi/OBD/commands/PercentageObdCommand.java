@@ -29,11 +29,6 @@ public abstract class PercentageObdCommand extends ObdCommand {
         super(command);
     }
 
-    /**
-     * <p>Constructor for PercentageObdCommand.</p>
-     *
-     * @param other a {@link com.github.pires.obd.commands.PercentageObdCommand} object.
-     */
     public PercentageObdCommand(PercentageObdCommand other) {
         super(other);
     }

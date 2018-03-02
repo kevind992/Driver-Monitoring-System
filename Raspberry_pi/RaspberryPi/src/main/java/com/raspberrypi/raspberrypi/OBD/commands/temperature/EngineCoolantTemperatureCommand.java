@@ -12,12 +12,8 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands.temperature;
 
-import com.github.pires.obd.enums.AvailableCommandNames;
+import com.raspberrypi.raspberrypi.OBD.enums.AvailableCommandNames;
 
-/**
- * Engine Coolant Temperature.
- *
- */
 public class EngineCoolantTemperatureCommand extends TemperatureCommand {
 
     /**
@@ -27,11 +23,7 @@ public class EngineCoolantTemperatureCommand extends TemperatureCommand {
         super("01 05");
     }
 
-    /**
-     * <p>Constructor for EngineCoolantTemperatureCommand.</p>
-     *
-     * @param other a {@link com.github.pires.obd.commands.temperature.TemperatureCommand} object.
-     */
+
     public EngineCoolantTemperatureCommand(TemperatureCommand other) {
         super(other);
     }

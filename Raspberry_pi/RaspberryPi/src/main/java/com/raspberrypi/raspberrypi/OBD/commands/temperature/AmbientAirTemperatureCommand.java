@@ -12,7 +12,7 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands.temperature;
 
-import com.github.pires.obd.enums.AvailableCommandNames;
+import com.raspberrypi.raspberrypi.OBD.enums.AvailableCommandNames;
 
 /**
  * Ambient Air Temperature.
@@ -27,11 +27,7 @@ public class AmbientAirTemperatureCommand extends TemperatureCommand {
         super("01 46");
     }
 
-    /**
-     * <p>Constructor for AmbientAirTemperatureCommand.</p>
-     *
-     * @param other a {@link com.github.pires.obd.commands.temperature.TemperatureCommand} object.
-     */
+
     public AmbientAirTemperatureCommand(TemperatureCommand other) {
         super(other);
     }

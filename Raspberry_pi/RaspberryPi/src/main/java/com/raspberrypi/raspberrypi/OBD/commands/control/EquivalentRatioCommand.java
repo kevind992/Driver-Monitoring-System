@@ -12,8 +12,8 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands.control;
 
-import com.github.pires.obd.commands.PercentageObdCommand;
-import com.github.pires.obd.enums.AvailableCommandNames;
+import com.raspberrypi.raspberrypi.OBD.commands.PercentageObdCommand;
+import com.raspberrypi.raspberrypi.OBD.enums.AvailableCommandNames;
 
 /**
  * Fuel systems that use conventional oxygen sensor display the commanded open
@@ -37,11 +37,7 @@ public class EquivalentRatioCommand extends PercentageObdCommand {
         super("01 44");
     }
 
-    /**
-     * Copy ctor.
-     *
-     * @param other a {@link com.github.pires.obd.commands.control.EquivalentRatioCommand} object.
-     */
+
     public EquivalentRatioCommand(EquivalentRatioCommand other) {
         super(other);
     }

@@ -12,8 +12,9 @@
  */
 package com.raspberrypi.raspberrypi.OBD.commands.engine;
 
-import com.github.pires.obd.commands.PercentageObdCommand;
-import com.github.pires.obd.enums.AvailableCommandNames;
+
+import com.raspberrypi.raspberrypi.OBD.commands.PercentageObdCommand;
+import com.raspberrypi.raspberrypi.OBD.enums.AvailableCommandNames;
 
 /**
  * Calculated Engine Load value.
@@ -28,11 +29,7 @@ public class LoadCommand extends PercentageObdCommand {
         super("01 04");
     }
 
-    /**
-     * <p>Constructor for LoadCommand.</p>
-     *
-     * @param other a {@link com.github.pires.obd.commands.engine.LoadCommand} object.
-     */
+
     public LoadCommand(LoadCommand other) {
         super(other);
     }
