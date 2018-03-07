@@ -9,6 +9,8 @@ public class OBD {
 
     public void getData(){
 
+
+        System.out.println("In OBD package");
         //A Class for getting OBD Data
 
         SerialPort socket = SerialPort.getCommPorts()[1];
@@ -20,13 +22,11 @@ public class OBD {
         // execute commands
         try {
 
-
             new EchoOffCommand().run(socket.getInputStream(), socket.getOutputStream());
             new LineFeedOffCommand().run(socket.getInputStream(), socket.getOutputStream());
             new TimeoutCommand(125).run(socket.getInputStream(), socket.getOutputStream());
             new SelectProtocolCommand(ObdProtocols.AUTO).run(socket.getInputStream(), socket.getOutputStream());
             new AmbientAirTemperatureCommand().run(socket.getInputStream(), socket.getOutputStream());
-
 
         } catch (Exception e) {
             // handle errors
