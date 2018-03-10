@@ -85,11 +85,11 @@ public abstract class ObdCommand {
             InterruptedException {
         synchronized (ObdCommand.class) {//Only one command can write and read a data in one time.
             start = System.currentTimeMillis();
-            System.out.println("In run method");
+            //System.out.println("In run method");
             sendCommand(out);
-            System.out.println("Finished sendCommand method");
+            //System.out.println("Finished sendCommand method");
             readResult(in);
-            System.out.println("Finished readResult method");
+            //System.out.println("Finished readResult method");
             end = System.currentTimeMillis();
         }
     }
@@ -141,13 +141,13 @@ public abstract class ObdCommand {
      */
     protected void readResult(InputStream in) throws IOException {
         readRawData(in);
-        System.out.println("Finished readRawData method");
+        //System.out.println("Finished readRawData method");
         checkForErrors();
-        System.out.println("Finished checkForErrors method");
+        //System.out.println("Finished checkForErrors method");
         fillBuffer();
-        System.out.println("Finished fillBuffer method");
+        //System.out.println("Finished fillBuffer method");
         performCalculations();
-        System.out.println("Finished performCalculations method");
+        //System.out.println("Finished performCalculations method");
     }
 
     /**
@@ -200,23 +200,21 @@ public abstract class ObdCommand {
      * @throws IOException if any.
      */
     protected void readRawData(InputStream in) throws IOException {
-        System.out.println("in readRawData method");
+        //System.out.println("in readRawData method");
         byte b;
         StringBuilder res = new StringBuilder();
-        System.out.println("Stringbuilder initiated");
+        //System.out.println("Stringbuilder initiated");
         // read until '>' arrives OR end of stream reached
         char c;
         // -1 if the end of the stream is reached
         while (((b = (byte) in.read()) > -1)) {
-            System.out.println("in while loop");
+
             c = (char) b;
             if (c == '>') // read until '>' arrives
             {
                 break;
             }
             res.append(c);
-            String result = res.toString();
-            System.out.print("result is: " + result);
 
         }
 
@@ -237,7 +235,7 @@ public abstract class ObdCommand {
      */
         //kills multiline.. rawData = rawData.substring(rawData.lastIndexOf(13) + 1);
         rawData = removeAll(WHITESPACE_PATTERN, rawData);//removes all [ \t\n\x0B\f\r]
-        System.out.println("finished read raw data method");
+        System.out.println("raw data: " + rawData);
     }
 
     void checkForErrors() {
