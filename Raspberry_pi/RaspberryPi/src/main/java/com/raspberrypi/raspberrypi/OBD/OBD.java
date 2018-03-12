@@ -1,20 +1,13 @@
 package com.raspberrypi.raspberrypi.OBD;
 
-        import com.fazecast.jSerialComm.SerialPort;
-        import com.raspberrypi.raspberrypi.OBD.commands.ObdCommand;
-        import com.raspberrypi.raspberrypi.OBD.commands.SpeedCommand;
-        import com.raspberrypi.raspberrypi.OBD.commands.control.*;
-        import com.raspberrypi.raspberrypi.OBD.commands.engine.RPMCommand;
-        import com.raspberrypi.raspberrypi.OBD.commands.fuel.FuelLevelCommand;
-        import com.raspberrypi.raspberrypi.OBD.commands.protocol.*;
-        import com.raspberrypi.raspberrypi.OBD.commands.temperature.AmbientAirTemperatureCommand;
-        import com.raspberrypi.raspberrypi.OBD.commands.temperature.EngineCoolantTemperatureCommand;
-        import com.raspberrypi.raspberrypi.OBD.enums.ObdProtocols;
+import com.fazecast.jSerialComm.SerialPort;
+import com.raspberrypi.raspberrypi.OBD.commands.control.*;
+import com.raspberrypi.raspberrypi.OBD.commands.engine.RPMCommand;
+import com.raspberrypi.raspberrypi.OBD.commands.fuel.FuelLevelCommand;
+import com.raspberrypi.raspberrypi.OBD.commands.protocol.*;
+import com.raspberrypi.raspberrypi.OBD.enums.ObdProtocols;
 
-        import java.io.BufferedReader;
-        import java.io.IOException;
-        import java.io.InputStreamReader;
-        import java.time.Clock;
+import java.io.IOException;
 
 public class OBD {
 

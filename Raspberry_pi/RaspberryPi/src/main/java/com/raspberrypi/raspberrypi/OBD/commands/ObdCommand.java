@@ -14,10 +14,8 @@ package com.raspberrypi.raspberrypi.OBD.commands;
 
 import com.raspberrypi.raspberrypi.OBD.exceptions.*;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * Base OBD command.
