@@ -1,6 +1,7 @@
 package com.raspberrypi.raspberrypi.OBD;
 
 import com.fazecast.jSerialComm.SerialPort;
+import com.raspberrypi.raspberrypi.OBD.commands.SpeedCommand;
 import com.raspberrypi.raspberrypi.OBD.commands.control.*;
 import com.raspberrypi.raspberrypi.OBD.commands.engine.RPMCommand;
 import com.raspberrypi.raspberrypi.OBD.commands.fuel.FuelLevelCommand;
@@ -55,6 +56,16 @@ public class OBD {
                 rpm = rpmCmd.getRPM();
                 System.out.println("rpm result is : " + rpm);
 
+                DistanceSinceCCCommand distCmd = new DistanceSinceCCCommand();
+                distCmd.run(socket.getInputStream(), socket.getOutputStream());
+
+                String dist = distCmd.getFormattedResult();
+                System.out.println("Current Distance: " + dist);
+
+                SpeedCommand speed = new SpeedCommand();
+                speed.run(socket.getInputStream(),socket.getOutputStream());
+                System.out.println("Speed: " + speed.getCalculatedResult());
+
                 Thread.sleep(1 * 1000);
 
                 new CloseCommand().run(socket.getInputStream(),
@@ -62,9 +73,7 @@ public class OBD {
 
                 //DistanceMILONCommand
                 //RETURNS 0KM/H
-//                DistanceMILOnCommand distCmd = new DistanceMILOnCommand();
-//                distCmd.run(socket.getInputStream(), socket.getOutputStream());
-//                int rpmInt = (int)distCmd.getFormattedResult();
+
 
                 //FuelLevelCommand
                 //RETURNS NODATA
@@ -103,7 +112,7 @@ public class OBD {
 //
 //                System.out.println("permanent trouble codes cmd result is: " + pmttcCmd.getFormattedResult().toString());
 
-            }while (rpm > 0);
+            }while (rpm > 300);
             System.out.println("Has exited while loop");
 
         } catch (Exception e) {
