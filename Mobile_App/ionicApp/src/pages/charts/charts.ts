@@ -22,25 +22,25 @@ export class ChartsPage {
   //chart with sample data
   public lineChartData:Array<any> = [
     {data: [2000, 4500, 4000, 1500, 2500, 1000, 4000], label: 'RPM'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
+    // {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
     // {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
   ];
   //chart with RPM data
   public rpmData:Array<any> = [
     {data: [2000, 4500, 4000, 1500, 2500, 1000, 4000], label: 'RPM'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
+    // {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
     // {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
   ];
   //chart with speed data
   public speedData:Array<any> = [
     {data: [50, 60, 120, 80, 80, 101, 66], label: 'Spd'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
+    // {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
     // {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
   ];
   //chart with distance traveled data
   public distanceData:Array<any> = [
     {data: [200, 350, 400, 15, 25, 10, 40], label: 'Dist'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
+    // {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
     // {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
   ];
   public lineChartLabels:Array<any> = ['', '', '', '', '', '', ''];
