@@ -18,6 +18,7 @@ public class DataTypes {
 
     public ArrayList<Integer> getRpm() {
         return rpm;
+
     }
 
     public void setRpm(ArrayList<Integer> rpm) {
