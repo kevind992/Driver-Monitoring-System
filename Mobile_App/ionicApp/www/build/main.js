@@ -35,22 +35,18 @@ var ChartsPage = (function () {
         //chart with sample data
         this.lineChartData = [
             { data: [2000, 4500, 4000, 1500, 2500, 1000, 4000], label: 'RPM' },
-            { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
         ];
         //chart with RPM data
         this.rpmData = [
             { data: [2000, 4500, 4000, 1500, 2500, 1000, 4000], label: 'RPM' },
-            { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
         ];
         //chart with speed data
         this.speedData = [
             { data: [50, 60, 120, 80, 80, 101, 66], label: 'Spd' },
-            { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
         ];
         //chart with distance traveled data
         this.distanceData = [
             { data: [200, 350, 400, 15, 25, 10, 40], label: 'Dist' },
-            { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
         ];
         this.lineChartLabels = ['', '', '', '', '', '', ''];
         this.lineChartOptions = {
