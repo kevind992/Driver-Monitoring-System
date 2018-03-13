@@ -28,4 +28,10 @@ export class HomePage {
   });
   }
 
+  ionViewDidLoad() {
+    // TO DO: fix only loads when re-loaded
+    this.loadLogs()
+    console.log('onLoad test')
+  }
+
 }

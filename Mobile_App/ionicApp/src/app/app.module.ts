@@ -5,24 +5,31 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import {HttpModule} from '@angular/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { ChartsPage } from '../pages/charts/charts';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+// charts
+import { ChartsModule } from 'ng2-charts';
+
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    ChartsPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
+    ChartsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    ChartsPage
   ],
   providers: [
     StatusBar,
