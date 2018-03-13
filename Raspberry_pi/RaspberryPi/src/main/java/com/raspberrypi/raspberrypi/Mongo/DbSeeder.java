@@ -1,6 +1,7 @@
 package com.raspberrypi.raspberrypi.Mongo;
 
 import com.raspberrypi.raspberrypi.OBD.OBD;
+import com.raspberrypi.raspberrypi.Report.ReportGenerator;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -21,8 +22,8 @@ public class DbSeeder implements CommandLineRunner {
     public void run(String... strings) throws Exception {
 
         System.out.println("In Mongo Package");
-        new OBD().getData();
 
+        new ReportGenerator().generateReport();
 
         System.out.println("Back In Mongo Package");
         Data data1 = new Data(userData(),userData());

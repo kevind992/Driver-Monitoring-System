@@ -6,14 +6,18 @@ import com.raspberrypi.raspberrypi.OBD.commands.engine.RPMCommand;
 import com.raspberrypi.raspberrypi.OBD.commands.fuel.FuelLevelCommand;
 import com.raspberrypi.raspberrypi.OBD.commands.protocol.*;
 import com.raspberrypi.raspberrypi.OBD.enums.ObdProtocols;
+import com.raspberrypi.raspberrypi.Report.DataTypes;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class OBD {
 
     private int rpm;
 
-    public void getData() throws IOException {
+    private ArrayList<DataTypes> data = new ArrayList<DataTypes>();
+
+    public ArrayList<DataTypes> getData() throws IOException {
 
         System.out.println("In OBD package");
         //A Class for getting OBD Data
@@ -107,6 +111,8 @@ public class OBD {
         }
 
         socket.closePort();
+
+        return data;
     }
 
 }
