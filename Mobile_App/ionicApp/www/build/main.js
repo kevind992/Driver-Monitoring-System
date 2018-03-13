@@ -34,22 +34,7 @@ var ChartsPage = (function () {
         // TO DO: plot real data, seperate charts for each
         //chart with sample data
         this.lineChartData = [
-            { data: [2000, 4500, 4000, 1500, 2500, 1000, 4000], label: 'RPM' },
-            { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
-        ];
-        //chart with RPM data
-        this.rpmData = [
-            { data: [2000, 4500, 4000, 1500, 2500, 1000, 4000], label: 'RPM' },
-            { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
-        ];
-        //chart with speed data
-        this.speedData = [
-            { data: [50, 60, 120, 80, 80, 101, 66], label: 'Spd' },
-            { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
-        ];
-        //chart with distance traveled data
-        this.distanceData = [
-            { data: [200, 350, 400, 15, 25, 10, 40], label: 'Dist' },
+            { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
             { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
         ];
         this.lineChartLabels = ['', '', '', '', '', '', ''];
@@ -101,10 +86,9 @@ var ChartsPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'page-charts',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/groupProj/3rd-Year-Project/Mobile_App/ionicApp/src/pages/charts/charts.html"*/'<!--\n  Generated template for the ChartsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Charts</ion-title>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n  </ion-navbar>\n  \n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-card>\n    <ion-card-header>\n      AVG. RPM\n    </ion-card-header>\n    <div class="row">\n        <div class="col-md-6">\n          <div style="display: block;">\n          <canvas baseChart width="300" height="400"\n                      [datasets]="rpmData"\n                      [labels]="lineChartLabels"\n                      [options]="lineChartOptions"\n                      [colors]="lineChartColors"\n                      [legend]="lineChartLegend"\n                      [chartType]="lineChartType"\n                      (chartHover)="chartHovered($event)"\n                      (chartClick)="chartClicked($event)"></canvas>\n          </div>\n        </div>\n      </div>\n  </ion-card>\n  <ion-card>\n      <ion-card-header>\n          Speed\n      </ion-card-header>\n      <div class="row">\n          <div class="col-md-6">\n            <div style="display: block;">\n            <canvas baseChart width="300" height="400"\n                        [datasets]="speedData"\n                        [labels]="lineChartLabels"\n                        [options]="lineChartOptions"\n                        [colors]="lineChartColors"\n                        [legend]="lineChartLegend"\n                        [chartType]="lineChartType"\n                        (chartHover)="chartHovered($event)"\n                        (chartClick)="chartClicked($event)"></canvas>\n            </div>\n          </div>\n        </div>\n    </ion-card>\n    <ion-card>\n        <ion-card-header>\n          Distance\n        </ion-card-header>\n        <div class="row">\n            <div class="col-md-6">\n              <div style="display: block;">\n              <canvas baseChart width="300" height="400"\n                          [datasets]="distanceData"\n                          [labels]="lineChartLabels"\n                          [options]="lineChartOptions"\n                          [colors]="lineChartColors"\n                          [legend]="lineChartLegend"\n                          [chartType]="lineChartType"\n                          (chartHover)="chartHovered($event)"\n                          (chartClick)="chartClicked($event)"></canvas>\n              </div>\n            </div>\n          </div>\n      </ion-card>\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/groupProj/3rd-Year-Project/Mobile_App/ionicApp/src/pages/charts/charts.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
     ], ChartsPage);
     return ChartsPage;
-    var _a, _b;
 }());
 
 //# sourceMappingURL=charts.js.map
