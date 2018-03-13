@@ -15,9 +15,9 @@ public class OBD {
 
     private int rpm;
 
-    private ArrayList<DataTypes> data = new ArrayList<DataTypes>();
+    private DataTypes data;
 
-    public ArrayList<DataTypes> getData() throws IOException {
+    public DataTypes getData() throws IOException {
 
         System.out.println("In OBD package");
         //A Class for getting OBD Data

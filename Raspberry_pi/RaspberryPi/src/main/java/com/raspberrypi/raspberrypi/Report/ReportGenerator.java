@@ -8,8 +8,9 @@ public class ReportGenerator {
 
     //A Class for generating OBD reports
 
-    private ArrayList<DataTypes> data = new ArrayList<DataTypes>();
+    private DataTypes data;
 
+    //A method for generating a final report
     public void generateReport(){
 
         System.out.println("In Report Generator..");
@@ -23,5 +24,24 @@ public class ReportGenerator {
         }
 
         System.out.println("Leaving Report Generator..");
+    }
+    //A method for calculating the total average speed of a trip
+    private void calAvgSpeed(){
+
+
+
+
+    }
+    //A method for calculating the average miles per gallon
+    private void calMPG(){
+
+
+
+    }
+    //A method for calculating the highest RPM
+    private void calHighestRPM(){
+
+
+
     }
 }
