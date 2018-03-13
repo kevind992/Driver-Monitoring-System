@@ -15,18 +15,23 @@ export class HomePage {
   }
 
   // items:any;
-  item;
-
-  //Hi thereS
+  items;
 
   loadLogs() {
     this.http.get('http://178.62.100.184/api/data').map(data => data.json()).subscribe(data => {
-      this.item = data;
-      console.log(this.item)
+      this.items = data;
+      console.log(this.items)
+      console.log("test")
     },
   (err) => {
     alert('oops' + err);
   });
+  }
+
+  ionViewDidLoad() {
+    // TO DO: fix only loads when re-loaded
+    this.loadLogs()
+    console.log('onLoad test')
   }
 
 }
