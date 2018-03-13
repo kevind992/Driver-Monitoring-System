@@ -11,8 +11,9 @@ import java.io.IOException;
 
 public class OBD {
 
-    public void getData() throws IOException {
+    private int rpm;
 
+    public void getData() throws IOException {
 
         System.out.println("In OBD package");
         //A Class for getting OBD Data
@@ -36,25 +37,30 @@ public class OBD {
             new TimeoutCommand(10000).run(socket.getInputStream(), socket.getOutputStream());
             new SelectProtocolCommand(ObdProtocols.AUTO).run(socket.getInputStream(), socket.getOutputStream());
             new HeadersOffCommand().run(socket.getInputStream(),socket.getOutputStream());
-            System.out.println("setup done");
-            while (socket.isOpen()==true) {
 
-                //Commands and results every 15 seconds
+            System.out.println("setup done");
+
+            do{
+
+                //Commands and results every 1 second
 
                 //RPM
                 //RETURNS 788RPM (WORKS)
                 RPMCommand rpmCmd = new RPMCommand();
                 rpmCmd.run(socket.getInputStream(), socket.getOutputStream());
-                int rpmInt = rpmCmd.getRPM();
-                System.out.println("rpm result is : " + rpmInt);
+                rpm = rpmCmd.getRPM();
+                System.out.println("rpm result is : " + rpm);
 
+                Thread.sleep(1 * 1000);
+
+                new CloseCommand().run(socket.getInputStream(),
+                        socket.getOutputStream());
 
                 //DistanceMILONCommand
                 //RETURNS 0KM/H
 //                DistanceMILOnCommand distCmd = new DistanceMILOnCommand();
 //                distCmd.run(socket.getInputStream(), socket.getOutputStream());
 //                int rpmInt = (int)distCmd.getFormattedResult();
-
 
                 //FuelLevelCommand
                 //RETURNS NODATA
@@ -90,13 +96,12 @@ public class OBD {
                 //RETURNS UNABLE TO CONNECT
 //                PermanentTroubleCodesCommand pmttcCmd = new PermanentTroubleCodesCommand();
 //                pmttcCmd.run(socket.getInputStream(), socket.getOutputStream());
+//
 //                System.out.println("permanent trouble codes cmd result is: " + pmttcCmd.getFormattedResult().toString());
 
-                Thread.sleep(1 * 1000);
+            }while (rpm > 0);
+            System.out.println("Has exited while loop");
 
-                new CloseCommand().run(socket.getInputStream(),
-                        socket.getOutputStream());
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
