@@ -14,6 +14,9 @@ package com.raspberrypi.raspberrypi.OBD.commands;
 
 import com.raspberrypi.raspberrypi.OBD.exceptions.*;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 

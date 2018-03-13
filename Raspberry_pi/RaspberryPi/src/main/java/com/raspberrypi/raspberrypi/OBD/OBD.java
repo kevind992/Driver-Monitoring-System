@@ -35,6 +35,7 @@ public class OBD {
             new LineFeedOffCommand().run(socket.getInputStream(), socket.getOutputStream());
             new TimeoutCommand(10000).run(socket.getInputStream(), socket.getOutputStream());
             new SelectProtocolCommand(ObdProtocols.AUTO).run(socket.getInputStream(), socket.getOutputStream());
+            new HeadersOffCommand().run(socket.getInputStream(),socket.getOutputStream());
             System.out.println("setup done");
             while (socket.isOpen()==true) {
 
@@ -44,21 +45,22 @@ public class OBD {
                 //RETURNS 788RPM (WORKS)
                 RPMCommand rpmCmd = new RPMCommand();
                 rpmCmd.run(socket.getInputStream(), socket.getOutputStream());
-                System.out.println("rpm result is : " + rpmCmd.getFormattedResult().toString());
+                int rpmInt = rpmCmd.getRPM();
+                System.out.println("rpm result is : " + rpmInt);
 
 
                 //DistanceMILONCommand
                 //RETURNS 0KM/H
-                DistanceMILOnCommand distCmd = new DistanceMILOnCommand();
-                distCmd.run(socket.getInputStream(), socket.getOutputStream());
-                System.out.println("distance cmd result is : " + distCmd.getFormattedResult().toString());
+//                DistanceMILOnCommand distCmd = new DistanceMILOnCommand();
+//                distCmd.run(socket.getInputStream(), socket.getOutputStream());
+//                int rpmInt = (int)distCmd.getFormattedResult();
 
 
                 //FuelLevelCommand
                 //RETURNS NODATA
-                FuelLevelCommand fuelLevCmd = new FuelLevelCommand();
-                fuelLevCmd.run(socket.getInputStream(), socket.getOutputStream());
-                System.out.println("fuel level cmd result is : " + fuelLevCmd.getFormattedResult().toString());
+//                FuelLevelCommand fuelLevCmd = new FuelLevelCommand();
+//                fuelLevCmd.run(socket.getInputStream(), socket.getOutputStream());
+//                System.out.println("fuel level cmd result is : " + fuelLevCmd.getFormattedResult().toString());
 
                 //SpeedCommand
                 //RETURNS XX KM/H (WORKS)
@@ -90,27 +92,16 @@ public class OBD {
 //                pmttcCmd.run(socket.getInputStream(), socket.getOutputStream());
 //                System.out.println("permanent trouble codes cmd result is: " + pmttcCmd.getFormattedResult().toString());
 
-                Thread.sleep(15 * 1000);
+                Thread.sleep(1 * 1000);
+
+                new CloseCommand().run(socket.getInputStream(),
+                        socket.getOutputStream());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-
-//      BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-//      String line;
-//      while((line = br.readLine())!= null ) {
-//          //debugging sys out
-//          System.out.println("Line = " + line);
-//
-//      }
-
-
-//            String engCoolant = new EngineCoolantTemperatureCommand().getFormattedResult();
-//            System.out.println("Engine coolant temp is : " + engCoolant);
-//            String rpm = new RPMCommand().getFormattedResult();
-//            System.out.println("RPM is : " + rpm);
-
+        socket.closePort();
     }
 
 }

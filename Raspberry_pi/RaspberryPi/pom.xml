@@ -47,7 +47,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>com.github.pires</groupId>
 			<artifactId>obd-java-api</artifactId>
@@ -55,7 +54,6 @@
 		</dependency>
 
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -64,6 +62,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
 </project>
