@@ -30,7 +30,7 @@ public class DbSeeder implements CommandLineRunner {
 
         List<Data> data = Arrays.asList(data1);
 
-        if(data1.getRepAvgSpeed().equals("0"))
+        if(data1.getRepHighestRPM().equals("0"))
         {
             System.out.println("Error Handling - No Data..");
         }else{

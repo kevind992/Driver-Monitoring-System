@@ -15,11 +15,12 @@ import java.util.ArrayList;
 public class OBD {
 
     private int rpm;
+    private int count;
 
     private DataTypes data;
-    private ArrayList<Integer> rpmArray;
-    private ArrayList<Integer> speedArray;
-    private ArrayList<Integer> distanceArray;
+    private ArrayList<Integer> rpmArray = new ArrayList<>();
+    private ArrayList<Integer> speedArray = new ArrayList<>();
+    private ArrayList<Integer> distanceArray = new ArrayList<>();
 
     public DataTypes getData() throws IOException {
 
@@ -32,7 +33,7 @@ public class OBD {
         for (SerialPort serial : serials) {
             System.out.println("serial ports are: " + serial.getSystemPortName().toString());
         }
-        SerialPort socket = SerialPort.getCommPorts()[2];
+        SerialPort socket = SerialPort.getCommPorts()[1];
         System.out.println(socket.getDescriptivePortName());
 
         //Opening com port
@@ -41,6 +42,7 @@ public class OBD {
         socket.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 100, 100);
         System.out.println("opened ports on socket");
 
+        DataTypes data = new DataTypes();
 
         try {
 
@@ -53,19 +55,12 @@ public class OBD {
 
             System.out.println("setup done");
 
-            //Creating a Object of DataTypes
-            DataTypes data = new DataTypes();
-
             do{//do while rpm not less them 300rpm
-
-                //Commands and results every 1 second
-
                 //RPM
-                //RETURNS 788RPM (WORKS)
                 RPMCommand rpmCmd = new RPMCommand();
                 rpmCmd.run(socket.getInputStream(), socket.getOutputStream());
                 rpm = rpmCmd.getRPM();
-                rpmArray.add(rpm);
+                rpmArray.add(count,rpmCmd.getRPM());
                 System.out.println("rpm result is : " + rpm);
 
                 DistanceSinceCCCommand distCmd = new DistanceSinceCCCommand();
@@ -77,12 +72,13 @@ public class OBD {
                 SpeedCommand speed = new SpeedCommand();
                 speed.run(socket.getInputStream(),socket.getOutputStream());
                 System.out.println("Speed: " + speed.getMetricSpeed());
-                speedArray.add(speed.getMetricSpeed());
+                speedArray.add(count,speed.getMetricSpeed());
 
                 Thread.sleep(1 * 1000);
 
                 new CloseCommand().run(socket.getInputStream(),
                         socket.getOutputStream());
+                count++;
             }while (rpm > 300);
 
             System.out.println("Has exited while loop");
