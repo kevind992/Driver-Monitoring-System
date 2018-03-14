@@ -4,16 +4,19 @@ import java.util.ArrayList;
 
 public class DataTypes {
 
+    private int distStart;
+    private int distEnd;
     private ArrayList<Integer> rpm;
     private ArrayList<Integer> speed;
-    private ArrayList<Integer> distance;
+   // private ArrayList<Integer> distance;
 
+    public DataTypes(){
+        super();
+    }
 
-    public DataTypes(ArrayList<Integer> rpm, ArrayList<Integer> speed, ArrayList<Integer> distance, ArrayList<Double> heat) {
+    public DataTypes(ArrayList<Integer> rpm, ArrayList<Integer> speed) {
         this.rpm = rpm;
         this.speed = speed;
-        this.distance = distance;
-
     }
 
     public ArrayList<Integer> getRpm() {
@@ -33,11 +36,19 @@ public class DataTypes {
         this.speed = speed;
     }
 
-    public ArrayList<Integer> getDistance() {
-        return distance;
+    public int getDistStart() {
+        return distStart;
     }
 
-    public void setDistance(ArrayList<Integer> distance) {
-        this.distance = distance;
+    public void setDistStart(int distStart) {
+        this.distStart = distStart;
+    }
+
+    public int getDistEnd() {
+        return distEnd;
+    }
+
+    public void setDistEnd(int distEnd) {
+        this.distEnd = distEnd;
     }
 }

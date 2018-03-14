@@ -1,6 +1,7 @@
 package com.raspberrypi.raspberrypi.OBD;
 
 import com.fazecast.jSerialComm.SerialPort;
+import com.raspberrypi.raspberrypi.OBD.commands.SpeedCommand;
 import com.raspberrypi.raspberrypi.OBD.commands.control.*;
 import com.raspberrypi.raspberrypi.OBD.commands.engine.RPMCommand;
 import com.raspberrypi.raspberrypi.OBD.commands.fuel.FuelLevelCommand;
@@ -16,26 +17,34 @@ public class OBD {
     private int rpm;
 
     private DataTypes data;
+    private ArrayList<Integer> rpmArray;
+    private ArrayList<Integer> speedArray;
+    private ArrayList<Integer> distanceArray;
 
     public DataTypes getData() throws IOException {
 
         System.out.println("In OBD package");
         //A Class for getting OBD Data
 
+
+        //Setting up com ports
         SerialPort serials[] = SerialPort.getCommPorts();
         for (SerialPort serial : serials) {
             System.out.println("serial ports are: " + serial.getSystemPortName().toString());
         }
-
         SerialPort socket = SerialPort.getCommPorts()[2];
         System.out.println(socket.getDescriptivePortName());
 
+        //Opening com port
         socket.openPort();
+        //Setting a com port timeout
         socket.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 100, 100);
         System.out.println("opened ports on socket");
 
 
         try {
+
+            //Set up commands for OBD
             new EchoOffCommand().run(socket.getInputStream(), socket.getOutputStream());
             new LineFeedOffCommand().run(socket.getInputStream(), socket.getOutputStream());
             new TimeoutCommand(10000).run(socket.getInputStream(), socket.getOutputStream());
@@ -44,7 +53,10 @@ public class OBD {
 
             System.out.println("setup done");
 
-            do{
+            //Creating a Object of DataTypes
+            DataTypes data = new DataTypes();
+
+            do{//do while rpm not less them 300rpm
 
                 //Commands and results every 1 second
 
@@ -53,58 +65,31 @@ public class OBD {
                 RPMCommand rpmCmd = new RPMCommand();
                 rpmCmd.run(socket.getInputStream(), socket.getOutputStream());
                 rpm = rpmCmd.getRPM();
+                rpmArray.add(rpm);
                 System.out.println("rpm result is : " + rpm);
+
+                DistanceSinceCCCommand distCmd = new DistanceSinceCCCommand();
+                distCmd.run(socket.getInputStream(), socket.getOutputStream());
+
+                String dist = distCmd.getFormattedResult();
+                System.out.println("Current Distance: " + dist);
+
+                SpeedCommand speed = new SpeedCommand();
+                speed.run(socket.getInputStream(),socket.getOutputStream());
+                System.out.println("Speed: " + speed.getMetricSpeed());
+                speedArray.add(speed.getMetricSpeed());
 
                 Thread.sleep(1 * 1000);
 
                 new CloseCommand().run(socket.getInputStream(),
                         socket.getOutputStream());
+            }while (rpm > 300);
 
-                //DistanceMILONCommand
-                //RETURNS 0KM/H
-//                DistanceMILOnCommand distCmd = new DistanceMILOnCommand();
-//                distCmd.run(socket.getInputStream(), socket.getOutputStream());
-//                int rpmInt = (int)distCmd.getFormattedResult();
-
-                //FuelLevelCommand
-                //RETURNS NODATA
-//                FuelLevelCommand fuelLevCmd = new FuelLevelCommand();
-//                fuelLevCmd.run(socket.getInputStream(), socket.getOutputStream());
-//                System.out.println("fuel level cmd result is : " + fuelLevCmd.getFormattedResult().toString());
-
-                //SpeedCommand
-                //RETURNS XX KM/H (WORKS)
-//                SpeedCommand spdCmd = new SpeedCommand();
-//                spdCmd.run(socket.getInputStream(), socket.getOutputStream());
-//                System.out.println("speed cmd result is : " + spdCmd.getFormattedResult().toString());
-
-                //IgnitionMonitorCommand
-                //RETURNS ON/OFF (WORKS)
-//                IgnitionMonitorCommand igMonCmd = new IgnitionMonitorCommand();
-//                igMonCmd.run(socket.getInputStream(), socket.getOutputStream());
-//                System.out.println("ignition monitor cmd result is : " + igMonCmd.getFormattedResult().toString());
-
-                //DistanceSinceCCCommand
-                //RETURNS 26248KM (WORKS)
-//                DistanceSinceCCCommand distSinceCC = new DistanceSinceCCCommand();
-//                distSinceCC.run(socket.getInputStream(), socket.getOutputStream());
-//                System.out.println("distance since cc cmd result is : " + distSinceCC.getFormattedResult().toString());
-
-                //DtcNumberCommand
-                //RETURNS MIL is OFF0 codes
-//                DtcNumberCommand dtcCmd = new DtcNumberCommand();
-//                dtcCmd.run(socket.getInputStream(), socket.getOutputStream());
-//                System.out.println("dtc number cmd result is : " + dtcCmd.getFormattedResult().toString());
-
-                //PermanentTroubleCodesCommand
-                //RETURNS UNABLE TO CONNECT
-//                PermanentTroubleCodesCommand pmttcCmd = new PermanentTroubleCodesCommand();
-//                pmttcCmd.run(socket.getInputStream(), socket.getOutputStream());
-//
-//                System.out.println("permanent trouble codes cmd result is: " + pmttcCmd.getFormattedResult().toString());
-
-            }while (rpm > 0);
             System.out.println("Has exited while loop");
+
+            //Adding arrays to DataTypes Object
+            data.setRpm(rpmArray);
+            data.setSpeed(speedArray);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -112,6 +97,7 @@ public class OBD {
 
         socket.closePort();
 
+        //Returning Object DataType
         return data;
     }
 
