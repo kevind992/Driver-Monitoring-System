@@ -17,27 +17,33 @@ public class ReportGenerator {
     public Data generateReport(){
 
         System.out.println("In Report Generator..");
+
+        //Creating instances of OBD and Data
         OBD obd = new OBD();
         Data calData = new Data();
 
         try{
             data = obd.getData();
 
+            //Calculation methods(Avg Speed, HighestRPM, Total Distance)
             avgSpeed = calAvgSpeed();
-            System.out.println("Average Speed: " + avgSpeed);
             highestRPM = calHighestRPM();
-            System.out.println("Highest RPM: " + highestRPM);
+            dist = calDistance(data.getDistStart(),data.getDistEnd());
 
+            //Adding the three values to Data Object
             calData.setRepAvgSpeed(String.valueOf(avgSpeed));
             calData.setRepHighestRPM(String.valueOf(highestRPM));
+            calData.setRepDistance(String.valueOf(dist));
         }
         catch(Exception e){
             System.out.println("Report Generator Error:-" + e);
         }
 
         System.out.println("Leaving Report Generator..");
+
         return calData;
     }
+
     //A method for calculating the total average speed of a trip
     private int calAvgSpeed(){
 
@@ -53,12 +59,14 @@ public class ReportGenerator {
         return res;
 
     }
+
     //A method for calculating the average miles per gallon
     private void calMPG(){
 
 
 
     }
+
     //A method for calculating the highest RPM
     private int calHighestRPM(){
 
@@ -67,5 +75,15 @@ public class ReportGenerator {
         max = Collections.max(data.getRpm());
 
         return max;
+    }
+
+    //A method for calculating the total distance traveled
+    private int calDistance(int start, int finish){
+
+        int res;
+
+        res = finish - start;
+
+        return res;
     }
 }

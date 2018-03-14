@@ -8,7 +8,6 @@ public class DataTypes {
     private int distEnd;
     private ArrayList<Integer> rpm;
     private ArrayList<Integer> speed;
-   // private ArrayList<Integer> distance;
 
     public DataTypes(){
         super();

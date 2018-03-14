@@ -11,14 +11,16 @@ public class Data {
     private String id;
     private String repAvgSpeed;
     private String repHighestRPM;
+    private String repDistance;
 
     public Data(){
         super();
     }
 
-    public Data(String repAvgSpeed, String repHighestRPM) {
+    public Data(String repAvgSpeed, String repHighestRPM, String repDistance) {
         this.repAvgSpeed = repAvgSpeed;
         this.repHighestRPM = repHighestRPM;
+        this.repDistance = repDistance;
     }
 
     public String getId() {
@@ -43,5 +45,13 @@ public class Data {
 
     public void setRepHighestRPM(String repHighestRPM) {
         this.repHighestRPM = repHighestRPM;
+    }
+
+    public String getRepDistance() {
+        return repDistance;
+    }
+
+    public void setRepDistance(String repDistance) {
+        this.repDistance = repDistance;
     }
 }
