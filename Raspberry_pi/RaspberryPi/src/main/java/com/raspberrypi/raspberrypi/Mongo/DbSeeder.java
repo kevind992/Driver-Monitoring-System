@@ -23,24 +23,26 @@ public class DbSeeder implements CommandLineRunner {
 
         System.out.println("In Mongo Package");
 
-        new ReportGenerator().generateReport();
+        Data data1;
+
+        //Generating report for current trip
+        ReportGenerator report = new ReportGenerator();
+        data1 = report.generateReport();
 
         System.out.println("Back In Mongo Package");
-        Data data1 = new Data(userData(),userData());
 
+        //adding the report to an List of reports
         List<Data> data = Arrays.asList(data1);
 
-        this.dataRepository.save(data);
+        if(data1.getRepHighestRPM().equals("0"))
+        {
+            System.out.println("Error Handling - No Data..");
+        }else{
+            //sending report to mongodb
+            this.dataRepository.save(data);
+        }
 
-    }
-    private String userData(){
 
-        String input;
 
-        Scanner scan = new Scanner(System.in);
-
-        input = scan.nextLine();
-
-        return input;
     }
 }

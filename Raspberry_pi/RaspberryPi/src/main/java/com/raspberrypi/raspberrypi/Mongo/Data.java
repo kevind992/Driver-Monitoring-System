@@ -9,12 +9,18 @@ public class Data {
 
     @Id
     private String id;
-    private String type;
-    private String value;
+    private String repAvgSpeed;
+    private String repHighestRPM;
+    private String repDistance;
 
-    public Data(String type, String value) {
-        this.type = type;
-        this.value = value;
+    public Data(){
+        super();
+    }
+
+    public Data(String repAvgSpeed, String repHighestRPM, String repDistance) {
+        this.repAvgSpeed = repAvgSpeed;
+        this.repHighestRPM = repHighestRPM;
+        this.repDistance = repDistance;
     }
 
     public String getId() {
@@ -25,19 +31,27 @@ public class Data {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getRepAvgSpeed() {
+        return repAvgSpeed;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setRepAvgSpeed(String repAvgSpeed) {
+        this.repAvgSpeed = repAvgSpeed;
     }
 
-    public String getValue() {
-        return value;
+    public String getRepHighestRPM() {
+        return repHighestRPM;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setRepHighestRPM(String repHighestRPM) {
+        this.repHighestRPM = repHighestRPM;
+    }
+
+    public String getRepDistance() {
+        return repDistance;
+    }
+
+    public void setRepDistance(String repDistance) {
+        this.repDistance = repDistance;
     }
 }
