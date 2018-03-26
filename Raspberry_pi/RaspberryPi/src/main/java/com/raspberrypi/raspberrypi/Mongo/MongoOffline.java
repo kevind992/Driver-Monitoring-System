@@ -2,11 +2,12 @@ package com.raspberrypi.raspberrypi.Mongo;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MongoOffline implements Serializable {
 
     private File backupFile;
-
 
     public MongoOffline(){
 
@@ -14,7 +15,7 @@ public class MongoOffline implements Serializable {
         backupFile = new File("backup.txt");
     }
 
-    public void WriteFileData(ArrayList<Data> data)  throws FileNotFoundException, IOException{
+    public void WriteFileData(List<Data> data)  throws FileNotFoundException, IOException{
 
         //Creating the FileOutputStream, BufferedOutputStream and ObjectOutputStream
         FileOutputStream fo = new FileOutputStream(backupFile);
@@ -28,9 +29,9 @@ public class MongoOffline implements Serializable {
         System.out.println("Data written to file..");
 
     }
-    public ArrayList<Data> ReadFileData()throws FileNotFoundException, IOException, ClassNotFoundException{
+    public List<Data> ReadFileData()throws FileNotFoundException, IOException, ClassNotFoundException{
 
-        ArrayList<Data> list = new ArrayList<>();
+        List<Data> list = Arrays.asList();
 
         //Creating a FileInputStream, BufferedInputStream and ObjectInputStream.
         FileInputStream fi = new FileInputStream(backupFile);
@@ -52,5 +53,21 @@ public class MongoOffline implements Serializable {
         input.close();
         //Sending the arraylist
         return list;
+    }
+    //Checks whether file is empty or not
+    public boolean IsFileEmpty() throws IOException, ClassNotFoundException {
+
+        boolean fileEmpty;
+        List<Data> list;
+
+        list = ReadFileData();
+
+        if(list.isEmpty()){
+            fileEmpty = true;
+        }else {
+            fileEmpty = false;
+        }
+
+        return fileEmpty;
     }
 }
