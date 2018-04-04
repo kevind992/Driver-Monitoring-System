@@ -5,6 +5,9 @@ import 'rxjs/add/operator/map';
 
 // charts
 import { ChartsModule } from 'ng2-charts';
+//npm install --save @types/jquery
+
+import * as $ from "jquery";
 
 /**
  * Generated class for the ChartsPage page.
@@ -32,6 +35,7 @@ export class ChartsPage {
 
   loadLogs() {
     this.http.get('http://167.99.82.134/api/data').map(data => data.json()).subscribe(data => {
+      // if(!itemListResponse.has("id");
       this.items = data;
       console.log(this.items)
     },
@@ -40,31 +44,47 @@ export class ChartsPage {
   });
   }
 
+//   try {
+//     itemListResponse = <Item[]>JSON.parse(responseArray);
+ 
+//     if(!itemListResponse.has("id") ||
+//        !itemListResponse.has("type") ||
+//        !itemListResponse.has("state")){
+ 
+//        throw "Invalid Item";
+//     }
+//  } catch (e){
+ 
+//  }
+
   // TO DO: plot real data
-  //chart with sample data
-  public lineChartData:Array<any> = [
-    {data: [2000, 4500, 4000, 1500, 2500, 1000, 4000], label: 'RnPM'},
-    {data: [28, 48, 40, 19, 86, 27, 90]},
-    // {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
-  ];
+  rpmArray: number[] = [1500, 2000, 3500];
+  spdArray: number[] = [30, 35, 60, 40];
+  dstArray: number[] = [4000, 5000, 200];
+
+  public fillarr(){
+    $.getJSON("test.php?c=10",function(data){
+      this.rpmArray = this.rpmArray.concat(data);
+    });
+}
+  
+
   //chart with RPM data
   public rpmData:Array<any> = [
-    {data: [2000, 4500, 4000, 1500, 2500, 1000, 4000], label: 'RPM'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
-    // {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
+    {data: this.rpmArray, label: 'RPM'}
   ];
   //chart with speed data
   public speedData:Array<any> = [
-    {data: [50, 60, 120, 80, 80, 101, 66], label: 'Spd'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
-    // {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
+    {data: this.spdArray, label: 'Spd'}
   ];
   //chart with distance traveled data
   public distanceData:Array<any> = [
-    {data: [200, 350, 400, 15, 25, 10, 40], label: 'Dist'},
+    {data: this.dstArray, label: 'Dist'},
     {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
     // {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
   ];
+
+  // TO DO: update for dates maybe
   public lineChartLabels:Array<any> = ['', '', '', '', '', '', ''];
   public lineChartOptions:any = {
     responsive: true

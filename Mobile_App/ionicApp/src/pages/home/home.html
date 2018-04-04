@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Logs</ion-title>
+    <ion-title>Logs test</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -11,7 +11,7 @@
   <button ion-button full (click)="loadLogs()">Load Data</button>
   
   <ion-list>
-    <ion-card ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
+    <ion-card ion-item *ngFor="let item of items">
       <ion-card-header>
         <!-- {{item.date}} -->
         {{item._id}}
