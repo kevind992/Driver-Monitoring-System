@@ -7,6 +7,9 @@ webpackJsonp([1],{
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChartsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(409);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,6 +21,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
+
 /**
  * Generated class for the ChartsPage page.
  *
@@ -27,14 +32,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 // charts
 // https://www.djamware.com/post/598953f880aca768e4d2b12b/creating-beautiful-charts-easily-using-ionic-3-and-angular-4
 var ChartsPage = (function () {
-    ///////
-    function ChartsPage(navCtrl, navParams) {
+    function ChartsPage(navCtrl, navParams, http) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        // TO DO: plot real data, seperate charts for each
+        this.http = http;
+        // TO DO: plot real data
         //chart with sample data
         this.lineChartData = [
-            { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+            { data: [2000, 4500, 4000, 1500, 2500, 1000, 4000], label: 'RnPM' },
+            { data: [28, 48, 40, 19, 86, 27, 90] },
+        ];
+        //chart with RPM data
+        this.rpmData = [
+            { data: [2000, 4500, 4000, 1500, 2500, 1000, 4000], label: 'RPM' },
+            { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
+        ];
+        //chart with speed data
+        this.speedData = [
+            { data: [50, 60, 120, 80, 80, 101, 66], label: 'Spd' },
+            { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
+        ];
+        //chart with distance traveled data
+        this.distanceData = [
+            { data: [200, 350, 400, 15, 25, 10, 40], label: 'Dist' },
             { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
         ];
         this.lineChartLabels = ['', '', '', '', '', '', ''];
@@ -62,6 +82,15 @@ var ChartsPage = (function () {
         this.lineChartLegend = true;
         this.lineChartType = 'line';
     }
+    ChartsPage.prototype.loadLogs = function () {
+        var _this = this;
+        this.http.get('http://167.99.82.134/api/data').map(function (data) { return data.json(); }).subscribe(function (data) {
+            _this.items = data;
+            console.log(_this.items);
+        }, function (err) {
+            alert('oops! ' + err);
+        });
+    };
     ChartsPage.prototype.randomize = function () {
         var _lineChartData = new Array(this.lineChartData.length);
         for (var i = 0; i < this.lineChartData.length; i++) {
@@ -79,6 +108,9 @@ var ChartsPage = (function () {
     ChartsPage.prototype.chartHovered = function (e) {
         console.log(e);
     };
+    ///////
+    // constructor(public navCtrl: NavController, public navParams: NavParams) {
+    // }
     ChartsPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad ChartsPage');
     };
@@ -86,9 +118,10 @@ var ChartsPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'page-charts',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/groupProj/3rd-Year-Project/Mobile_App/ionicApp/src/pages/charts/charts.html"*/'<!--\n  Generated template for the ChartsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Charts</ion-title>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n  </ion-navbar>\n  \n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-card>\n    <ion-card-header>\n      AVG. RPM\n    </ion-card-header>\n    <div class="row">\n        <div class="col-md-6">\n          <div style="display: block;">\n          <canvas baseChart width="300" height="400"\n                      [datasets]="rpmData"\n                      [labels]="lineChartLabels"\n                      [options]="lineChartOptions"\n                      [colors]="lineChartColors"\n                      [legend]="lineChartLegend"\n                      [chartType]="lineChartType"\n                      (chartHover)="chartHovered($event)"\n                      (chartClick)="chartClicked($event)"></canvas>\n          </div>\n        </div>\n      </div>\n  </ion-card>\n  <ion-card>\n      <ion-card-header>\n          Speed\n      </ion-card-header>\n      <div class="row">\n          <div class="col-md-6">\n            <div style="display: block;">\n            <canvas baseChart width="300" height="400"\n                        [datasets]="speedData"\n                        [labels]="lineChartLabels"\n                        [options]="lineChartOptions"\n                        [colors]="lineChartColors"\n                        [legend]="lineChartLegend"\n                        [chartType]="lineChartType"\n                        (chartHover)="chartHovered($event)"\n                        (chartClick)="chartClicked($event)"></canvas>\n            </div>\n          </div>\n        </div>\n    </ion-card>\n    <ion-card>\n        <ion-card-header>\n          Distance\n        </ion-card-header>\n        <div class="row">\n            <div class="col-md-6">\n              <div style="display: block;">\n              <canvas baseChart width="300" height="400"\n                          [datasets]="distanceData"\n                          [labels]="lineChartLabels"\n                          [options]="lineChartOptions"\n                          [colors]="lineChartColors"\n                          [legend]="lineChartLegend"\n                          [chartType]="lineChartType"\n                          (chartHover)="chartHovered($event)"\n                          (chartClick)="chartClicked($event)"></canvas>\n              </div>\n            </div>\n          </div>\n      </ion-card>\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/groupProj/3rd-Year-Project/Mobile_App/ionicApp/src/pages/charts/charts.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]) === "function" && _c || Object])
     ], ChartsPage);
     return ChartsPage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=charts.js.map
@@ -167,10 +200,9 @@ var HomePage = (function () {
     }
     HomePage.prototype.loadLogs = function () {
         var _this = this;
-        this.http.get('http://178.62.100.184/api/data').map(function (data) { return data.json(); }).subscribe(function (data) {
+        this.http.get('http://167.99.82.134/api/data').map(function (data) { return data.json(); }).subscribe(function (data) {
             _this.items = data;
             console.log(_this.items);
-            console.log("test");
         }, function (err) {
             alert('oops' + err);
         });
@@ -182,7 +214,7 @@ var HomePage = (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-home',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/groupProj/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Logs</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <button ion-button full (click)="loadLogs()">Load Data</button>\n  \n  <ion-list>\n    <ion-card>\n      <ion-card-header>\n        <!-- {{item.date}} -->\n        [Trip Date]\n      </ion-card-header>\n      <ion-card-content ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">\n          <ion-item-group>\n            <ion-item-divider color="light">{{item.type}}</ion-item-divider>\n            <!-- <div class="item-note" item-end>\n              {{item.type}}\n            </div> -->\n              <div class="item-note" item-end>\n                <br>\n                {{item.value}}\n              </div>\n          </ion-item-group>\n          \n      </ion-card-content>\n      <!-- <div class="item item-divider">\n      </div> -->\n    </ion-card>\n\n\n\n  </ion-list>\n\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/groupProj/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/groupProj/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Logs</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <button ion-button full (click)="loadLogs()">Load Data</button>\n  \n  <ion-list>\n    <ion-card ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">\n      <ion-card-header>\n        <!-- {{item.date}} -->\n        {{item._id}}\n      </ion-card-header>\n      <ion-card-content>\n          <ion-item-group>\n              Highest RPM:  {{item.repHighestRPM}}\n              <br>\n              Average Speed:  {{item.repAvgSpeed}}\n          </ion-item-group>\n          \n      </ion-card-content>\n      <!-- <div class="item item-divider">\n      </div> -->\n    </ion-card>\n\n\n\n  </ion-list>\n\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/groupProj/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]])
     ], HomePage);
@@ -306,6 +338,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+// @Component({
+//template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/groupProj/3rd-Year-Project/Mobile_App/ionicApp/src/app/app.html"*/'<ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n        {{p.title}}\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/groupProj/3rd-Year-Project/Mobile_App/ionicApp/src/app/app.html"*/
+// })
 var MyApp = (function () {
     function MyApp(platform, statusBar, splashScreen) {
         this.platform = platform;
@@ -313,6 +348,8 @@ var MyApp = (function () {
         this.splashScreen = splashScreen;
         this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */];
         this.initializeApp();
+        this.tab1 = __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */];
+        this.tab2 = __WEBPACK_IMPORTED_MODULE_5__pages_charts_charts__["a" /* ChartsPage */];
         // used for an example of ngFor and navigation
         this.pages = [
             { title: 'Home', component: __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */] },
@@ -338,7 +375,8 @@ var MyApp = (function () {
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */])
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/groupProj/3rd-Year-Project/Mobile_App/ionicApp/src/app/app.html"*/'<ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n        {{p.title}}\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/groupProj/3rd-Year-Project/Mobile_App/ionicApp/src/app/app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            template: "\n    <ion-tabs>\n      <ion-tab tabIcon=\"car\" [root]=\"tab1\"></ion-tab>\n      <ion-tab tabIcon=\"clipboard\" [root]=\"tab2\"></ion-tab>\n    </ion-tabs>"
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);

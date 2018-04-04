@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
+
+// charts
+import { ChartsModule } from 'ng2-charts';
 
 /**
  * Generated class for the ChartsPage page.
@@ -18,11 +23,28 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ChartsPage {
 
-  // TO DO: plot real data, seperate charts for each
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http:Http) {
+
+  }
+
+  // items:any;
+  items;
+
+  loadLogs() {
+    this.http.get('http://167.99.82.134/api/data').map(data => data.json()).subscribe(data => {
+      this.items = data;
+      console.log(this.items)
+    },
+  (err) => {
+    alert('oops! ' + err);
+  });
+  }
+
+  // TO DO: plot real data
   //chart with sample data
   public lineChartData:Array<any> = [
-    {data: [2000, 4500, 4000, 1500, 2500, 1000, 4000], label: 'RPM'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
+    {data: [2000, 4500, 4000, 1500, 2500, 1000, 4000], label: 'RnPM'},
+    {data: [28, 48, 40, 19, 86, 27, 90]},
     // {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
   ];
   //chart with RPM data
@@ -89,8 +111,8 @@ export class ChartsPage {
   }
   ///////
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  // constructor(public navCtrl: NavController, public navParams: NavParams) {
+  // }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChartsPage');
