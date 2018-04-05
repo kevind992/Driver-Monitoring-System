@@ -30,16 +30,20 @@ public class DbSeeder implements CommandLineRunner {
 
         MongoOffline mongoOffline = new MongoOffline();
 
-        fileEmpty = mongoOffline.IsFileEmpty();
+        if (mongoOffline.IsConnected() == false){
 
-        if(fileEmpty == false){
+            fileEmpty = mongoOffline.IsFileEmpty();
 
-            backupData = mongoOffline.ReadFileData();
-            try{
-                this.dataRepository.save(backupData);
-            }catch (IllegalStateException e){
-                System.out.println("Error - DB offline..");
+            if(fileEmpty == false){
+
+                backupData = mongoOffline.ReadFileData();
+                try{
+                    this.dataRepository.save(backupData);
+                }catch (IllegalStateException e){
+                    System.out.println("Error - DB offline..");
+                }
             }
+
         }
 
         //Generating report for current trip
