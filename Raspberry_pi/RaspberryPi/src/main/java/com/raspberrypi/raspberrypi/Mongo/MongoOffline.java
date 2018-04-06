@@ -9,26 +9,28 @@ import java.util.List;
 
 public class MongoOffline implements Serializable {
 
-    private File backupFile;
+
 
     public MongoOffline(){
 
         super();
-        backupFile = new File("backup.txt");
+
     }
 
     public void WriteFileData(List<Data> data)  throws FileNotFoundException, IOException{
 
-        //Creating the FileOutputStream, BufferedOutputStream and ObjectOutputStream
-//        FileOutputStream fo = new FileOutputStream(backupFile);
-//        BufferedOutputStream bout = new BufferedOutputStream(fo);
-//        ObjectOutputStream output = new ObjectOutputStream(bout);
-//
-//        for(Data d : data){
-//            output.writeObject(d);
-//        }
+        File backupFile = new File("/backup.txt");
 
-        //checking if users file exists
+        //Creating the FileOutputStream, BufferedOutputStream and ObjectOutputStream
+        FileOutputStream fo = new FileOutputStream(backupFile);
+        BufferedOutputStream bout = new BufferedOutputStream(fo);
+        ObjectOutputStream output = new ObjectOutputStream(bout);
+
+        for(Data d : data){
+            output.writeObject(d);
+        }
+
+        /*//checking if users file exists
         boolean check = new File("com/raspberrypi/raspberrypi/backup.txt").exists();
         if(check == false){
             //creating file
@@ -44,7 +46,10 @@ public class MongoOffline implements Serializable {
             bw.close();
             outfile.close();
         }
+*/
 
+        //bw.close();
+        output.close();
 
         System.out.println("Data written to file..");
 
@@ -52,14 +57,18 @@ public class MongoOffline implements Serializable {
 
     public List<Data> ReadFileData()throws FileNotFoundException, IOException, ClassNotFoundException {
 
+        File backupFile = new File("/backup.txt");
+
         List<Data> list = null;
 
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("backup.txt"));
+        FileInputStream in = new FileInputStream(backupFile);
+        BufferedInputStream bInpStream = new BufferedInputStream(in);
+        ObjectInputStream ojInputStream = new ObjectInputStream(bInpStream);
 
         try {
-            while(ois.readObject() != null) {
+            while(ojInputStream.readObject() != null) {
                 //Reading and adding to the Arraylist
-                Data d = (Data) ois.readObject();
+                Data d = (Data) ojInputStream.readObject();
                 list.add(d);
             }
         } catch (EOFException ex) {
@@ -67,8 +76,9 @@ public class MongoOffline implements Serializable {
         }
 
         System.out.println("backupFile.txt Read Successful..");
+
         //Closing the last opened stream
-        ois.close();
+        ojInputStream.close();
 
         //Sending the arraylist
         return list;
@@ -78,8 +88,10 @@ public class MongoOffline implements Serializable {
     public boolean IsFileEmpty() throws IOException, ClassNotFoundException {
 
         boolean fileEmpty;
+
         List<Data> list;
 
+        //reading from backup.txt to see if there is any saved files
         list = ReadFileData();
 
         if(list.isEmpty()){
@@ -90,9 +102,8 @@ public class MongoOffline implements Serializable {
 
         return fileEmpty;
     }
-
     public boolean IsConnected(){
 
-        return false;
+        return true;
     }
 }
