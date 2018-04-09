@@ -22,7 +22,7 @@
 
   <ion-card>
     <ion-card-header>
-      AVG. RPM
+      Highest RPM
     </ion-card-header>
     <div class="row">
         <div class="col-md-6">
@@ -45,7 +45,7 @@
   </ion-card>
   <ion-card>
       <ion-card-header>
-          Speed
+          Average Speed
       </ion-card-header>
       <div class="row">
           <div class="col-md-6">
@@ -71,7 +71,7 @@
             <div class="col-md-6">
               <div style="display: block;">
               <canvas baseChart width="300" height="400"
-                          [datasets]="spdArray"
+                          [datasets]="dstArray"
                           [labels]="lineChartLabels"
                           [options]="lineChartOptions"
                           [colors]="lineChartColors"
