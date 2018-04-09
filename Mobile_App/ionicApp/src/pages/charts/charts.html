@@ -18,6 +18,8 @@
 
 
 <ion-content padding>
+    <button ion-button full (click)="loadLogs()">Load Data</button>
+
   <ion-card>
     <ion-card-header>
       AVG. RPM
@@ -26,17 +28,20 @@
         <div class="col-md-6">
           <div style="display: block;">
           <canvas baseChart width="300" height="400"
-                      [datasets]="rpmData"
+                      [datasets]="lineChartData"
                       [labels]="lineChartLabels"
                       [options]="lineChartOptions"
                       [colors]="lineChartColors"
                       [legend]="lineChartLegend"
                       [chartType]="lineChartType"
                       (chartHover)="chartHovered($event)"
-                      (chartClick)="chartClicked($event)"></canvas>
+                      (chartClick)="chartClicked($event)">
+            </canvas>
           </div>
         </div>
       </div>
+      <button (click)="loadLogs()">Update</button>
+
   </ion-card>
   <ion-card>
       <ion-card-header>
@@ -58,7 +63,7 @@
           </div>
         </div>
     </ion-card>
-    <ion-card>
+    <!--ion-card>
         <ion-card-header>
           Distance
         </ion-card-header>
@@ -77,5 +82,5 @@
               </div>
             </div>
           </div>
-      </ion-card>
+      </ion-card> -->
 </ion-content>

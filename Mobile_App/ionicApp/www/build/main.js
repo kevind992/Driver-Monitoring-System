@@ -10,8 +10,6 @@ webpackJsonp([1],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(85);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(162);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__(460);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_jquery__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -25,14 +23,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-//npm install --save @types/jquery
-
-/**
- * Generated class for the ChartsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 // charts
 // https://www.djamware.com/post/598953f880aca768e4d2b12b/creating-beautiful-charts-easily-using-ionic-3-and-angular-4
 var ChartsPage = (function () {
@@ -40,19 +30,16 @@ var ChartsPage = (function () {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.http = http;
-        //   try {
-        //     itemListResponse = <Item[]>JSON.parse(responseArray);
-        //     if(!itemListResponse.has("id") ||
-        //        !itemListResponse.has("type") ||
-        //        !itemListResponse.has("state")){
-        //        throw "Invalid Item";
-        //     }
-        //  } catch (e){
-        //  }
-        // TO DO: plot real data
-        this.rpmArray = [1500, 2000, 3500];
-        this.spdArray = [30, 35, 60, 40];
-        this.dstArray = [4000, 5000, 200];
+        // Arrays for data
+        this.rpmArray = [];
+        // spdArray: number[] = [];
+        this.dstArray = [];
+        this.lineChartData = [
+            { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }
+        ];
+        this.spdArray = [
+            { data: [65, 59, 80, 81, 56, 55, 40], label: 'Highest Speed' }
+        ];
         //chart with RPM data
         this.rpmData = [
             { data: this.rpmArray, label: 'RPM' }
@@ -61,13 +48,13 @@ var ChartsPage = (function () {
         this.speedData = [
             { data: this.spdArray, label: 'Spd' }
         ];
-        //chart with distance traveled data
-        this.distanceData = [
-            { data: this.dstArray, label: 'Dist' },
-            { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
-        ];
-        // TO DO: update for dates maybe
-        this.lineChartLabels = ['', '', '', '', '', '', ''];
+        // //chart with distance traveled data
+        // public distanceData:Array<any> = [
+        //   {data: this.dstArray, label: 'Dist'},
+        //   {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
+        //   // {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
+        // ];
+        this.lineChartLabels = ['', '', '', '', '', '', '']; //TO DO: add dates here
         this.lineChartOptions = {
             responsive: true
         };
@@ -94,25 +81,52 @@ var ChartsPage = (function () {
     }
     ChartsPage.prototype.loadLogs = function () {
         var _this = this;
-        this.http.get('http://167.99.82.134/api/data').map(function (data) { return data.json(); }).subscribe(function (data) {
-            // if(!itemListResponse.has("id");
+        this.http.get('http://167.99.202.75/api/data').map(function (data) { return data.json(); }).subscribe(function (data) {
             _this.items = data;
-            console.log(_this.items);
+            for (var _i = 0, _a = _this.items; _i < _a.length; _i++) {
+                var item = _a[_i];
+                _this.rpmArray.push(Number(item.repHighestRPM));
+                _this.spdArray.push(Number(item.repAvgSpeed));
+                _this.dstArray.push(Number(item.repDistance));
+            }
         }, function (err) {
             alert('oops! ' + err);
         });
-    };
-    ChartsPage.prototype.fillarr = function () {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__["getJSON"]("test.php?c=10", function (data) {
-            this.rpmArray = this.rpmArray.concat(data);
-        });
-    };
-    ChartsPage.prototype.randomize = function () {
+        //TO DO:change to all three
         var _lineChartData = new Array(this.lineChartData.length);
+        // temp arrays with new data
+        var _rpmArray = new Array(this.rpmArray.length);
+        var _spdArray = new Array(this.spdArray.length);
+        var _dstArray = new Array(this.dstArray.length);
+        // loop over each array
         for (var i = 0; i < this.lineChartData.length; i++) {
             _lineChartData[i] = { data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label };
             for (var j = 0; j < this.lineChartData[i].data.length; j++) {
-                _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
+                _lineChartData[i].data[j] = this.rpmArray[j]; // replace with data from json
+            }
+        }
+        // rpm
+        this.lineChartData = _lineChartData;
+        for (var i = 0; i < this.lineChartData.length; i++) {
+            _lineChartData[i] = { data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label };
+            for (var j = 0; j < this.lineChartData[i].data.length; j++) {
+                _lineChartData[i].data[j] = this.rpmArray[j];
+            }
+        }
+        // spd
+        this.spdArray = _spdArray;
+        for (var i = 0; i < this.spdArray.length; i++) {
+            _spdArray[i] = { data: new Array(this.spdArray[i].data.length), label: this.spdArray[i].label };
+            for (var j = 0; j < this.spdArray[i].data.length; j++) {
+                _spdArray[i].data[j] = this.spdArray[j];
+            }
+        }
+        // dst
+        this.lineChartData = _lineChartData;
+        for (var i = 0; i < this.lineChartData.length; i++) {
+            _lineChartData[i] = { data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label };
+            for (var j = 0; j < this.lineChartData[i].data.length; j++) {
+                _lineChartData[i].data[j] = this.rpmArray[j];
             }
         }
         this.lineChartData = _lineChartData;
@@ -124,15 +138,13 @@ var ChartsPage = (function () {
     ChartsPage.prototype.chartHovered = function (e) {
         console.log(e);
     };
-    ///////
-    // constructor(public navCtrl: NavController, public navParams: NavParams) {
-    // }
     ChartsPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad ChartsPage');
+        this.loadLogs();
     };
     ChartsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-charts',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/groupProj/3rd-Year-Project/Mobile_App/ionicApp/src/pages/charts/charts.html"*/'<!--\n  Generated template for the ChartsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Charts ggg</ion-title>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n  </ion-navbar>\n  \n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-card>\n    <ion-card-header>\n      AVG. RPM\n    </ion-card-header>\n    <div class="row">\n        <div class="col-md-6">\n          <div style="display: block;">\n          <canvas baseChart width="300" height="400"\n                      [datasets]="rpmData"\n                      [labels]="lineChartLabels"\n                      [options]="lineChartOptions"\n                      [colors]="lineChartColors"\n                      [legend]="lineChartLegend"\n                      [chartType]="lineChartType"\n                      (chartHover)="chartHovered($event)"\n                      (chartClick)="chartClicked($event)"></canvas>\n          </div>\n        </div>\n      </div>\n  </ion-card>\n  <ion-card>\n      <ion-card-header>\n          Speed\n      </ion-card-header>\n      <div class="row">\n          <div class="col-md-6">\n            <div style="display: block;">\n            <canvas baseChart width="300" height="400"\n                        [datasets]="speedData"\n                        [labels]="lineChartLabels"\n                        [options]="lineChartOptions"\n                        [colors]="lineChartColors"\n                        [legend]="lineChartLegend"\n                        [chartType]="lineChartType"\n                        (chartHover)="chartHovered($event)"\n                        (chartClick)="chartClicked($event)"></canvas>\n            </div>\n          </div>\n        </div>\n    </ion-card>\n    <ion-card>\n        <ion-card-header>\n          Distance\n        </ion-card-header>\n        <div class="row">\n            <div class="col-md-6">\n              <div style="display: block;">\n              <canvas baseChart width="300" height="400"\n                          [datasets]="distanceData"\n                          [labels]="lineChartLabels"\n                          [options]="lineChartOptions"\n                          [colors]="lineChartColors"\n                          [legend]="lineChartLegend"\n                          [chartType]="lineChartType"\n                          (chartHover)="chartHovered($event)"\n                          (chartClick)="chartClicked($event)"></canvas>\n              </div>\n            </div>\n          </div>\n      </ion-card>\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/groupProj/3rd-Year-Project/Mobile_App/ionicApp/src/pages/charts/charts.html"*/,
+            selector: 'page-charts',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/groupProj/3rd-Year-Project/Mobile_App/ionicApp/src/pages/charts/charts.html"*/'<!--\n  Generated template for the ChartsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Charts ggg</ion-title>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n  </ion-navbar>\n  \n\n</ion-header>\n\n\n<ion-content padding>\n    <button ion-button full (click)="loadLogs()">Load Data</button>\n\n  <ion-card>\n    <ion-card-header>\n      AVG. RPM\n    </ion-card-header>\n    <div class="row">\n        <div class="col-md-6">\n          <div style="display: block;">\n          <canvas baseChart width="300" height="400"\n                      [datasets]="lineChartData"\n                      [labels]="lineChartLabels"\n                      [options]="lineChartOptions"\n                      [colors]="lineChartColors"\n                      [legend]="lineChartLegend"\n                      [chartType]="lineChartType"\n                      (chartHover)="chartHovered($event)"\n                      (chartClick)="chartClicked($event)">\n            </canvas>\n          </div>\n        </div>\n      </div>\n      <button (click)="loadLogs()">Update</button>\n\n  </ion-card>\n  <ion-card>\n      <ion-card-header>\n          Speed\n      </ion-card-header>\n      <div class="row">\n          <div class="col-md-6">\n            <div style="display: block;">\n            <canvas baseChart width="300" height="400"\n                        [datasets]="speedData"\n                        [labels]="lineChartLabels"\n                        [options]="lineChartOptions"\n                        [colors]="lineChartColors"\n                        [legend]="lineChartLegend"\n                        [chartType]="lineChartType"\n                        (chartHover)="chartHovered($event)"\n                        (chartClick)="chartClicked($event)"></canvas>\n            </div>\n          </div>\n        </div>\n    </ion-card>\n    <!--ion-card>\n        <ion-card-header>\n          Distance\n        </ion-card-header>\n        <div class="row">\n            <div class="col-md-6">\n              <div style="display: block;">\n              <canvas baseChart width="300" height="400"\n                          [datasets]="distanceData"\n                          [labels]="lineChartLabels"\n                          [options]="lineChartOptions"\n                          [colors]="lineChartColors"\n                          [legend]="lineChartLegend"\n                          [chartType]="lineChartType"\n                          (chartHover)="chartHovered($event)"\n                          (chartClick)="chartClicked($event)"></canvas>\n              </div>\n            </div>\n          </div>\n      </ion-card> -->\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/groupProj/3rd-Year-Project/Mobile_App/ionicApp/src/pages/charts/charts.html"*/,
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]) === "function" && _c || Object])
     ], ChartsPage);
@@ -216,7 +228,7 @@ var HomePage = (function () {
     }
     HomePage.prototype.loadLogs = function () {
         var _this = this;
-        this.http.get('http://167.99.82.134/api/data').map(function (data) { return data.json(); }).subscribe(function (data) {
+        this.http.get('http://167.99.202.75/api/data').map(function (data) { return data.json(); }).subscribe(function (data) {
             _this.items = data;
             console.log(_this.items);
         }, function (err) {

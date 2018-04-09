@@ -8,16 +8,10 @@ import { ChartsModule } from 'ng2-charts';
 //npm install --save @types/jquery
 
 import * as $ from "jquery";
+import { NgForOf } from '@angular/common';
 
-/**
- * Generated class for the ChartsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
- // charts
- // https://www.djamware.com/post/598953f880aca768e4d2b12b/creating-beautiful-charts-easily-using-ionic-3-and-angular-4
+// charts
+// https://www.djamware.com/post/598953f880aca768e4d2b12b/creating-beautiful-charts-easily-using-ionic-3-and-angular-4
 
 @IonicPage()
 @Component({
@@ -26,70 +20,105 @@ import * as $ from "jquery";
 })
 export class ChartsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http:Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
 
   }
 
   // items:any;
   items;
 
+  // Arrays for data
+  rpmArray: number[] = [];
+  // spdArray: number[] = [];
+  dstArray: number[] = [];
+
+  public lineChartData: Array<any> = [
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }
+  ];
+
+  public spdArray: Array<any> = [
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Highest Speed' }
+  ];
+
   loadLogs() {
-    this.http.get('http://167.99.82.134/api/data').map(data => data.json()).subscribe(data => {
-      // if(!itemListResponse.has("id");
+    this.http.get('http://167.99.202.75/api/data').map(data => data.json()).subscribe(data => {
       this.items = data;
-      console.log(this.items)
+
+      for (let item of this.items) {
+        this.rpmArray.push(Number(item.repHighestRPM));
+        this.spdArray.push(Number(item.repAvgSpeed));
+        this.dstArray.push(Number(item.repDistance));
+      }
+
     },
-  (err) => {
-    alert('oops! ' + err);
-  });
+      (err) => {
+        alert('oops! ' + err);
+      });
+
+
+      //TO DO:change to all three
+    let _lineChartData: Array<any> = new Array(this.lineChartData.length);
+    // temp arrays with new data
+    let _rpmArray: Array<any> = new Array(this.rpmArray.length);
+    let _spdArray: Array<any> = new Array(this.spdArray.length);
+    let _dstArray: Array<any> = new Array(this.dstArray.length);
+
+    // loop over each array
+    for (let i = 0; i < this.lineChartData.length; i++) {
+      _lineChartData[i] = { data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label };
+      for (let j = 0; j < this.lineChartData[i].data.length; j++) {
+        _lineChartData[i].data[j] = this.rpmArray[j]; // replace with data from json
+      }
+    }
+    // rpm
+    this.lineChartData = _lineChartData;
+    for (let i = 0; i < this.lineChartData.length; i++) {
+      _lineChartData[i] = { data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label };
+      for (let j = 0; j < this.lineChartData[i].data.length; j++) {
+        _lineChartData[i].data[j] = this.rpmArray[j]; 
+      }
+    }
+
+    // spd
+    this.spdArray = _spdArray;
+    for (let i = 0; i < this.spdArray.length; i++) {
+      _spdArray[i] = { data: new Array(this.spdArray[i].data.length), label: this.spdArray[i].label };
+      for (let j = 0; j < this.spdArray[i].data.length; j++) {
+        _spdArray[i].data[j] = this.spdArray[j];
+      }
+    }
+
+    // dst
+    this.lineChartData = _lineChartData;
+    for (let i = 0; i < this.lineChartData.length; i++) {
+      _lineChartData[i] = { data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label };
+      for (let j = 0; j < this.lineChartData[i].data.length; j++) {
+        _lineChartData[i].data[j] = this.rpmArray[j];
+      }
+    }
+    this.lineChartData = _lineChartData;
   }
 
-//   try {
-//     itemListResponse = <Item[]>JSON.parse(responseArray);
- 
-//     if(!itemListResponse.has("id") ||
-//        !itemListResponse.has("type") ||
-//        !itemListResponse.has("state")){
- 
-//        throw "Invalid Item";
-//     }
-//  } catch (e){
- 
-//  }
-
-  // TO DO: plot real data
-  rpmArray: number[] = [1500, 2000, 3500];
-  spdArray: number[] = [30, 35, 60, 40];
-  dstArray: number[] = [4000, 5000, 200];
-
-  public fillarr(){
-    $.getJSON("test.php?c=10",function(data){
-      this.rpmArray = this.rpmArray.concat(data);
-    });
-}
-  
-
   //chart with RPM data
-  public rpmData:Array<any> = [
-    {data: this.rpmArray, label: 'RPM'}
+  public rpmData: Array<any> = [
+    { data: this.rpmArray, label: 'RPM' }
   ];
   //chart with speed data
   public speedData:Array<any> = [
     {data: this.spdArray, label: 'Spd'}
   ];
-  //chart with distance traveled data
-  public distanceData:Array<any> = [
-    {data: this.dstArray, label: 'Dist'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
-    // {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
-  ];
+  // //chart with distance traveled data
+  // public distanceData:Array<any> = [
+  //   {data: this.dstArray, label: 'Dist'},
+  //   {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
+  //   // {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
+  // ];
 
-  // TO DO: update for dates maybe
-  public lineChartLabels:Array<any> = ['', '', '', '', '', '', ''];
-  public lineChartOptions:any = {
+  public lineChartLabels: Array<any> = ['', '', '', '', '', '', ''];//TO DO: add dates here
+  public lineChartOptions: any = {
     responsive: true
   };
-  public lineChartColors:Array<any> = [
+  public lineChartColors: Array<any> = [
     { // grey
       backgroundColor: 'rgba(148,159,177,0.2)',
       borderColor: 'rgba(148,159,177,1)',
@@ -107,35 +136,21 @@ export class ChartsPage {
       pointHoverBorderColor: 'rgba(77,83,96,1)'
     }
   ];
-  public lineChartLegend:boolean = true;
-  public lineChartType:string = 'line';
-  
-  public randomize():void {
-    let _lineChartData:Array<any> = new Array(this.lineChartData.length);
-    for (let i = 0; i < this.lineChartData.length; i++) {
-      _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
-      for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-        _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
-      }
-    }
-    this.lineChartData = _lineChartData;
-  }
-  
-  // events
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
-  
-  public chartHovered(e:any):void {
-    console.log(e);
-  }
-  ///////
+  public lineChartLegend: boolean = true;
+  public lineChartType: string = 'line';
 
-  // constructor(public navCtrl: NavController, public navParams: NavParams) {
-  // }
+  // events
+  public chartClicked(e: any): void {
+    console.log(e);
+  }
+
+  public chartHovered(e: any): void {
+    console.log(e);
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChartsPage');
+    this.loadLogs()
   }
 
 }

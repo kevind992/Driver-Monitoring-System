@@ -18,7 +18,7 @@ export class HomePage {
   items;
 
   loadLogs() {
-    this.http.get('http://167.99.82.134/api/data').map(data => data.json()).subscribe(data => {
+    this.http.get('http://167.99.202.75/api/data').map(data => data.json()).subscribe(data => {
       this.items = data;
       console.log(this.items)
     },
