@@ -35,7 +35,7 @@ var ChartsPage = (function () {
         // spdArray: number[] = [];
         //dstArray: number[] = [];
         this.lineChartData = [
-            { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }
+            { data: [65, 59, 80, 81, 56, 55, 40] }
         ];
         this.spdArray = [
             { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }
@@ -43,20 +43,6 @@ var ChartsPage = (function () {
         this.dstArray = [
             { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }
         ];
-        //chart with RPM data
-        // public rpmData: Array<any> = [
-        //   { data: this.rpmArray, label: 'RPM' }
-        // ];
-        // //chart with speed data
-        // public speedData:Array<any> = [
-        //   {data: this.spdArray, label: 'Spd'}
-        // ];
-        // //chart with distance traveled data
-        // public distanceData:Array<any> = [
-        //   {data: this.dstArray, label: 'Dist'},
-        //   {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
-        //   // {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
-        // ];
         this.lineChartLabels = ['', '', '', '', '', '', '']; //TO DO: add dates here
         this.lineChartOptions = {
             responsive: true
@@ -79,7 +65,7 @@ var ChartsPage = (function () {
                 pointHoverBorderColor: 'rgba(77,83,96,1)'
             }
         ];
-        this.lineChartLegend = true;
+        this.lineChartLegend = false;
         this.lineChartType = 'line';
     }
     ChartsPage.prototype.loadLogs = function () {
@@ -116,6 +102,7 @@ var ChartsPage = (function () {
         this.lineChartData = _lineChartData;
         this.spdArray = _spdData;
         this.dstArray = _dstData;
+        console.log("loaded");
     };
     // events
     ChartsPage.prototype.chartClicked = function (e) {
@@ -125,12 +112,13 @@ var ChartsPage = (function () {
         console.log(e);
     };
     ChartsPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad ChartsPage');
+        // first load overrides hardcoded data
         this.loadLogs();
+        // console.log('ionViewDidLoad ChartsPage');
     };
     ChartsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-charts',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/groupProj/3rd-Year-Project/Mobile_App/ionicApp/src/pages/charts/charts.html"*/'<!--\n  Generated template for the ChartsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Log Charts</ion-title>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n  </ion-navbar>\n  \n\n</ion-header>\n\n\n<ion-content padding>\n    <button ion-button full (click)="loadLogs()">Load Data</button>\n\n  <ion-card>\n    <ion-card-header>\n      Highest RPM\n    </ion-card-header>\n    <div class="row">\n        <div class="col-md-6">\n          <div style="display: block;">\n          <canvas baseChart width="300" height="400"\n                      [datasets]="lineChartData"\n                      [labels]="lineChartLabels"\n                      [options]="lineChartOptions"\n                      [colors]="lineChartColors"\n                      [legend]="lineChartLegend"\n                      [chartType]="lineChartType"\n                      (chartHover)="chartHovered($event)"\n                      (chartClick)="chartClicked($event)">\n            </canvas>\n          </div>\n        </div>\n      </div>\n      <button (click)="loadLogs()">Update</button>\n\n  </ion-card>\n  <ion-card>\n      <ion-card-header>\n          Average Speed\n      </ion-card-header>\n      <div class="row">\n          <div class="col-md-6">\n            <div style="display: block;">\n            <canvas baseChart width="300" height="400"\n                        [datasets]="spdArray"\n                        [labels]="lineChartLabels"\n                        [options]="lineChartOptions"\n                        [colors]="lineChartColors"\n                        [legend]="lineChartLegend"\n                        [chartType]="lineChartType"\n                        (chartHover)="chartHovered($event)"\n                        (chartClick)="chartClicked($event)"></canvas>\n            </div>\n          </div>\n        </div>\n    </ion-card>\n    <ion-card>\n        <ion-card-header>\n          Distance\n        </ion-card-header>\n        <div class="row">\n            <div class="col-md-6">\n              <div style="display: block;">\n              <canvas baseChart width="300" height="400"\n                          [datasets]="dstArray"\n                          [labels]="lineChartLabels"\n                          [options]="lineChartOptions"\n                          [colors]="lineChartColors"\n                          [legend]="lineChartLegend"\n                          [chartType]="lineChartType"\n                          (chartHover)="chartHovered($event)"\n                          (chartClick)="chartClicked($event)"></canvas>\n              </div>\n            </div>\n          </div>\n      </ion-card>\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/groupProj/3rd-Year-Project/Mobile_App/ionicApp/src/pages/charts/charts.html"*/,
+            selector: 'page-charts',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/groupProj/3rd-Year-Project/Mobile_App/ionicApp/src/pages/charts/charts.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>Log Charts</ion-title>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n  </ion-navbar>\n  \n\n</ion-header>\n\n\n<ion-content padding>\n    <button ion-button full (click)="loadLogs()">Load Data</button>\n\n  <ion-card>\n    <ion-card-header>\n      Highest RPM\n    </ion-card-header>\n    <div class="row">\n        <div class="col-md-6">\n          <div style="display: block;">\n          <canvas baseChart width="300" height="400"\n                      [datasets]="lineChartData"\n                      [labels]="lineChartLabels"\n                      [options]="lineChartOptions"\n                      [colors]="lineChartColors"\n                      [legend]="lineChartLegend"\n                      [chartType]="lineChartType"\n                      (chartHover)="chartHovered($event)"\n                      (chartClick)="chartClicked($event)">\n            </canvas>\n          </div>\n        </div>\n      </div>\n\n  </ion-card>\n  <ion-card>\n      <ion-card-header>\n          Average Speed\n      </ion-card-header>\n      <div class="row">\n          <div class="col-md-6">\n            <div style="display: block;">\n            <canvas baseChart width="300" height="400"\n                        [datasets]="spdArray"\n                        [labels]="lineChartLabels"\n                        [options]="lineChartOptions"\n                        [colors]="lineChartColors"\n                        [legend]="lineChartLegend"\n                        [chartType]="lineChartType"\n                        (chartHover)="chartHovered($event)"\n                        (chartClick)="chartClicked($event)"></canvas>\n            </div>\n          </div>\n        </div>\n    </ion-card>\n    <ion-card>\n        <ion-card-header>\n          Distance\n        </ion-card-header>\n        <div class="row">\n            <div class="col-md-6">\n              <div style="display: block;">\n              <canvas baseChart width="300" height="400"\n                          [datasets]="dstArray"\n                          [labels]="lineChartLabels"\n                          [options]="lineChartOptions"\n                          [colors]="lineChartColors"\n                          [legend]="lineChartLegend"\n                          [chartType]="lineChartType"\n                          (chartHover)="chartHovered($event)"\n                          (chartClick)="chartClicked($event)"></canvas>\n              </div>\n            </div>\n          </div>\n      </ion-card>\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/groupProj/3rd-Year-Project/Mobile_App/ionicApp/src/pages/charts/charts.html"*/,
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]) === "function" && _c || Object])
     ], ChartsPage);
@@ -228,7 +216,7 @@ var HomePage = (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-home',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/groupProj/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Trip Logs</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <button ion-button full (click)="loadLogs()">Load Data</button>\n  \n  <ion-list>\n    <ion-card ion-item *ngFor="let item of items">\n      <ion-card-header>\n        <!-- {{item.date}} -->\n        {{item._id}}\n      </ion-card-header>\n      <ion-card-content>\n          <ion-item-group>\n              Highest RPM:  {{item.repHighestRPM}}\n              <br>\n              Average Speed:  {{item.repAvgSpeed}}\n              <br>\n              Distance Traveled:  {{item.repDistance}}\n          </ion-item-group>\n          \n      </ion-card-content>\n      <!-- <div class="item item-divider">\n      </div> -->\n    </ion-card>\n\n\n\n  </ion-list>\n\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/groupProj/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/groupProj/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Trip Logs</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <button ion-button full (click)="loadLogs()">Load Data</button>\n  \n  <ion-list>\n    <ion-card ion-item *ngFor="let item of items">\n      <ion-card-header>\n        <!-- {{item.date}} -->\n        {{item._id}}\n      </ion-card-header>\n      <ion-card-content>\n          <ion-item-group>\n              Highest RPM:  {{item.repHighestRPM}}\n              <br>\n              Average Speed:  {{item.repAvgSpeed}}\n              <br>\n              Distance Traveled:  {{item.repDistance}}\n          </ion-item-group>\n          \n      </ion-card-content>\n\n    </ion-card>\n\n\n\n  </ion-list>\n\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/groupProj/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]])
     ], HomePage);

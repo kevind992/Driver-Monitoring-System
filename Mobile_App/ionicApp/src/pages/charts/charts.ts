@@ -33,7 +33,7 @@ export class ChartsPage {
   //dstArray: number[] = [];
 
   public lineChartData: Array<any> = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }
+    { data: [65, 59, 80, 81, 56, 55, 40]}
   ];
 
   public spdArray: Array<any> = [
@@ -82,21 +82,9 @@ export class ChartsPage {
     this.spdArray = _spdData;
     this.dstArray = _dstData;
 
+    console.log("loaded")
+
   }
-  //chart with RPM data
-  // public rpmData: Array<any> = [
-  //   { data: this.rpmArray, label: 'RPM' }
-  // ];
-  // //chart with speed data
-  // public speedData:Array<any> = [
-  //   {data: this.spdArray, label: 'Spd'}
-  // ];
-  // //chart with distance traveled data
-  // public distanceData:Array<any> = [
-  //   {data: this.dstArray, label: 'Dist'},
-  //   {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
-  //   // {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
-  // ];
 
   public lineChartLabels: Array<any> = ['', '', '', '', '', '', ''];//TO DO: add dates here
   public lineChartOptions: any = {
@@ -120,7 +108,7 @@ export class ChartsPage {
       pointHoverBorderColor: 'rgba(77,83,96,1)'
     }
   ];
-  public lineChartLegend: boolean = true;
+  public lineChartLegend: boolean = false;
   public lineChartType: string = 'line';
 
   // events
@@ -133,8 +121,10 @@ export class ChartsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ChartsPage');
+    // first load overrides hardcoded data
     this.loadLogs()
+
+    // console.log('ionViewDidLoad ChartsPage');
   }
 
 }
