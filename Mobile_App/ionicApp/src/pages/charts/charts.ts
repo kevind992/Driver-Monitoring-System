@@ -59,33 +59,28 @@ export class ChartsPage {
       //TO DO:change to all three
     let _lineChartData: Array<any> = new Array(this.lineChartData.length);
     // temp arrays with new data
-    let _rpmData: Array<any> = new Array(this.rpmArray.length);
+    // let _rpmData: Array<any> = new Array(this.rpmArray.length);
     let _spdData: Array<any> = new Array(this.spdArray.length);
-    let _dstData: Array<any> = new Array(this.dstArray.length);
+    // let _dstData: Array<any> = new Array(this.dstArray.length);
 
     // loop over each array
     for (let i = 0; i < this.lineChartData.length; i++) {
       _lineChartData[i] = { data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label };
+      _spdData[i] = { data: new Array(this.spdArray[i].data.length), label: this.spdArray[i].label };
       for (let j = 0; j < this.lineChartData[i].data.length; j++) {
         _lineChartData[i].data[j] = this.rpmArray[j]; // replace with data from json
+        _spdData[i].data[j] = this.spdArray[j];
       }
     }
     // rpm
     this.lineChartData = _lineChartData;
     this.spdArray = _spdData;
-    this.lineChartData = _lineChartData;
-    // for (let i = 0; i < this.lineChartData.length; i++) {
-    //   _lineChartData[i] = { data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label };
-    //   for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-    //     _lineChartData[i].data[j] = this.rpmArray[j];
-    //     _spdData[i].data[j] = this.spdArray[j];
-    //   }
-    // }
+
   }
   //chart with RPM data
-  public rpmData: Array<any> = [
-    { data: this.rpmArray, label: 'RPM' }
-  ];
+  // public rpmData: Array<any> = [
+  //   { data: this.rpmArray, label: 'RPM' }
+  // ];
   // //chart with speed data
   // public speedData:Array<any> = [
   //   {data: this.spdArray, label: 'Spd'}

@@ -51,7 +51,7 @@
           <div class="col-md-6">
             <div style="display: block;">
             <canvas baseChart width="300" height="400"
-                        [datasets]="speedData"
+                        [datasets]="spdArray"
                         [labels]="lineChartLabels"
                         [options]="lineChartOptions"
                         [colors]="lineChartColors"
@@ -63,7 +63,7 @@
           </div>
         </div>
     </ion-card>
-    <!--ion-card>
+    <ion-card>
         <ion-card-header>
           Distance
         </ion-card-header>
@@ -71,7 +71,7 @@
             <div class="col-md-6">
               <div style="display: block;">
               <canvas baseChart width="300" height="400"
-                          [datasets]="distanceData"
+                          [datasets]="spdArray"
                           [labels]="lineChartLabels"
                           [options]="lineChartOptions"
                           [colors]="lineChartColors"
@@ -82,5 +82,5 @@
               </div>
             </div>
           </div>
-      </ion-card> -->
+      </ion-card>
 </ion-content>
