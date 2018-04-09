@@ -58,7 +58,7 @@ public class DbSeeder implements CommandLineRunner {
         }catch (FileNotFoundException e){
             System.out.println("File not Found..");
         }
-
+        System.out.println("here..");
         //Generating report for current trip
         ReportGenerator report = new ReportGenerator();
         data1 = report.generateReport();
@@ -68,16 +68,15 @@ public class DbSeeder implements CommandLineRunner {
         //adding the report to an List of reports
         List<Data> data = Arrays.asList(data1);
 
-
-
-        if(data1.getRepHighestRPM().equals("0"))
-        {
-            System.out.println("Error Handling - No Data..");
-        }else{
+//        if(data1.getRepHighestRPM().equals("0"))
+//        {
+//            System.out.println("Error Handling - No Data..");
+//        }else{
             //sending report to mongodb
             try{
                 System.out.println("Sending to mongoDB..");
                 this.dataRepository.save(data);
+                mongoOffline.WriteFileData(data);
             }catch (IllegalStateException e){
                 System.out.println("DB offline, writing to local file..");
                 mongoOffline.WriteFileData(data);
@@ -85,6 +84,6 @@ public class DbSeeder implements CommandLineRunner {
                 System.out.println("DB offline, writing to local file..");
                 mongoOffline.WriteFileData(data);
             }
-        }
+        //}
     }
 }
