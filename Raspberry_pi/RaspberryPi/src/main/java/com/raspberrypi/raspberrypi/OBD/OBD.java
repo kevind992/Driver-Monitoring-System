@@ -7,6 +7,7 @@ import com.raspberrypi.raspberrypi.OBD.commands.control.*;
 import com.raspberrypi.raspberrypi.OBD.commands.engine.RPMCommand;
 import com.raspberrypi.raspberrypi.OBD.commands.protocol.*;
 import com.raspberrypi.raspberrypi.OBD.enums.ObdProtocols;
+import com.raspberrypi.raspberrypi.OBD.exceptions.NoDataException;
 import com.raspberrypi.raspberrypi.Report.DataTypes;
 
 import java.io.IOException;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 public class OBD {
 
     private int rpm;
-    private int count;
+    private int count=0;
     private int startDist;
     private int endDist;
 
@@ -78,20 +79,22 @@ public class OBD {
 
                 count++;
 
-            }while (rpm > 300);
+            }while (count < 20);
             System.out.println("Has exited while loop");
-
-            //Getting finishing distance
-            endDist = distCmd.getKm();
 
             //Running CloseCommand()
             new CloseCommand().run(socket.getInputStream(), socket.getOutputStream());
+
+            //Getting finishing distance
+            endDist = distCmd.getKm();
 
             //Adding arrays to DataTypes Object
             data.setRpm(rpmArray);
             data.setSpeed(speedArray);
             data.setDistStart(startDist);
             data.setDistEnd(endDist);
+
+
 
         } catch (Exception e) {
             e.printStackTrace();

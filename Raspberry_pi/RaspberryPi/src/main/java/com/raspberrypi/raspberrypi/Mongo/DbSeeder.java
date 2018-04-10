@@ -4,6 +4,7 @@ import com.mongodb.MongoSocketOpenException;
 import com.raspberrypi.raspberrypi.OBD.OBD;
 import com.raspberrypi.raspberrypi.Report.ReportGenerator;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.stereotype.Component;
 
 import java.io.FileNotFoundException;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeoutException;
 
 @Component
 public class DbSeeder implements CommandLineRunner {
@@ -47,7 +49,10 @@ public class DbSeeder implements CommandLineRunner {
                     System.out.println("Error - DB offline..");
                 }catch (MongoSocketOpenException e){
                     System.out.println("Error - DB offline..");
+                } catch(NullPointerException e){
+                    System.out.println("Empty file" + e);
                 }
+
             }else {
                 System.out.println("File Empty..");
             }
@@ -58,7 +63,7 @@ public class DbSeeder implements CommandLineRunner {
         }catch (FileNotFoundException e){
             System.out.println("File not Found..");
         }
-        System.out.println("here..");
+
         //Generating report for current trip
         ReportGenerator report = new ReportGenerator();
         data1 = report.generateReport();
@@ -76,11 +81,13 @@ public class DbSeeder implements CommandLineRunner {
             try{
                 System.out.println("Sending to mongoDB..");
                 this.dataRepository.save(data);
-                mongoOffline.WriteFileData(data);
             }catch (IllegalStateException e){
                 System.out.println("DB offline, writing to local file..");
                 mongoOffline.WriteFileData(data);
             }catch (MongoSocketOpenException e) {
+                System.out.println("DB offline, writing to local file..");
+                mongoOffline.WriteFileData(data);
+            }catch (DataAccessResourceFailureException e) {
                 System.out.println("DB offline, writing to local file..");
                 mongoOffline.WriteFileData(data);
             }

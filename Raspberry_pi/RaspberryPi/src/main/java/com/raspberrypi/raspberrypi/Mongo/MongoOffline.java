@@ -4,6 +4,7 @@ import com.raspberrypi.raspberrypi.OBD.OBD;
 import com.raspberrypi.raspberrypi.Report.ReportGenerator;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,12 +12,11 @@ public class MongoOffline implements Serializable {
 
     public void WriteFileData(List<Data> data)  throws FileNotFoundException, IOException{
 
-        File backupFile = new File("backup.txt");
+        File backupFile = new File("C:\\Users\\miche\\Desktop\\3rd-Year-Project\\Raspberry_pi\\backup.txt");
 
         //Creating the FileOutputStream, BufferedOutputStream and ObjectOutputStream
         FileOutputStream fo = new FileOutputStream(backupFile);
-        BufferedOutputStream bout = new BufferedOutputStream(fo);
-        ObjectOutputStream output = new ObjectOutputStream(bout);
+        ObjectOutputStream output = new ObjectOutputStream(fo);
 
         for(Data d : data){
             output.writeObject(d);
@@ -30,22 +30,17 @@ public class MongoOffline implements Serializable {
 
     public List<Data> ReadFileData()throws FileNotFoundException, IOException, ClassNotFoundException {
 
-        File backupFile = new File("backup.txt");
+        File backupFile = new File("C:\\Users\\miche\\Desktop\\3rd-Year-Project\\Raspberry_pi\\backup.txt");
 
-        List<Data> list = null;
+        List<Data> list = new ArrayList<Data>();
 
         FileInputStream in = new FileInputStream(backupFile);
         ObjectInputStream input = new ObjectInputStream(in);
 
         try {
-            System.out.println("before while read");
-
-            while (true) {
-
                 Data d = (Data) input.readObject();
                 list.add(d);
 
-            }
         } catch (EOFException ex) {
             System.out.println("Error - Data not read from file..");
         }
@@ -63,30 +58,26 @@ public class MongoOffline implements Serializable {
         System.out.println("Is file empty..");
         boolean fileEmpty;
 
-        List<Data> list = Arrays.asList();;
+        List<Data> list = ReadFileData();
 
-        try{
-            //reading from backup.txt to see if there is any saved files
-            list = ReadFileData();
-            fileEmpty = false;
-            System.out.println("false");
-        } catch (NullPointerException e){
-            fileEmpty = true;
-            System.out.println("true");
-        }
-
-//        System.out.println();
-//        if(list == null){
-//
-//        }else {
+//        try{
+//            //reading from backup.txt to see if there is any saved files
+//            list = ReadFileData();
 //            fileEmpty = false;
 //            System.out.println("false");
+//        } catch (NullPointerException e){
+//            fileEmpty = true;
+//            System.out.println("true");
 //        }
+        if(list == null){
+            fileEmpty = true;
+            System.out.println("true");
+        }else {
+            fileEmpty = false;
+            System.out.println("false");
+        }
 
         return fileEmpty;
     }
-    public boolean IsConnected(){
 
-        return true;
-    }
 }

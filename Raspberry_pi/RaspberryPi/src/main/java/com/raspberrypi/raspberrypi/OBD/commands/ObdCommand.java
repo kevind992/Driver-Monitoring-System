@@ -236,7 +236,7 @@ public abstract class ObdCommand {
      */
         //kills multiline.. rawData = rawData.substring(rawData.lastIndexOf(13) + 1);
         rawData = removeAll(WHITESPACE_PATTERN, rawData);//removes all [ \t\n\x0B\f\r]
-        System.out.println("raw data: " + rawData);
+        //System.out.println("raw data: " + rawData);
     }
 
     void checkForErrors() {
