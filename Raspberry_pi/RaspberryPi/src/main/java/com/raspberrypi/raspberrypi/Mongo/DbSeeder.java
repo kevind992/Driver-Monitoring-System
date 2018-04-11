@@ -1,6 +1,7 @@
 package com.raspberrypi.raspberrypi.Mongo;
 
 import com.mongodb.MongoSocketOpenException;
+import com.mongodb.MongoTimeoutException;
 import com.raspberrypi.raspberrypi.OBD.OBD;
 import com.raspberrypi.raspberrypi.Report.ReportGenerator;
 import org.springframework.boot.CommandLineRunner;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.FileNotFoundException;
 import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +21,7 @@ import java.util.concurrent.TimeoutException;
 public class DbSeeder implements CommandLineRunner {
 
     private DataRepository dataRepository;
-    private List<Data> backupData = Arrays.asList();
+    private List<Data> data = Arrays.asList();
     private boolean fileEmpty;
 
     public  DbSeeder(DataRepository dataRepository){
@@ -31,7 +33,7 @@ public class DbSeeder implements CommandLineRunner {
 
         System.out.println("In Mongo Package");
 
-        Data data1;
+        Data newData;
 
         MongoOffline mongoOffline = new MongoOffline();
 
@@ -41,16 +43,21 @@ public class DbSeeder implements CommandLineRunner {
 
             if(fileEmpty == false){
                 System.out.println("File not empty..");
-                backupData = mongoOffline.ReadFileData();
+                data = mongoOffline.ReadFileData();
                 try{
                     System.out.println("Files sent to mongodb..");
-                    this.dataRepository.save(backupData);
+                    this.dataRepository.save(data);
+                    data.clear();
                 }catch (IllegalStateException e){
                     System.out.println("Error - DB offline..");
                 }catch (MongoSocketOpenException e){
                     System.out.println("Error - DB offline..");
-                } catch(NullPointerException e){
-                    System.out.println("Empty file" + e);
+                }
+                catch (DataAccessResourceFailureException e){
+                    System.out.println("Error - DB offline..");
+                }
+                catch (MongoTimeoutException e){
+                    System.out.println("Error - DB offline..");
                 }
 
             }else {
@@ -66,17 +73,17 @@ public class DbSeeder implements CommandLineRunner {
 
         //Generating report for current trip
         ReportGenerator report = new ReportGenerator();
-        data1 = report.generateReport();
+        newData = report.generateReport();
 
         System.out.println("Back In Mongo Package");
 
         //adding the report to an List of reports
-        List<Data> data = Arrays.asList(data1);
+        data.add(newData);
 
-//        if(data1.getRepHighestRPM().equals("0"))
-//        {
-//            System.out.println("Error Handling - No Data..");
-//        }else{
+        if(newData.getRepHighestRPM().equals("0"))
+        {
+            System.out.println("Error Handling - No Data..");
+        }else{
             //sending report to mongodb
             try{
                 System.out.println("Sending to mongoDB..");
@@ -91,6 +98,9 @@ public class DbSeeder implements CommandLineRunner {
                 System.out.println("DB offline, writing to local file..");
                 mongoOffline.WriteFileData(data);
             }
-        //}
+            catch (MongoTimeoutException e){
+                System.out.println("Error - DB offline..");
+            }
+        }
     }
 }

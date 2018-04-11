@@ -79,7 +79,7 @@ public class OBD {
 
                 count++;
 
-            }while (count < 20);
+            }while (rpm > 300 );
             System.out.println("Has exited while loop");
 
             //Running CloseCommand()

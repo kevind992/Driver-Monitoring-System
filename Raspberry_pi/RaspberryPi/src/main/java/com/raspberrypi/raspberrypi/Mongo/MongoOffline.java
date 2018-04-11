@@ -12,7 +12,8 @@ public class MongoOffline implements Serializable {
 
     public void WriteFileData(List<Data> data)  throws FileNotFoundException, IOException{
 
-        File backupFile = new File("C:\\Users\\miche\\Desktop\\3rd-Year-Project\\Raspberry_pi\\backup.txt");
+        //File backupFile = new File("C:\\Users\\kevin\\Desktop\\Software 3rd Year\\Semester 2\\Professional Practice in I.T\\3rd-Year-Project\\Raspberry_pi\\backup.txt");
+        File backupFile = new File("backup.txt");
 
         //Creating the FileOutputStream, BufferedOutputStream and ObjectOutputStream
         FileOutputStream fo = new FileOutputStream(backupFile);
@@ -30,7 +31,8 @@ public class MongoOffline implements Serializable {
 
     public List<Data> ReadFileData()throws FileNotFoundException, IOException, ClassNotFoundException {
 
-        File backupFile = new File("C:\\Users\\miche\\Desktop\\3rd-Year-Project\\Raspberry_pi\\backup.txt");
+        //File backupFile = new File("C:\\Users\\kevin\\Desktop\\Software 3rd Year\\Semester 2\\Professional Practice in I.T\\3rd-Year-Project\\Raspberry_pi\\backup.txt");
+        File backupFile = new File("backup.txt");
 
         List<Data> list = new ArrayList<Data>();
 
@@ -46,7 +48,8 @@ public class MongoOffline implements Serializable {
         }
         System.out.println("backupFile.txt Read Successful..");
 
-        //Closing the last opened stream
+        //Closing the last opened stream and deleting the backupFile.txt
+        backupFile.delete();
         input.close();
 
         //Sending the arraylist
