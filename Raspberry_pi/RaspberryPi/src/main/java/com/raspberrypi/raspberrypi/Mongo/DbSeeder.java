@@ -38,16 +38,15 @@ public class DbSeeder implements CommandLineRunner {
         MongoOffline mongoOffline = new MongoOffline();
 
         try{
-            System.out.println("Checking if file is empty..");
             fileEmpty = mongoOffline.IsFileEmpty();
 
             if(fileEmpty == false){
-                System.out.println("File not empty..");
+
                 data = mongoOffline.ReadFileData();
                 try{
                     this.dataRepository.save(data);
                     data.clear();
-                    System.out.println("Files sent to mongodb..");
+                    System.out.println("dending report to mongodb..");
                 }catch (IllegalStateException e){
                     System.out.println("Error - DB offline..");
                 }catch (MongoSocketOpenException e){
@@ -61,7 +60,7 @@ public class DbSeeder implements CommandLineRunner {
                 }
 
             }else {
-                System.out.println("File Empty..");
+                System.out.println("File is empty");
             }
         }catch (MongoSocketOpenException e){
             System.out.println("Error - DB offline - OUTER..");

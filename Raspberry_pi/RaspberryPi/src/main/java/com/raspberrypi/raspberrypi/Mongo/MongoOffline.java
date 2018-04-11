@@ -58,7 +58,7 @@ public class MongoOffline implements Serializable {
 
     //Checks whether file is empty or not
     public boolean IsFileEmpty() throws IOException, ClassNotFoundException {
-        System.out.println("Is file empty..");
+
         boolean fileEmpty;
 
         List<Data> list = ReadFileData();
@@ -74,10 +74,10 @@ public class MongoOffline implements Serializable {
 //        }
         if(list == null){
             fileEmpty = true;
-            System.out.println("true");
+            System.out.println("file empty");
         }else {
             fileEmpty = false;
-            System.out.println("false");
+            System.out.println("file not empty");
         }
 
         return fileEmpty;

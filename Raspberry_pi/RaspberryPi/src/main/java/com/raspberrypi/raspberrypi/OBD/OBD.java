@@ -30,11 +30,9 @@ public class OBD {
 
         //Setting up com ports
         SerialPort serials[] = SerialPort.getCommPorts();
-        for (SerialPort serial : serials) {
-            System.out.println("serial ports are: " + serial.getSystemPortName().toString());
-        }
+
         SerialPort socket = SerialPort.getCommPorts()[1];
-        System.out.println(socket.getDescriptivePortName());
+
 
         //Opening com port
         socket.openPort();
@@ -59,8 +57,6 @@ public class OBD {
             distCmd.run(socket.getInputStream(), socket.getOutputStream());
             startDist = distCmd.getKm();
 
-            System.out.println("setup done");
-
             do{//do while rpm not less them 300rpm
                 //RPM
                 RPMCommand rpmCmd = new RPMCommand();
@@ -80,13 +76,12 @@ public class OBD {
                 count++;
 
             }while (rpm > 300 );
-            System.out.println("Has exited while loop");
 
-            //Running CloseCommand()
-            new CloseCommand().run(socket.getInputStream(), socket.getOutputStream());
 
-            //Getting finishing distance
-            endDist = distCmd.getKm();
+
+            DistanceSinceCCCommand distCmd2 = new DistanceSinceCCCommand();
+            distCmd2.run(socket.getInputStream(), socket.getOutputStream());
+            endDist = distCmd2.getKm();
 
             //Adding arrays to DataTypes Object
             data.setRpm(rpmArray);
@@ -94,6 +89,8 @@ public class OBD {
             data.setDistStart(startDist);
             data.setDistEnd(endDist);
 
+            //Running CloseCommand()
+            new CloseCommand().run(socket.getInputStream(), socket.getOutputStream());
 
 
         } catch (Exception e) {
