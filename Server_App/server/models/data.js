@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var dataSchema = mongoose.Schema({
         _id: String,
         _class: String,
+		date: String,
         repAvgSpeed: String,
         repHighestRPM: String,
         repDistance: String

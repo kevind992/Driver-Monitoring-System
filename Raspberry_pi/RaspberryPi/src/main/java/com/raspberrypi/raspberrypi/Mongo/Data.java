@@ -11,6 +11,7 @@ public class Data implements Serializable {
 
     @Id
     private String id;
+    private String date;
     private String repAvgSpeed;
     private String repHighestRPM;
     private String repDistance;
@@ -19,7 +20,9 @@ public class Data implements Serializable {
         super();
     }
 
-    public Data(String repAvgSpeed, String repHighestRPM, String repDistance) {
+    public Data(String dateString, String repAvgSpeed, String repHighestRPM, String repDistance) {
+
+        this.date = date;
         this.repAvgSpeed = repAvgSpeed;
         this.repHighestRPM = repHighestRPM;
         this.repDistance = repDistance;
@@ -33,6 +36,13 @@ public class Data implements Serializable {
         this.id = id;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
     public String getRepAvgSpeed() {
         return repAvgSpeed;
     }

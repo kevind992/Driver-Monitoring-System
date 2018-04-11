@@ -2,7 +2,11 @@ package com.raspberrypi.raspberrypi.Report;
 
 import com.raspberrypi.raspberrypi.Mongo.Data;
 import com.raspberrypi.raspberrypi.OBD.OBD;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 
 public class ReportGenerator {
 
@@ -24,19 +28,19 @@ public class ReportGenerator {
 
         try{
             data = obd.getData();
-
             //Calculation methods(Avg Speed, HighestRPM, Total Distance)
             avgSpeed = calAvgSpeed();
             highestRPM = calHighestRPM();
             dist = calDistance(data.getDistStart(),data.getDistEnd());
 
             //Adding the three values to Data Object
+            calData.setDate(getDate());
             calData.setRepAvgSpeed(String.valueOf(avgSpeed));
             calData.setRepHighestRPM(String.valueOf(highestRPM));
             calData.setRepDistance(String.valueOf(dist));
         }
         catch(Exception e){
-            System.out.println("Report Generator Error:-" + e);
+            System.out.println("Report Generator Error: -" + e);
         }
 
         System.out.println("Leaving Report Generator..");
@@ -57,7 +61,6 @@ public class ReportGenerator {
         res = sum / data.getSpeed().size();
 
         return res;
-
     }
 
     //A method for calculating the average miles per gallon
@@ -85,5 +88,14 @@ public class ReportGenerator {
         res = finish - start;
 
         return res;
+    }
+    // Method for getting current date
+    private String getDate(){
+        // Format for the date
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        // Getting current date
+        Date date = new Date();
+        // Returning today's date
+        return dateFormat.format(date);
     }
 }
