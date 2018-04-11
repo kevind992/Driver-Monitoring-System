@@ -21,7 +21,7 @@ import java.util.concurrent.TimeoutException;
 public class DbSeeder implements CommandLineRunner {
 
     private DataRepository dataRepository;
-    private List<Data> data = Arrays.asList();
+    private List<Data> data = new ArrayList<Data>();
     private boolean fileEmpty;
 
     public  DbSeeder(DataRepository dataRepository){
@@ -45,9 +45,9 @@ public class DbSeeder implements CommandLineRunner {
                 System.out.println("File not empty..");
                 data = mongoOffline.ReadFileData();
                 try{
-                    System.out.println("Files sent to mongodb..");
                     this.dataRepository.save(data);
                     data.clear();
+                    System.out.println("Files sent to mongodb..");
                 }catch (IllegalStateException e){
                     System.out.println("Error - DB offline..");
                 }catch (MongoSocketOpenException e){
