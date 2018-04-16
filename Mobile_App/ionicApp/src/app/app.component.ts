@@ -6,10 +6,23 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ChartsPage } from '../pages/charts/charts';
 
+// charts
+import { ChartsModule } from 'ng2-charts';
+
+// @Component({
+//   templateUrl: 'app.html'
+// })
 @Component({
-  templateUrl: 'app.html'
+  template: `
+    <ion-tabs>
+      <ion-tab tabIcon="car" [root]="tab1"></ion-tab>
+      <ion-tab tabIcon="clipboard" [root]="tab2"></ion-tab>
+    </ion-tabs>`
 })
+
 export class MyApp {
+  tab1: any;
+  tab2: any;
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;
@@ -18,6 +31,9 @@ export class MyApp {
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
+
+    this.tab1 = HomePage;
+    this.tab2 = ChartsPage;
 
     // used for an example of ngFor and navigation
     this.pages = [

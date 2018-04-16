@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Logs</ion-title>
+    <ion-title>Trip Logs</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -11,26 +11,22 @@
   <button ion-button full (click)="loadLogs()">Load Data</button>
   
   <ion-list>
-    <ion-card>
+    <ion-card ion-item *ngFor="let item of items">
       <ion-card-header>
-        <!-- {{item.date}} -->
-        [Trip Date]
+        {{item.date}}
+        <!-- {{item._id}} -->
       </ion-card-header>
-      <ion-card-content ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
+      <ion-card-content>
           <ion-item-group>
-            <ion-item-divider color="light">{{item.type}}</ion-item-divider>
-            <!-- <div class="item-note" item-end>
-              {{item.type}}
-            </div> -->
-              <div class="item-note" item-end>
-                <br>
-                {{item.value}}
-              </div>
+              Highest RPM:  {{item.repHighestRPM}}
+              <br>
+              Average Speed:  {{item.repAvgSpeed}}
+              <br>
+              Distance Traveled:  {{item.repDistance}}
           </ion-item-group>
           
       </ion-card-content>
-      <!-- <div class="item item-divider">
-      </div> -->
+
     </ion-card>
 
 

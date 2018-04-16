@@ -1,13 +1,7 @@
-<!--
-  Generated template for the ChartsPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Charts</ion-title>
+    <ion-title>Log Charts</ion-title>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -18,35 +12,39 @@
 
 
 <ion-content padding>
+    <button ion-button full (click)="loadLogs()">Load Data</button>
+
   <ion-card>
     <ion-card-header>
-      AVG. RPM
+      Highest RPM
     </ion-card-header>
     <div class="row">
         <div class="col-md-6">
           <div style="display: block;">
           <canvas baseChart width="300" height="400"
-                      [datasets]="rpmData"
+                      [datasets]="lineChartData"
                       [labels]="lineChartLabels"
                       [options]="lineChartOptions"
                       [colors]="lineChartColors"
                       [legend]="lineChartLegend"
                       [chartType]="lineChartType"
                       (chartHover)="chartHovered($event)"
-                      (chartClick)="chartClicked($event)"></canvas>
+                      (chartClick)="chartClicked($event)">
+            </canvas>
           </div>
         </div>
       </div>
+
   </ion-card>
   <ion-card>
       <ion-card-header>
-          Speed
+          Average Speed
       </ion-card-header>
       <div class="row">
           <div class="col-md-6">
             <div style="display: block;">
             <canvas baseChart width="300" height="400"
-                        [datasets]="speedData"
+                        [datasets]="spdArray"
                         [labels]="lineChartLabels"
                         [options]="lineChartOptions"
                         [colors]="lineChartColors"
@@ -66,7 +64,7 @@
             <div class="col-md-6">
               <div style="display: block;">
               <canvas baseChart width="300" height="400"
-                          [datasets]="distanceData"
+                          [datasets]="dstArray"
                           [labels]="lineChartLabels"
                           [options]="lineChartOptions"
                           [colors]="lineChartColors"
