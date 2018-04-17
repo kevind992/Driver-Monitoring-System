@@ -7,9 +7,7 @@ import com.raspberrypi.raspberrypi.OBD.commands.control.*;
 import com.raspberrypi.raspberrypi.OBD.commands.engine.RPMCommand;
 import com.raspberrypi.raspberrypi.OBD.commands.protocol.*;
 import com.raspberrypi.raspberrypi.OBD.enums.ObdProtocols;
-import com.raspberrypi.raspberrypi.OBD.exceptions.NoDataException;
 import com.raspberrypi.raspberrypi.Report.DataTypes;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
