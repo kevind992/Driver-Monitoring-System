@@ -61,6 +61,7 @@ public class OBD {
                 rpmCmd.run(socket.getInputStream(), socket.getOutputStream());
                 rpm = rpmCmd.getRPM();
                 rpmArray.add(count,rpmCmd.getRPM());
+
                 System.out.println("rpm result is : " + rpm);
 
                 SpeedCommand speed = new SpeedCommand();

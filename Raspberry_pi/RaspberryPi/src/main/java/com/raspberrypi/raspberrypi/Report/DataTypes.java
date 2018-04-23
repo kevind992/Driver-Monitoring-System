@@ -18,10 +18,7 @@ public class DataTypes {
         this.speed = speed;
     }
 
-    public ArrayList<Integer> getRpm() {
-        return rpm;
-
-    }
+    public ArrayList<Integer> getRpm() { return rpm; }
 
     public void setRpm(ArrayList<Integer> rpm) {
         this.rpm = rpm;

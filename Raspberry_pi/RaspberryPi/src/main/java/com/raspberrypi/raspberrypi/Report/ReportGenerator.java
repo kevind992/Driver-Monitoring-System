@@ -5,6 +5,7 @@ import com.raspberrypi.raspberrypi.OBD.OBD;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
@@ -16,6 +17,8 @@ public class ReportGenerator {
     private int avgSpeed;
     private int highestRPM;
     private int dist;
+    private ArrayList<Integer> speeds;
+    private ArrayList<Integer> rpms;
 
     //A method for generating a final report
     public Data generateReport(){
@@ -38,6 +41,8 @@ public class ReportGenerator {
             calData.setRepAvgSpeed(String.valueOf(avgSpeed));
             calData.setRepHighestRPM(String.valueOf(highestRPM));
             calData.setRepDistance(String.valueOf(dist));
+            calData.setSpeedData(data.getSpeed());
+            calData.setSpeedData(data.getRpm());
         }
         catch(Exception e){
             System.out.println("Report Generator Error: -" + e);

@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 
 @Document(collection = "datas")
@@ -15,17 +16,23 @@ public class Data implements Serializable {
     private String repAvgSpeed;
     private String repHighestRPM;
     private String repDistance;
+    private ArrayList<Integer> speedData;
+    private ArrayList<Integer> rpmData;
+
 
     public Data(){
         super();
     }
 
-    public Data(String dateString, String repAvgSpeed, String repHighestRPM, String repDistance) {
+    public Data(String dateString, String repAvgSpeed, String repHighestRPM, String repDistance, ArrayList<Integer> speedData, ArrayList<Integer> rpmData) {
 
-        this.date = date;
+        this.date = dateString;
         this.repAvgSpeed = repAvgSpeed;
         this.repHighestRPM = repHighestRPM;
         this.repDistance = repDistance;
+        this.speedData = speedData;
+        this.rpmData = rpmData;
+
     }
 
     public String getId() {
@@ -66,4 +73,12 @@ public class Data implements Serializable {
     public void setRepDistance(String repDistance) {
         this.repDistance = repDistance;
     }
+
+    public ArrayList<Integer> getRpmData() { return rpmData; }
+
+    public void setRpmData(ArrayList<Integer> rpmData) { this.rpmData = rpmData; }
+
+    public ArrayList<Integer> getSpeedData() { return speedData; }
+
+    public void setSpeedData(ArrayList<Integer> speedData) { this.speedData = speedData; }
 }
