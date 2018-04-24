@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { DataPage } from '../data/data';
 
 @Component({
   selector: 'page-home',
@@ -25,6 +26,10 @@ export class HomePage {
   (err) => {
     alert('oops' + err);
   });
+  }
+
+  getData(){
+    console.log('clicked');
   }
 
   ionViewDidLoad() {

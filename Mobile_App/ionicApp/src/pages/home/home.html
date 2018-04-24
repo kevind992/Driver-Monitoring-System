@@ -11,10 +11,9 @@
   <button ion-button full (click)="loadLogs()">Load Data</button>
   
   <ion-list>
-    <ion-card ion-item *ngFor="let item of items">
+    <ion-card ion-item *ngFor="let item of items" (click)="getData()">
       <ion-card-header>
         {{item.date}}
-        <!-- {{item._id}} -->
       </ion-card-header>
       <ion-card-content>
           <ion-item-group>
@@ -28,8 +27,6 @@
       </ion-card-content>
 
     </ion-card>
-
-
 
   </ion-list>
 

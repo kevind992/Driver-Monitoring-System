@@ -1,4 +1,4 @@
-webpackJsonp([1],{
+webpackJsonp([2],{
 
 /***/ 108:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -152,6 +152,10 @@ webpackEmptyAsyncContext.id = 119;
 var map = {
 	"../pages/charts/charts.module": [
 		459,
+		1
+	],
+	"../pages/data/data.module": [
+		460,
 		0
 	]
 };
@@ -208,6 +212,9 @@ var HomePage = (function () {
             alert('oops' + err);
         });
     };
+    HomePage.prototype.getData = function () {
+        console.log('clicked');
+    };
     HomePage.prototype.ionViewDidLoad = function () {
         // TO DO: fix only loads when re-loaded
         this.loadLogs();
@@ -215,11 +222,12 @@ var HomePage = (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-home',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Trip Logs</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <button ion-button full (click)="loadLogs()">Load Data</button>\n  \n  <ion-list>\n    <ion-card ion-item *ngFor="let item of items">\n      <ion-card-header>\n        {{item.date}}\n        <!-- {{item._id}} -->\n      </ion-card-header>\n      <ion-card-content>\n          <ion-item-group>\n              Highest RPM:  {{item.repHighestRPM}}\n              <br>\n              Average Speed:  {{item.repAvgSpeed}}\n              <br>\n              Distance Traveled:  {{item.repDistance}}\n          </ion-item-group>\n          \n      </ion-card-content>\n\n    </ion-card>\n\n\n\n  </ion-list>\n\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Trip Logs</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <button ion-button full (click)="loadLogs()">Load Data</button>\n  \n  <ion-list>\n    <ion-card ion-item *ngFor="let item of items" (click)="getData()">\n      <ion-card-header>\n        {{item.date}}\n      </ion-card-header>\n      <ion-card-content>\n          <ion-item-group>\n              Highest RPM:  {{item.repHighestRPM}}\n              <br>\n              Average Speed:  {{item.repAvgSpeed}}\n              <br>\n              Distance Traveled:  {{item.repDistance}}\n          </ion-item-group>\n          \n      </ion-card-content>\n\n    </ion-card>\n\n  </ion-list>\n\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]) === "function" && _b || Object])
     ], HomePage);
     return HomePage;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=home.js.map
@@ -288,7 +296,8 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* HttpModule */],
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* MyApp */], {}, {
                     links: [
-                        { loadChildren: '../pages/charts/charts.module#ChartsPageModule', name: 'ChartsPage', segment: 'charts', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/charts/charts.module#ChartsPageModule', name: 'ChartsPage', segment: 'charts', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/data/data.module#DataPageModule', name: 'DataPage', segment: 'data', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_9_ng2_charts__["ChartsModule"]
