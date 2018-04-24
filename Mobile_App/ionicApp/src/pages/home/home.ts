@@ -15,7 +15,6 @@ export class HomePage {
 
   }
 
-  // items:any;
   items;
 
   loadLogs() {
@@ -28,8 +27,12 @@ export class HomePage {
   });
   }
 
-  getData(){
-    this.navCtrl.push(DataPage);
+  // populate with json data
+  getData(item){
+
+
+    // push item to DataPage
+    this.navCtrl.push(DataPage, item);
   }
 
   ionViewDidLoad() {
