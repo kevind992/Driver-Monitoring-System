@@ -31,7 +31,6 @@ public class OBD {
 
         SerialPort socket = SerialPort.getCommPorts()[1];
 
-
         //Opening com port
         socket.openPort();
 
@@ -69,13 +68,9 @@ public class OBD {
                 speedArray.add(count,speed.getMetricSpeed());
 
                 Thread.sleep(1 * 1000);
-
-
                 count++;
 
             }while (rpm > 300 );
-
-
 
             DistanceSinceCCCommand distCmd2 = new DistanceSinceCCCommand();
             distCmd2.run(socket.getInputStream(), socket.getOutputStream());

@@ -63,15 +63,15 @@ public class MongoOffline implements Serializable {
 
         List<Data> list = ReadFileData();
 
-//        try{
-//            //reading from backup.txt to see if there is any saved files
-//            list = ReadFileData();
-//            fileEmpty = false;
-//            System.out.println("false");
-//        } catch (NullPointerException e){
-//            fileEmpty = true;
-//            System.out.println("true");
-//        }
+        try{
+            //reading from backup.txt to see if there is any saved files
+            list = ReadFileData();
+            //fileEmpty = false;
+            System.out.println("false");
+        } catch (NullPointerException e){
+            //fileEmpty = true;
+            System.out.println("true");
+        }
         if(list == null){
             fileEmpty = true;
             System.out.println("file empty");
@@ -82,5 +82,4 @@ public class MongoOffline implements Serializable {
 
         return fileEmpty;
     }
-
 }

@@ -33,17 +33,24 @@ public class DbSeeder implements CommandLineRunner {
 
         System.out.println("In Mongo Package");
 
+        // Instance of object
         Data newData;
 
+        // Instance of MongoOffline. Used for handling all the offline methods
         MongoOffline mongoOffline = new MongoOffline();
 
         try{
+            // Check if there is data of on the backup.txt
             fileEmpty = mongoOffline.IsFileEmpty();
 
+            // If there is backed up data go through if statement
             if(fileEmpty == false){
 
+                // Pull the backed up data from the backup.txt
                 data = mongoOffline.ReadFileData();
+
                 try{
+                    //
                     this.dataRepository.save(data);
                     data.clear();
                     System.out.println("dending report to mongodb..");

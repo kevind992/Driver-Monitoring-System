@@ -10,15 +10,19 @@ import java.util.List;
 @RequestMapping("/data")
 public class DataController {
 
+    // Getting instance of DataRepository
     private DataRepository dataRepository;
 
+    //Constructor
     public DataController(DataRepository dataRepository){
         this.dataRepository = dataRepository;
     }
 
+    //Handling the mapping
     @GetMapping("/all")
     public List<Data> getAll(){
 
+        //Getting data from Mongodb
         List<Data> data = this.dataRepository.findAll();
 
         return data;
