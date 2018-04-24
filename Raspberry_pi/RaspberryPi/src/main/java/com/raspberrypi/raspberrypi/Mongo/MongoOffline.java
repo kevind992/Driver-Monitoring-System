@@ -68,10 +68,11 @@ public class MongoOffline implements Serializable {
 
         // Creating fileEmpty and list
         boolean fileEmpty;
-        List<Data> list =  new ArrayList<>();
+        List<Data> list = new ArrayList<Data>();
 
         try{
             //reading from backup.txt to see if there is any saved files
+            System.out.println("Trying read check");
             list = ReadFileData(false);
         } catch (NullPointerException e){ }
 
