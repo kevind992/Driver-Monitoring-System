@@ -26,9 +26,6 @@ public class OBD {
 
         System.out.println("In OBD package");
 
-        //Setting up com ports
-        SerialPort serials[] = SerialPort.getCommPorts();
-
         SerialPort socket = SerialPort.getCommPorts()[1];
 
         //Opening com port
@@ -56,16 +53,17 @@ public class OBD {
 
             do{//do while rpm not less them 300rpm
                 //RPM
-                RPMCommand rpmCmd = new RPMCommand();
-                rpmCmd.run(socket.getInputStream(), socket.getOutputStream());
-                rpm = rpmCmd.getRPM();
-                rpmArray.add(count,rpmCmd.getRPM());
-                System.out.println("rpm result is : " + rpm);
 
                 SpeedCommand speed = new SpeedCommand();
                 speed.run(socket.getInputStream(),socket.getOutputStream());
                 System.out.println("Speed: " + speed.getMetricSpeed());
                 speedArray.add(count,speed.getMetricSpeed());
+
+                RPMCommand rpmCmd = new RPMCommand();
+                rpmCmd.run(socket.getInputStream(), socket.getOutputStream());
+                rpm = rpmCmd.getRPM();
+                rpmArray.add(count,rpmCmd.getRPM());
+                System.out.println("rpm result is : " + rpm);
 
                 Thread.sleep(1 * 1000);
                 count++;

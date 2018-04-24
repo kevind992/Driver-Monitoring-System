@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 // Name of collection which data will be stored within Mongodb
 @Document(collection = "datas")
@@ -16,19 +17,24 @@ public class Data implements Serializable {
     private String repAvgSpeed;
     private String repHighestRPM;
     private String repDistance;
+    private ArrayList<Integer> speedList;
+    private ArrayList<Integer> rpmList;
 
-    // Constructors
+
+    //No Argument Constructor
     public Data(){
         super();
     }
 
-    // Argument Constructor
-    public Data(String dateString, String repAvgSpeed, String repHighestRPM, String repDistance) {
+    //Argument Constructor
+    public Data(String dateString, String repAvgSpeed, String repHighestRPM, String repDistance, ArrayList<Integer> speedList, ArrayList<Integer> rpmList) {
 
-        this.date = date;
+        this.date = dateString;
         this.repAvgSpeed = repAvgSpeed;
         this.repHighestRPM = repHighestRPM;
         this.repDistance = repDistance;
+        this.speedList = speedList;
+        this.rpmList = rpmList;
     }
 
     // Getters and Setters
@@ -69,5 +75,21 @@ public class Data implements Serializable {
 
     public void setRepDistance(String repDistance) {
         this.repDistance = repDistance;
+    }
+
+    public ArrayList<Integer> getSpeedList() {
+        return speedList;
+    }
+
+    public void setSpeedList(ArrayList<Integer> speedList) {
+        this.speedList = speedList;
+    }
+
+    public ArrayList<Integer> getRpmList() {
+        return rpmList;
+    }
+
+    public void setRpmList(ArrayList<Integer> rpmList) {
+        this.rpmList = rpmList;
     }
 }

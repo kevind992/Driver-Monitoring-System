@@ -1,85 +1,90 @@
 package com.raspberrypi.raspberrypi.Mongo;
 
-import com.raspberrypi.raspberrypi.OBD.OBD;
-import com.raspberrypi.raspberrypi.Report.ReportGenerator;
-
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+// A Java class for managing all the offline functions like reading, writing and checking a text file
 public class MongoOffline implements Serializable {
 
+    // A method for writing a list of Data objects to a file
     public void WriteFileData(List<Data> data)  throws FileNotFoundException, IOException{
 
-        //File backupFile = new File("C:\\Users\\kevin\\Desktop\\Software 3rd Year\\Semester 2\\Professional Practice in I.T\\3rd-Year-Project\\Raspberry_pi\\backup.txt");
+        // File which backup will be stored
         File backupFile = new File("backup.txt");
 
-        //Creating the FileOutputStream, BufferedOutputStream and ObjectOutputStream
+        //Creating the FileOutputStream and ObjectOutputStream
         FileOutputStream fo = new FileOutputStream(backupFile);
         ObjectOutputStream output = new ObjectOutputStream(fo);
 
+        //Writing everything within the Data list to the backup.txt
         for(Data d : data){
             output.writeObject(d);
         }
 
+        // Closing the ObjectOutputStream
         output.close();
 
         System.out.println("Data written to file..");
 
     }
+    // A method for reading objects from a file
+    public List<Data> ReadFileData(boolean check)throws FileNotFoundException, IOException, ClassNotFoundException {
 
-    public List<Data> ReadFileData()throws FileNotFoundException, IOException, ClassNotFoundException {
-
-        //File backupFile = new File("C:\\Users\\kevin\\Desktop\\Software 3rd Year\\Semester 2\\Professional Practice in I.T\\3rd-Year-Project\\Raspberry_pi\\backup.txt");
+        // Backup file
         File backupFile = new File("backup.txt");
 
+        // List which the objects will be stored
         List<Data> list = new ArrayList<Data>();
 
+        // Creating the FileInputStream and ObjectOutputStream
         FileInputStream in = new FileInputStream(backupFile);
         ObjectInputStream input = new ObjectInputStream(in);
 
         try {
+                // Trying to read the data from the backup.txt file
                 Data d = (Data) input.readObject();
+                // Adding the object to the list
                 list.add(d);
 
-        } catch (EOFException ex) {
-            System.out.println("Error - Data not read from file..");
-        }
+        } catch (EOFException ex) { }
+
         System.out.println("backupFile.txt Read Successful..");
 
-        //Closing the last opened stream and deleting the backupFile.txt
-        backupFile.delete();
+        // if this isnt a check then after the read delete the file
+        if(check == false){
+            backupFile.delete();
+        }
+
+        //Closing the last opened stream
         input.close();
 
-        //Sending the arraylist
+        //Returning the arraylist
         return list;
     }
 
     //Checks whether file is empty or not
     public boolean IsFileEmpty() throws IOException, ClassNotFoundException {
 
+        // Creating fileEmpty and list
         boolean fileEmpty;
-
-        List<Data> list = ReadFileData();
+        List<Data> list =  new ArrayList<>();
 
         try{
             //reading from backup.txt to see if there is any saved files
-            list = ReadFileData();
-            //fileEmpty = false;
-            System.out.println("false");
-        } catch (NullPointerException e){
-            //fileEmpty = true;
-            System.out.println("true");
-        }
-        if(list == null){
+            list = ReadFileData(false);
+        } catch (NullPointerException e){ }
+
+        //If file is empty set fileEmpty to true
+        if(list.isEmpty()){
             fileEmpty = true;
             System.out.println("file empty");
-        }else {
+        }else { // Else set fileEmpty to false
             fileEmpty = false;
             System.out.println("file not empty");
         }
 
+        //return fileEmpty
         return fileEmpty;
     }
 }

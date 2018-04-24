@@ -47,7 +47,7 @@ public class DbSeeder implements CommandLineRunner {
             if(fileEmpty == false){
 
                 // Pull the backed up data from the backup.txt
-                data = mongoOffline.ReadFileData();
+                data = mongoOffline.ReadFileData(true);
 
                 try{
                     //
