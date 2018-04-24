@@ -29,7 +29,7 @@ export class HomePage {
   }
 
   getData(){
-    console.log('clicked');
+    this.navCtrl.push(DataPage);
   }
 
   ionViewDidLoad() {
