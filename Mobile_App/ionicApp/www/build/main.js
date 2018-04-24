@@ -67,6 +67,8 @@ var ChartsPage = (function () {
         ];
         this.lineChartLegend = false;
         this.lineChartType = 'line';
+        // first load overrides hardcoded data
+        this.loadLogs();
     }
     ChartsPage.prototype.loadLogs = function () {
         var _this = this;
@@ -117,9 +119,10 @@ var ChartsPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'page-charts',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/charts/charts.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>Log Charts</ion-title>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n  </ion-navbar>\n  \n\n</ion-header>\n\n\n<ion-content padding>\n    <button ion-button full (click)="loadLogs()">Load Data</button>\n\n  <ion-card>\n    <ion-card-header>\n      Highest RPM\n    </ion-card-header>\n    <div class="row">\n        <div class="col-md-6">\n          <div style="display: block;">\n          <canvas baseChart width="300" height="400"\n                      [datasets]="rpmArray"\n                      [labels]="lineChartLabels"\n                      [options]="lineChartOptions"\n                      [colors]="lineChartColors"\n                      [legend]="lineChartLegend"\n                      [chartType]="lineChartType"\n                      (chartHover)="chartHovered($event)"\n                      (chartClick)="chartClicked($event)">\n            </canvas>\n          </div>\n        </div>\n      </div>\n\n  </ion-card>\n  <ion-card>\n      <ion-card-header>\n          Average Speed\n      </ion-card-header>\n      <div class="row">\n          <div class="col-md-6">\n            <div style="display: block;">\n            <canvas baseChart width="300" height="400"\n                        [datasets]="spdArray"\n                        [labels]="lineChartLabels"\n                        [options]="lineChartOptions"\n                        [colors]="lineChartColors"\n                        [legend]="lineChartLegend"\n                        [chartType]="lineChartType"\n                        (chartHover)="chartHovered($event)"\n                        (chartClick)="chartClicked($event)"></canvas>\n            </div>\n          </div>\n        </div>\n    </ion-card>\n    <ion-card>\n        <ion-card-header>\n          Distance\n        </ion-card-header>\n        <div class="row">\n            <div class="col-md-6">\n              <div style="display: block;">\n              <canvas baseChart width="300" height="400"\n                          [datasets]="dstArray"\n                          [labels]="lineChartLabels"\n                          [options]="lineChartOptions"\n                          [colors]="lineChartColors"\n                          [legend]="lineChartLegend"\n                          [chartType]="lineChartType"\n                          (chartHover)="chartHovered($event)"\n                          (chartClick)="chartClicked($event)"></canvas>\n              </div>\n            </div>\n          </div>\n      </ion-card>\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/charts/charts.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]) === "function" && _c || Object])
     ], ChartsPage);
     return ChartsPage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=charts.js.map
@@ -151,8 +154,11 @@ var DataPage = (function () {
         this.navParams = navParams;
         // selected data
         this.item = this.navParams.data;
-        ////
-        this.lineChartData = [
+        // data arrays
+        this.rpmData = [
+            { data: [] }
+        ];
+        this.spdData = [
             { data: [] }
         ];
         this.lineChartLabels = [];
@@ -191,9 +197,12 @@ var DataPage = (function () {
         var label = 0;
         this.item.rpmList.forEach(function (element) {
             label++;
-            console.log(element + " " + label);
-            _this.lineChartData[0].data.push(element);
+            _this.rpmData[0].data.push(element);
             _this.lineChartLabels.push(label);
+        });
+        index = 0;
+        this.item.speedList.forEach(function (element) {
+            _this.spdData[0].data.push(element);
         });
     }
     // events
@@ -204,7 +213,6 @@ var DataPage = (function () {
         console.log(e);
     };
     Object.defineProperty(DataPage.prototype, "date", {
-        ////
         get: function () {
             console.log(this.item.date);
             return (this.item.date);
@@ -213,20 +221,19 @@ var DataPage = (function () {
         configurable: true
     });
     DataPage.prototype.ionViewDidLoad = function () {
-        var _this = this;
         //console.log(this.item.rpmList);
-        var index = 0;
-        var label = 0;
-        this.item.rpmList.forEach(function (element) {
-            label++;
-            console.log(element + " " + label);
-            _this.lineChartData[0].data.push(element);
-            _this.lineChartLabels.push(label);
-        });
+        // let index = 0;
+        // let label = 0;
+        // this.item.rpmList.forEach(element => {
+        //   label++;
+        //   console.log(element + " " +label);
+        //   this.rpmData[0].data.push(element);
+        //   this.lineChartLabels.push(label)
+        // });
     };
     DataPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-data',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/data/data.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>data</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding >\n\n    <ion-title >{{date}}</ion-title>\n\n    <ion-card>\n        <ion-card-header>\n          RPM\n        </ion-card-header>\n        <div class="row">\n            <div class="col-md-6">\n              <div style="display: block;">\n              <canvas baseChart width="300" height="400"\n                          [datasets]="lineChartData"\n                          [labels]="lineChartLabels"\n                          [options]="lineChartOptions"\n                          [colors]="lineChartColors"\n                          [legend]="lineChartLegend"\n                          [chartType]="lineChartType"\n                          (chartHover)="chartHovered($event)"\n                          (chartClick)="chartClicked($event)">\n                </canvas>\n              </div>\n            </div>\n          </div>\n      </ion-card>\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/data/data.html"*/,
+            selector: 'page-data',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/data/data.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>data</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding >\n\n    <ion-title >{{date}}</ion-title>\n\n    <ion-card>\n        <ion-card-header>\n          RPM\n        </ion-card-header>\n        <div class="row">\n            <div class="col-md-6">\n              <div style="display: block;">\n              <canvas baseChart width="300" height="400"\n                          [datasets]="rpmData"\n                          [labels]="lineChartLabels"\n                          [options]="lineChartOptions"\n                          [colors]="lineChartColors"\n                          [legend]="lineChartLegend"\n                          [chartType]="lineChartType"\n                          (chartHover)="chartHovered($event)"\n                          (chartClick)="chartClicked($event)">\n                </canvas>\n              </div>\n            </div>\n          </div>\n      </ion-card>\n\n      <ion-card>\n          <ion-card-header>\n            RPM\n          </ion-card-header>\n          <div class="row">\n              <div class="col-md-6">\n                <div style="display: block;">\n                <canvas baseChart width="300" height="400"\n                            [datasets]="spdData"\n                            [labels]="lineChartLabels"\n                            [options]="lineChartOptions"\n                            [colors]="lineChartColors"\n                            [legend]="lineChartLegend"\n                            [chartType]="lineChartType"\n                            (chartHover)="chartHovered($event)"\n                            (chartClick)="chartClicked($event)">\n                  </canvas>\n                </div>\n              </div>\n            </div>\n        </ion-card>\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/data/data.html"*/,
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object])
     ], DataPage);

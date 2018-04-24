@@ -19,7 +19,7 @@
             <div class="col-md-6">
               <div style="display: block;">
               <canvas baseChart width="300" height="400"
-                          [datasets]="lineChartData"
+                          [datasets]="rpmData"
                           [labels]="lineChartLabels"
                           [options]="lineChartOptions"
                           [colors]="lineChartColors"
@@ -32,4 +32,26 @@
             </div>
           </div>
       </ion-card>
+
+      <ion-card>
+          <ion-card-header>
+            RPM
+          </ion-card-header>
+          <div class="row">
+              <div class="col-md-6">
+                <div style="display: block;">
+                <canvas baseChart width="300" height="400"
+                            [datasets]="spdData"
+                            [labels]="lineChartLabels"
+                            [options]="lineChartOptions"
+                            [colors]="lineChartColors"
+                            [legend]="lineChartLegend"
+                            [chartType]="lineChartType"
+                            (chartHover)="chartHovered($event)"
+                            (chartClick)="chartClicked($event)">
+                  </canvas>
+                </div>
+              </div>
+            </div>
+        </ion-card>
 </ion-content>

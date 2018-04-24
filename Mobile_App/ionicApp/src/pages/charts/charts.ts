@@ -21,7 +21,8 @@ import { NgForOf } from '@angular/common';
 export class ChartsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
-
+    // first load overrides hardcoded data
+    this.loadLogs()
   }
 
   items;

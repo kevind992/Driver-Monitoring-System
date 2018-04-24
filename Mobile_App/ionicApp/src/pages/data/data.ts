@@ -17,14 +17,22 @@ export class DataPage {
 
     this.item.rpmList.forEach(element => {
       label++;
-      console.log(element + " " +label);
-      this.lineChartData[0].data.push(element);
+      this.rpmData[0].data.push(element);
       this.lineChartLabels.push(label)
+    });
+
+    index = 0;
+
+    this.item.speedList.forEach(element => {
+      this.spdData[0].data.push(element);
     });
   }
 
-  ////
-  public lineChartData:Array<any> = [
+  // data arrays
+  public rpmData:Array<any> = [
+    {data: []}
+  ];
+  public spdData:Array<any> = [
     {data: []}
   ];
 
@@ -70,7 +78,6 @@ export class DataPage {
   public chartHovered(e:any):void {
     console.log(e);
   }
-  ////
 
   get date() {
     console.log(this.item.date);
@@ -79,15 +86,15 @@ export class DataPage {
 
   ionViewDidLoad() {
     //console.log(this.item.rpmList);
-    let index = 0;
-    let label = 0;
+    // let index = 0;
+    // let label = 0;
 
-    this.item.rpmList.forEach(element => {
-      label++;
-      console.log(element + " " +label);
-      this.lineChartData[0].data.push(element);
-      this.lineChartLabels.push(label)
-    });
+    // this.item.rpmList.forEach(element => {
+    //   label++;
+    //   console.log(element + " " +label);
+    //   this.rpmData[0].data.push(element);
+    //   this.lineChartLabels.push(label)
+    // });
 
   }
 
