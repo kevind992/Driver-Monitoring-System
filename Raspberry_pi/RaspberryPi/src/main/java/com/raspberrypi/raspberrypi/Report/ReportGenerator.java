@@ -9,16 +9,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
+//A Class for generating OBD reports
 public class ReportGenerator {
-
-    //A Class for generating OBD reports
 
     private DataTypes data;
     private int avgSpeed;
     private int highestRPM;
     private int dist;
-    private ArrayList<Integer> speeds;
-    private ArrayList<Integer> rpms;
 
     //A method for generating a final report
     public Data generateReport(){
@@ -30,19 +27,20 @@ public class ReportGenerator {
         Data calData = new Data();
 
         try{
+
             data = obd.getData();
             //Calculation methods(Avg Speed, HighestRPM, Total Distance)
             avgSpeed = calAvgSpeed();
             highestRPM = calHighestRPM();
             dist = calDistance(data.getDistStart(),data.getDistEnd());
 
-            //Adding the three values to Data Object
+            //Adding the 6 values to Data Object
             calData.setDate(getDate());
             calData.setRepAvgSpeed(String.valueOf(avgSpeed));
             calData.setRepHighestRPM(String.valueOf(highestRPM));
             calData.setRepDistance(String.valueOf(dist));
-            calData.setSpeedData(data.getSpeed());
-            calData.setSpeedData(data.getRpm());
+            calData.setRpmList(data.getRpm());
+            calData.setSpeedList(data.getSpeed());
         }
         catch(Exception e){
             System.out.println("Report Generator Error: -" + e);
@@ -50,9 +48,9 @@ public class ReportGenerator {
 
         System.out.println("Leaving Report Generator..");
 
+        // Returning all the calculated results
         return calData;
     }
-
     //A method for calculating the total average speed of a trip
     private int calAvgSpeed(){
 
@@ -67,14 +65,12 @@ public class ReportGenerator {
 
         return res;
     }
-
     //A method for calculating the average miles per gallon
     private void calMPG(){
 
 
 
     }
-
     //A method for calculating the highest RPM
     private int calHighestRPM(){
 
@@ -84,7 +80,6 @@ public class ReportGenerator {
 
         return max;
     }
-
     //A method for calculating the total distance traveled
     private int calDistance(int start, int finish){
 

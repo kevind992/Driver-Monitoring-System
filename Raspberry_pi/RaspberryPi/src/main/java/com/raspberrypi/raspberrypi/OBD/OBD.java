@@ -25,7 +25,7 @@ public class OBD {
     public DataTypes getData() throws IOException {
 
         System.out.println("In OBD package");
-
+        SerialPort serials[] = SerialPort.getCommPorts();
         SerialPort socket = SerialPort.getCommPorts()[1];
 
         //Opening com port

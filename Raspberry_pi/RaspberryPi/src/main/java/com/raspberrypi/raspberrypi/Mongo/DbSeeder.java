@@ -2,20 +2,13 @@ package com.raspberrypi.raspberrypi.Mongo;
 
 import com.mongodb.MongoSocketOpenException;
 import com.mongodb.MongoTimeoutException;
-import com.raspberrypi.raspberrypi.OBD.OBD;
 import com.raspberrypi.raspberrypi.Report.ReportGenerator;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.stereotype.Component;
-
 import java.io.FileNotFoundException;
-import java.net.SocketException;
-import java.net.SocketTimeoutException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
-import java.util.concurrent.TimeoutException;
 
 @Component
 public class DbSeeder implements CommandLineRunner {
