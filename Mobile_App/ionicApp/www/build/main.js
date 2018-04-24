@@ -146,15 +146,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var DataPage = (function () {
     function DataPage(navCtrl, navParams) {
+        var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         // selected data
         this.item = this.navParams.data;
         ////
         this.lineChartData = [
-            { data: [18, 48, 77, 9, 100, 27, 40] }
+            { data: [] }
         ];
-        this.lineChartLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+        this.lineChartLabels = [];
         this.lineChartOptions = {
             responsive: true
         };
@@ -186,6 +187,14 @@ var DataPage = (function () {
         ];
         this.lineChartLegend = false;
         this.lineChartType = 'line';
+        var index = 0;
+        var label = 0;
+        this.item.rpmList.forEach(function (element) {
+            label++;
+            console.log(element + " " + label);
+            _this.lineChartData[0].data.push(element);
+            _this.lineChartLabels.push(label);
+        });
     }
     // events
     DataPage.prototype.chartClicked = function (e) {
@@ -208,12 +217,9 @@ var DataPage = (function () {
         //console.log(this.item.rpmList);
         var index = 0;
         var label = 0;
-        // for (let i = 0; i < this.item.rpmList.lenghth(); i++) {
-        //   console.log('i: ' + i)
-        //   //this.lineChartData[0].data[i];
-        // }
         this.item.rpmList.forEach(function (element) {
             label++;
+            console.log(element + " " + label);
             _this.lineChartData[0].data.push(element);
             _this.lineChartLabels.push(label);
         });

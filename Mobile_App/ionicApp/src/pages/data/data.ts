@@ -12,14 +12,23 @@ export class DataPage {
   item:any = this.navParams.data;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    let index = 0;
+    let label = 0;
+
+    this.item.rpmList.forEach(element => {
+      label++;
+      console.log(element + " " +label);
+      this.lineChartData[0].data.push(element);
+      this.lineChartLabels.push(label)
+    });
   }
 
   ////
   public lineChartData:Array<any> = [
-    {data: [18, 48, 77, 9, 100, 27, 40]}
+    {data: []}
   ];
 
-  public lineChartLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  public lineChartLabels:Array<any> = [];
   public lineChartOptions:any = {
     responsive: true
   };
@@ -73,14 +82,9 @@ export class DataPage {
     let index = 0;
     let label = 0;
 
-    // for (let i = 0; i < this.item.rpmList.lenghth(); i++) {
-    //   console.log('i: ' + i)
-    //   //this.lineChartData[0].data[i];
-    // }
-
-
     this.item.rpmList.forEach(element => {
       label++;
+      console.log(element + " " +label);
       this.lineChartData[0].data.push(element);
       this.lineChartLabels.push(label)
     });
