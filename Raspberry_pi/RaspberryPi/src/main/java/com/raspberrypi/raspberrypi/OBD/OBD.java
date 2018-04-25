@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class OBD {
 
     private int rpm;
+    private int speed;
     private int count=0;
     private int startDist;
     private int endDist;
@@ -41,6 +42,7 @@ public class OBD {
         try {
 
             //Set up commands for OBD
+            new ObdResetCommand().run(socket.getInputStream(),socket.getOutputStream());
             new EchoOffCommand().run(socket.getInputStream(), socket.getOutputStream());
             new LineFeedOffCommand().run(socket.getInputStream(), socket.getOutputStream());
             new TimeoutCommand(10000).run(socket.getInputStream(), socket.getOutputStream());
@@ -53,21 +55,28 @@ public class OBD {
             startDist = distCmd.getKm();
 
             do{//do while rpm not less them 300rpm
-                //RPM
 
-                SpeedCommand speed = new SpeedCommand();
-                speed.run(socket.getInputStream(),socket.getOutputStream());
-                System.out.println("Speed: " + speed.getMetricSpeed());
-                speedArray.add(count,speed.getMetricSpeed());
+                try{
 
-                RPMCommand rpmCmd = new RPMCommand();
-                rpmCmd.run(socket.getInputStream(), socket.getOutputStream());
-                rpm = rpmCmd.getRPM();
-                rpmArray.add(count,rpmCmd.getRPM());
-                System.out.println("rpm result is : " + rpm);
+                    SpeedCommand speedCom = new SpeedCommand();
+                    speedCom.run(socket.getInputStream(),socket.getOutputStream());
+                    //RPM
+                    RPMCommand rpmCmd = new RPMCommand();
+                    rpmCmd.run(socket.getInputStream(), socket.getOutputStream());
+                    speed = speedCom.getMetricSpeed();
+                    System.out.println("Speed: " + speed);
+                    speedArray.add(count,speed);
 
-                Thread.sleep(1 * 1000);
-                count++;
+                    rpm = Integer.parseInt(rpmCmd.getCalculatedResult());
+                    rpmArray.add(count,rpm);
+                    System.out.println("rpm result is : " + rpm);
+
+                    Thread.sleep(1 * 1000);
+                    count++;
+
+                }catch (NonNumericResponseException e){
+                    System.out.println("Non Numeric Responce..");
+                }
 
             }while (rpm > 300 );
 
