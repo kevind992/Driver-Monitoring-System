@@ -100,6 +100,7 @@ public class DbSeeder implements CommandLineRunner {
             catch (MongoTimeoutException e){
                 System.out.println("Error - DB offline..");
             }
+            System.exit(3);
         }
     }
 }
