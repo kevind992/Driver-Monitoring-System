@@ -23,6 +23,7 @@ page-home {
 
     ion-card.reports-card ion-card-header {
       color: map-get($colors, primary);
+      border-bottom: 1px solid grey;
     }
 
     ion-card.reports-card ion-list {

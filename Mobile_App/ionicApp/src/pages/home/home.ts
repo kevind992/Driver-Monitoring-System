@@ -12,23 +12,25 @@ import { DataPage } from '../data/data';
 export class HomePage {
 
   constructor(public navCtrl: NavController, public http:Http) {
-    this.loadLogs();
+    // this.loadLogs();
   }
 
-  items;
+  items: any;
   rating = false;
 
   loadLogs() {
     this.http.get('http://167.99.202.75/api/data').map(data => data.json()).subscribe(data => {
       this.items = data;
-      console.log("check" + this.items);
+      for (let index = 0; index < this.items.length; index++) {
+        console.log("check" + this.items);
+      }
       this.items.reverse();
     },
   (err) => {
     alert('oops' + err);
   });
   // check last 5
-  //this.checkRating();
+  this.checkRating();
   }
 
   checkRating() {
@@ -66,7 +68,7 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    // this.loadLogs()
+    this.loadLogs()
     console.log('onLoad test')
   }
 

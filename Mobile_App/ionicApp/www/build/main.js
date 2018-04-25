@@ -23,8 +23,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// charts
-// https://www.djamware.com/post/598953f880aca768e4d2b12b/creating-beautiful-charts-easily-using-ionic-3-and-angular-4
 var ChartsPage = (function () {
     function ChartsPage(navCtrl, navParams, http) {
         this.navCtrl = navCtrl;
@@ -319,19 +317,21 @@ var HomePage = (function () {
         this.navCtrl = navCtrl;
         this.http = http;
         this.rating = false;
-        this.loadLogs();
+        // this.loadLogs();
     }
     HomePage.prototype.loadLogs = function () {
         var _this = this;
         this.http.get('http://167.99.202.75/api/data').map(function (data) { return data.json(); }).subscribe(function (data) {
             _this.items = data;
-            console.log("check" + _this.items);
+            for (var index = 0; index < _this.items.length; index++) {
+                console.log("check" + _this.items);
+            }
             _this.items.reverse();
         }, function (err) {
             alert('oops' + err);
         });
         // check last 5
-        //this.checkRating();
+        this.checkRating();
     };
     HomePage.prototype.checkRating = function () {
         //console.log("check" + this.items[0]);
@@ -363,16 +363,17 @@ var HomePage = (function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__data_data__["a" /* DataPage */], item);
     };
     HomePage.prototype.ionViewDidLoad = function () {
-        // this.loadLogs()
+        this.loadLogs();
         console.log('onLoad test');
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-home',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Trip Logs</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding class="main">\n\n\n    <ion-card class="reports-card" ion-item *ngFor="let item of items" (click)="getData(item)">\n      <ion-card-header>\n        {{item.date}}\n      </ion-card-header>\n      \n      <!-- <ion-card-content> -->\n          <!-- <ion-item-group>\n              Highest RPM:  {{item.repHighestRPM}}\n              <br>\n              Average Speed:  {{item.repAvgSpeed}}\n              <br>\n              Distance Traveled:  {{item.repDistance}}\n          </ion-item-group>\n\n          <ion-icon name="ios-arrow-forward" item-start></ion-icon> -->\n\n          <ion-item>\n              <ion-icon name="ios-speedometer" item-start large></ion-icon>\n              <h2>Highest RPM:</h2>\n              <p>{{item.repHighestRPM}} RPM</p>\n          </ion-item>\n\n          <ion-item>\n            <ion-icon name="ios-car" item-start large></ion-icon>\n            <h2>Average Speed:</h2>\n            <p>{{item.repAvgSpeed}} KPH</p>\n          </ion-item>\n\n            \n          <ion-item>\n            <ion-icon name="ios-navigate" item-start large></ion-icon>\n            <h2>Distance Traveled:</h2>\n            <p>{{item.repDistance}} K</p>\n          </ion-item>\n            \n                <!-- Highest RPM:  {{item.repHighestRPM}}\n                <br>\n                Average Speed:  {{item.repAvgSpeed}}\n                <br>\n                Distance Traveled:  {{item.repDistance}} -->\n                <ion-icon name="ios-arrow-forward" item-end></ion-icon>\n       \n      <!-- </ion-card-content> -->\n\n    </ion-card>\n\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Trip Logs</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding class="main">\n\n\n    <ion-card class="reports-card" ion-item *ngFor="let item of items" (click)="getData(item)">\n      <ion-card-header>\n        {{item.date}}\n      </ion-card-header>\n\n          <ion-item>\n              <ion-icon name="ios-speedometer" item-start large></ion-icon>\n              <h2>Highest RPM:</h2>\n              <p>{{item.repHighestRPM}} RPM</p>\n          </ion-item>\n\n          <ion-item>\n            <ion-icon name="ios-car" item-start large></ion-icon>\n            <h2>Average Speed:</h2>\n            <p>{{item.repAvgSpeed}} KPH</p>\n          </ion-item>\n\n            \n          <ion-item>\n            <ion-icon name="ios-navigate" item-start large></ion-icon>\n            <h2>Distance Traveled:</h2>\n            <p>{{item.repDistance}} K</p>\n          </ion-item>\n          <ion-icon name="ios-arrow-forward" item-end></ion-icon>\n\n    </ion-card>\n\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]) === "function" && _b || Object])
     ], HomePage);
     return HomePage;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=home.js.map
