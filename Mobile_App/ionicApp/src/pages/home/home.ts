@@ -36,10 +36,8 @@ export class HomePage {
 
   checkRating() {
     for (let i = 0; i < 5; i++) {
-      if (this.items[i].repHighestRPM >= 800) {
+      if (this.items[i].repHighestRPM >= 800) // check if the driver is going over 3500 rpm over the last five records
         this.rating = true;
-        console.log("true");
-      }
     }
   }
 

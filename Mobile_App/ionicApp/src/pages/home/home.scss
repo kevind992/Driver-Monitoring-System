@@ -4,30 +4,25 @@ page-home {
     background-color: whitesmoke;
   }
 
-    ion-card.reports-card {
-      margin-bottom: 2em;
-      margin-top: 2em;
-      background-color: white
-    }
-    
-      ion-card-content {
-        //background-color: #F4F5F8;
-      }
-    //   ion-card img {
-    //     width: auto;
-    //     height: 44px;
-    //     display: block;
-    //     margin: 20px auto;
-    // }    
+  ion-card.rating-card {
+    margin-bottom: -1em;
+    margin-top: 1em;
+    background-color: green($color: #15c50f)
+  }
 
+  ion-card.reports-card {
+    margin-bottom: 2em;
+    margin-top: 2em;
+    background-color: white
+  }
 
-    ion-card.reports-card ion-card-header {
-      color: map-get($colors, primary);
-      border-bottom: 1px solid grey;
-    }
+  ion-card.reports-card ion-card-header {
+    color: map-get($colors, primary);
+    border-bottom: 1px solid grey;
+  }
 
-    ion-card.reports-card ion-list {
-      background-color: aqua
+  ion-card.reports-card ion-list {
+    background-color: aqua
 
-    }
+  }
 }
