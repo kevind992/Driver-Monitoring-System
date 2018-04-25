@@ -87,6 +87,7 @@ public class DbSeeder implements CommandLineRunner {
             try{
                 System.out.println("Sending to mongoDB..");
                 this.dataRepository.save(data);
+
             }catch (IllegalStateException e){
                 System.out.println("DB offline, writing to local file..");
                 mongoOffline.WriteFileData(data);
@@ -100,7 +101,7 @@ public class DbSeeder implements CommandLineRunner {
             catch (MongoTimeoutException e){
                 System.out.println("Error - DB offline..");
             }
-            System.exit(3);
+            //System.exit(0);
         }
     }
 }
