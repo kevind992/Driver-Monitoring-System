@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { DataPage } from '../data/data';
 
 @Component({
   selector: 'page-home',
@@ -14,7 +15,6 @@ export class HomePage {
 
   }
 
-  // items:any;
   items;
 
   loadLogs() {
@@ -25,6 +25,14 @@ export class HomePage {
   (err) => {
     alert('oops' + err);
   });
+  }
+
+  // populate with json data
+  getData(item){
+
+
+    // push item to DataPage
+    this.navCtrl.push(DataPage, item);
   }
 
   ionViewDidLoad() {

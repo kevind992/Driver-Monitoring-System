@@ -1,4 +1,4 @@
-webpackJsonp([1],{
+webpackJsonp([2],{
 
 /***/ 108:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -6,9 +6,9 @@ webpackJsonp([1],{
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChartsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(85);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(163);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -31,19 +31,19 @@ var ChartsPage = (function () {
         this.navParams = navParams;
         this.http = http;
         // Arrays for data
-        this.rpmArray = [];
-        // spdArray: number[] = [];
-        //dstArray: number[] = [];
         this.lineChartData = [
-            { data: [65, 59, 80, 81, 56, 55, 40] }
+            { data: [] }
+        ];
+        this.rpmArray = [
+            { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] }
         ];
         this.spdArray = [
-            { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }
+            { data: [] }
         ];
         this.dstArray = [
-            { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }
+            { data: [] }
         ];
-        this.lineChartLabels = ['', '', '', '', '', '', '']; //TO DO: add dates here
+        this.lineChartLabels = ['', '', '', '', '', '', '', '', '', '', '', '', '']; //TO DO: add dates here
         this.lineChartOptions = {
             responsive: true
         };
@@ -67,11 +67,14 @@ var ChartsPage = (function () {
         ];
         this.lineChartLegend = false;
         this.lineChartType = 'line';
+        // first load overrides hardcoded data
+        this.loadLogs();
     }
     ChartsPage.prototype.loadLogs = function () {
         var _this = this;
         this.http.get('http://167.99.202.75/api/data').map(function (data) { return data.json(); }).subscribe(function (data) {
             _this.items = data;
+            _this.count = data.length;
             for (var _i = 0, _a = _this.items; _i < _a.length; _i++) {
                 var item = _a[_i];
                 _this.rpmArray.push(Number(item.repHighestRPM));
@@ -81,28 +84,25 @@ var ChartsPage = (function () {
         }, function (err) {
             alert('oops! ' + err);
         });
-        //TO DO:change to all three
-        var _lineChartData = new Array(this.lineChartData.length);
         // temp arrays with new data
-        // let _rpmData: Array<any> = new Array(this.rpmArray.length);
+        var _rpmData = new Array(this.rpmArray.length);
         var _spdData = new Array(this.spdArray.length);
         var _dstData = new Array(this.dstArray.length);
-        // loop over each array
+        // loop over array
         for (var i = 0; i < this.lineChartData.length; i++) {
-            _lineChartData[i] = { data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label };
-            _spdData[i] = { data: new Array(this.spdArray[i].data.length), label: this.spdArray[i].label };
-            _dstData[i] = { data: new Array(this.dstArray[i].data.length), label: this.dstArray[i].label };
-            for (var j = 0; j < this.lineChartData[i].data.length; j++) {
-                _lineChartData[i].data[j] = this.rpmArray[j]; // replace with data from json
+            _rpmData[i] = { data: new Array(this.rpmArray[i].data.length) };
+            _spdData[i] = { data: new Array(this.spdArray[i].data.length) };
+            _dstData[i] = { data: new Array(this.dstArray[i].data.length) };
+            for (var j = 0; j < this.rpmArray[i].data.length; j++) {
+                _rpmData[i].data[j] = this.rpmArray[j]; // replace with data from json
                 _spdData[i].data[j] = this.spdArray[j];
                 _dstData[i].data[j] = this.dstArray[j];
             }
         }
         // rpm
-        this.lineChartData = _lineChartData;
+        this.rpmArray = _rpmData;
         this.spdArray = _spdData;
         this.dstArray = _dstData;
-        console.log("loaded");
     };
     // events
     ChartsPage.prototype.chartClicked = function (e) {
@@ -114,22 +114,138 @@ var ChartsPage = (function () {
     ChartsPage.prototype.ionViewDidLoad = function () {
         // first load overrides hardcoded data
         this.loadLogs();
-        // console.log('ionViewDidLoad ChartsPage');
     };
     ChartsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-charts',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/charts/charts.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>Log Charts</ion-title>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n  </ion-navbar>\n  \n\n</ion-header>\n\n\n<ion-content padding>\n    <button ion-button full (click)="loadLogs()">Load Data</button>\n\n  <ion-card>\n    <ion-card-header>\n      Highest RPM\n    </ion-card-header>\n    <div class="row">\n        <div class="col-md-6">\n          <div style="display: block;">\n          <canvas baseChart width="300" height="400"\n                      [datasets]="lineChartData"\n                      [labels]="lineChartLabels"\n                      [options]="lineChartOptions"\n                      [colors]="lineChartColors"\n                      [legend]="lineChartLegend"\n                      [chartType]="lineChartType"\n                      (chartHover)="chartHovered($event)"\n                      (chartClick)="chartClicked($event)">\n            </canvas>\n          </div>\n        </div>\n      </div>\n\n  </ion-card>\n  <ion-card>\n      <ion-card-header>\n          Average Speed\n      </ion-card-header>\n      <div class="row">\n          <div class="col-md-6">\n            <div style="display: block;">\n            <canvas baseChart width="300" height="400"\n                        [datasets]="spdArray"\n                        [labels]="lineChartLabels"\n                        [options]="lineChartOptions"\n                        [colors]="lineChartColors"\n                        [legend]="lineChartLegend"\n                        [chartType]="lineChartType"\n                        (chartHover)="chartHovered($event)"\n                        (chartClick)="chartClicked($event)"></canvas>\n            </div>\n          </div>\n        </div>\n    </ion-card>\n    <ion-card>\n        <ion-card-header>\n          Distance\n        </ion-card-header>\n        <div class="row">\n            <div class="col-md-6">\n              <div style="display: block;">\n              <canvas baseChart width="300" height="400"\n                          [datasets]="dstArray"\n                          [labels]="lineChartLabels"\n                          [options]="lineChartOptions"\n                          [colors]="lineChartColors"\n                          [legend]="lineChartLegend"\n                          [chartType]="lineChartType"\n                          (chartHover)="chartHovered($event)"\n                          (chartClick)="chartClicked($event)"></canvas>\n              </div>\n            </div>\n          </div>\n      </ion-card>\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/charts/charts.html"*/,
+            selector: 'page-charts',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/charts/charts.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>Log Charts</ion-title>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n  </ion-navbar>\n  \n\n</ion-header>\n\n\n<ion-content padding>\n    <button ion-button full (click)="loadLogs()">Load Data</button>\n\n  <ion-card>\n    <ion-card-header>\n      Highest RPM\n    </ion-card-header>\n    <div class="row">\n        <div class="col-md-6">\n          <div style="display: block;">\n          <canvas baseChart width="300" height="400"\n                      [datasets]="rpmArray"\n                      [labels]="lineChartLabels"\n                      [options]="lineChartOptions"\n                      [colors]="lineChartColors"\n                      [legend]="lineChartLegend"\n                      [chartType]="lineChartType"\n                      (chartHover)="chartHovered($event)"\n                      (chartClick)="chartClicked($event)">\n            </canvas>\n          </div>\n        </div>\n      </div>\n\n  </ion-card>\n  <ion-card>\n      <ion-card-header>\n          Average Speed\n      </ion-card-header>\n      <div class="row">\n          <div class="col-md-6">\n            <div style="display: block;">\n            <canvas baseChart width="300" height="400"\n                        [datasets]="spdArray"\n                        [labels]="lineChartLabels"\n                        [options]="lineChartOptions"\n                        [colors]="lineChartColors"\n                        [legend]="lineChartLegend"\n                        [chartType]="lineChartType"\n                        (chartHover)="chartHovered($event)"\n                        (chartClick)="chartClicked($event)"></canvas>\n            </div>\n          </div>\n        </div>\n    </ion-card>\n    <ion-card>\n        <ion-card-header>\n          Distance\n        </ion-card-header>\n        <div class="row">\n            <div class="col-md-6">\n              <div style="display: block;">\n              <canvas baseChart width="300" height="400"\n                          [datasets]="dstArray"\n                          [labels]="lineChartLabels"\n                          [options]="lineChartOptions"\n                          [colors]="lineChartColors"\n                          [legend]="lineChartLegend"\n                          [chartType]="lineChartType"\n                          (chartHover)="chartHovered($event)"\n                          (chartClick)="chartClicked($event)"></canvas>\n              </div>\n            </div>\n          </div>\n      </ion-card>\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/charts/charts.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]) === "function" && _c || Object])
     ], ChartsPage);
     return ChartsPage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=charts.js.map
 
 /***/ }),
 
-/***/ 119:
+/***/ 109:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DataPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var DataPage = (function () {
+    function DataPage(navCtrl, navParams) {
+        var _this = this;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        // selected data
+        this.item = this.navParams.data;
+        // data arrays
+        this.rpmData = [
+            { data: [] }
+        ];
+        this.spdData = [
+            { data: [] }
+        ];
+        this.lineChartLabels = [];
+        this.lineChartOptions = {
+            responsive: true
+        };
+        this.lineChartColors = [
+            {
+                backgroundColor: 'rgba(148,159,177,0.2)',
+                borderColor: 'rgba(148,159,177,1)',
+                pointBackgroundColor: 'rgba(148,159,177,1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+            },
+            {
+                backgroundColor: 'rgba(77,83,96,0.2)',
+                borderColor: 'rgba(77,83,96,1)',
+                pointBackgroundColor: 'rgba(77,83,96,1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(77,83,96,1)'
+            },
+            {
+                backgroundColor: 'rgba(148,159,177,0.2)',
+                borderColor: 'rgba(148,159,177,1)',
+                pointBackgroundColor: 'rgba(148,159,177,1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+            }
+        ];
+        this.lineChartLegend = false;
+        this.lineChartType = 'line';
+        var index = 0;
+        var label = 0;
+        this.item.rpmList.forEach(function (element) {
+            label++;
+            _this.rpmData[0].data.push(element);
+            _this.lineChartLabels.push(label);
+        });
+        index = 0;
+        this.item.speedList.forEach(function (element) {
+            _this.spdData[0].data.push(element);
+        });
+    }
+    // events
+    DataPage.prototype.chartClicked = function (e) {
+        console.log(e);
+    };
+    DataPage.prototype.chartHovered = function (e) {
+        console.log(e);
+    };
+    Object.defineProperty(DataPage.prototype, "date", {
+        get: function () {
+            console.log(this.item.date);
+            return (this.item.date);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    DataPage.prototype.ionViewDidLoad = function () {
+        //console.log(this.item.rpmList);
+        // let index = 0;
+        // let label = 0;
+        // this.item.rpmList.forEach(element => {
+        //   label++;
+        //   console.log(element + " " +label);
+        //   this.rpmData[0].data.push(element);
+        //   this.lineChartLabels.push(label)
+        // });
+    };
+    DataPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-data',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/data/data.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>data</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding >\n\n    <ion-title >{{date}}</ion-title>\n\n    <ion-card>\n        <ion-card-header>\n          RPM\n        </ion-card-header>\n        <div class="row">\n            <div class="col-md-6">\n              <div style="display: block;">\n              <canvas baseChart width="300" height="400"\n                          [datasets]="rpmData"\n                          [labels]="lineChartLabels"\n                          [options]="lineChartOptions"\n                          [colors]="lineChartColors"\n                          [legend]="lineChartLegend"\n                          [chartType]="lineChartType"\n                          (chartHover)="chartHovered($event)"\n                          (chartClick)="chartClicked($event)">\n                </canvas>\n              </div>\n            </div>\n          </div>\n      </ion-card>\n\n      <ion-card>\n          <ion-card-header>\n            RPM\n          </ion-card-header>\n          <div class="row">\n              <div class="col-md-6">\n                <div style="display: block;">\n                <canvas baseChart width="300" height="400"\n                            [datasets]="spdData"\n                            [labels]="lineChartLabels"\n                            [options]="lineChartOptions"\n                            [colors]="lineChartColors"\n                            [legend]="lineChartLegend"\n                            [chartType]="lineChartType"\n                            (chartHover)="chartHovered($event)"\n                            (chartClick)="chartClicked($event)">\n                  </canvas>\n                </div>\n              </div>\n            </div>\n        </ion-card>\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/data/data.html"*/,
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object])
+    ], DataPage);
+    return DataPage;
+    var _a, _b;
+}());
+
+//# sourceMappingURL=data.js.map
+
+/***/ }),
+
+/***/ 120:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -142,16 +258,20 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 119;
+webpackEmptyAsyncContext.id = 120;
 
 /***/ }),
 
-/***/ 161:
+/***/ 162:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"../pages/charts/charts.module": [
-		459,
+		460,
+		1
+	],
+	"../pages/data/data.module": [
+		461,
 		0
 	]
 };
@@ -166,21 +286,22 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 161;
+webpackAsyncContext.id = 162;
 module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 206:
+/***/ 207:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(85);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(163);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_data__ = __webpack_require__(109);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -190,6 +311,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -208,6 +330,11 @@ var HomePage = (function () {
             alert('oops' + err);
         });
     };
+    // populate with json data
+    HomePage.prototype.getData = function (item) {
+        // push item to DataPage
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__data_data__["a" /* DataPage */], item);
+    };
     HomePage.prototype.ionViewDidLoad = function () {
         // TO DO: fix only loads when re-loaded
         this.loadLogs();
@@ -215,7 +342,7 @@ var HomePage = (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-home',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Trip Logs</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <button ion-button full (click)="loadLogs()">Load Data</button>\n  \n  <ion-list>\n    <ion-card ion-item *ngFor="let item of items">\n      <ion-card-header>\n        {{item.date}}\n        <!-- {{item._id}} -->\n      </ion-card-header>\n      <ion-card-content>\n          <ion-item-group>\n              Highest RPM:  {{item.repHighestRPM}}\n              <br>\n              Average Speed:  {{item.repAvgSpeed}}\n              <br>\n              Distance Traveled:  {{item.repDistance}}\n          </ion-item-group>\n          \n      </ion-card-content>\n\n    </ion-card>\n\n\n\n  </ion-list>\n\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Trip Logs</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <button ion-button full (click)="loadLogs()">Load Data</button>\n  \n  <ion-list>\n    <ion-card ion-item *ngFor="let item of items" (click)="getData(item)">\n      <ion-card-header>\n        {{item.date}}\n      </ion-card-header>\n      <ion-card-content>\n          <ion-item-group>\n              Highest RPM:  {{item.repHighestRPM}}\n              <br>\n              Average Speed:  {{item.repAvgSpeed}}\n              <br>\n              Distance Traveled:  {{item.repDistance}}\n              <br>\n              RPM Data:  {{item.rpmList}}\n          </ion-item-group>\n          \n      </ion-card-content>\n\n    </ion-card>\n\n  </ion-list>\n\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]])
     ], HomePage);
@@ -226,13 +353,13 @@ var HomePage = (function () {
 
 /***/ }),
 
-/***/ 335:
+/***/ 336:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(336);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(359);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(337);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(360);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -240,28 +367,30 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 359:
+/***/ 360:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(85);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(401);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(402);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_charts_charts__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_status_bar__ = __webpack_require__(202);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_splash_screen__ = __webpack_require__(205);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ng2_charts__ = __webpack_require__(410);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_ng2_charts__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_data_data__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ng2_charts__ = __webpack_require__(411);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_ng2_charts__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -281,27 +410,30 @@ var AppModule = (function () {
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* MyApp */],
                 __WEBPACK_IMPORTED_MODULE_5__pages_home_home__["a" /* HomePage */],
-                __WEBPACK_IMPORTED_MODULE_6__pages_charts_charts__["a" /* ChartsPage */]
+                __WEBPACK_IMPORTED_MODULE_6__pages_charts_charts__["a" /* ChartsPage */],
+                __WEBPACK_IMPORTED_MODULE_7__pages_data_data__["a" /* DataPage */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* HttpModule */],
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* MyApp */], {}, {
                     links: [
-                        { loadChildren: '../pages/charts/charts.module#ChartsPageModule', name: 'ChartsPage', segment: 'charts', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/charts/charts.module#ChartsPageModule', name: 'ChartsPage', segment: 'charts', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/data/data.module#DataPageModule', name: 'DataPage', segment: 'data', priority: 'low', defaultHistory: [] }
                     ]
                 }),
-                __WEBPACK_IMPORTED_MODULE_9_ng2_charts__["ChartsModule"]
+                __WEBPACK_IMPORTED_MODULE_10_ng2_charts__["ChartsModule"]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* IonicApp */]],
             entryComponents: [
                 __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* MyApp */],
                 __WEBPACK_IMPORTED_MODULE_5__pages_home_home__["a" /* HomePage */],
-                __WEBPACK_IMPORTED_MODULE_6__pages_charts_charts__["a" /* ChartsPage */]
+                __WEBPACK_IMPORTED_MODULE_6__pages_charts_charts__["a" /* ChartsPage */],
+                __WEBPACK_IMPORTED_MODULE_7__pages_data_data__["a" /* DataPage */]
             ],
             providers: [
-                __WEBPACK_IMPORTED_MODULE_7__ionic_native_status_bar__["a" /* StatusBar */],
-                __WEBPACK_IMPORTED_MODULE_8__ionic_native_splash_screen__["a" /* SplashScreen */],
+                __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__["a" /* StatusBar */],
+                __WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__["a" /* SplashScreen */],
                 { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["ErrorHandler"], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicErrorHandler */] }
             ]
         })
@@ -313,16 +445,16 @@ var AppModule = (function () {
 
 /***/ }),
 
-/***/ 401:
+/***/ 402:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(202);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(205);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_charts_charts__ = __webpack_require__(108);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -388,254 +520,254 @@ var MyApp = (function () {
 
 /***/ }),
 
-/***/ 440:
+/***/ 441:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 213,
-	"./af.js": 213,
-	"./ar": 214,
-	"./ar-dz": 215,
-	"./ar-dz.js": 215,
-	"./ar-kw": 216,
-	"./ar-kw.js": 216,
-	"./ar-ly": 217,
-	"./ar-ly.js": 217,
-	"./ar-ma": 218,
-	"./ar-ma.js": 218,
-	"./ar-sa": 219,
-	"./ar-sa.js": 219,
-	"./ar-tn": 220,
-	"./ar-tn.js": 220,
-	"./ar.js": 214,
-	"./az": 221,
-	"./az.js": 221,
-	"./be": 222,
-	"./be.js": 222,
-	"./bg": 223,
-	"./bg.js": 223,
-	"./bm": 224,
-	"./bm.js": 224,
-	"./bn": 225,
-	"./bn.js": 225,
-	"./bo": 226,
-	"./bo.js": 226,
-	"./br": 227,
-	"./br.js": 227,
-	"./bs": 228,
-	"./bs.js": 228,
-	"./ca": 229,
-	"./ca.js": 229,
-	"./cs": 230,
-	"./cs.js": 230,
-	"./cv": 231,
-	"./cv.js": 231,
-	"./cy": 232,
-	"./cy.js": 232,
-	"./da": 233,
-	"./da.js": 233,
-	"./de": 234,
-	"./de-at": 235,
-	"./de-at.js": 235,
-	"./de-ch": 236,
-	"./de-ch.js": 236,
-	"./de.js": 234,
-	"./dv": 237,
-	"./dv.js": 237,
-	"./el": 238,
-	"./el.js": 238,
-	"./en-au": 239,
-	"./en-au.js": 239,
-	"./en-ca": 240,
-	"./en-ca.js": 240,
-	"./en-gb": 241,
-	"./en-gb.js": 241,
-	"./en-ie": 242,
-	"./en-ie.js": 242,
-	"./en-il": 243,
-	"./en-il.js": 243,
-	"./en-nz": 244,
-	"./en-nz.js": 244,
-	"./eo": 245,
-	"./eo.js": 245,
-	"./es": 246,
-	"./es-do": 247,
-	"./es-do.js": 247,
-	"./es-us": 248,
-	"./es-us.js": 248,
-	"./es.js": 246,
-	"./et": 249,
-	"./et.js": 249,
-	"./eu": 250,
-	"./eu.js": 250,
-	"./fa": 251,
-	"./fa.js": 251,
-	"./fi": 252,
-	"./fi.js": 252,
-	"./fo": 253,
-	"./fo.js": 253,
-	"./fr": 254,
-	"./fr-ca": 255,
-	"./fr-ca.js": 255,
-	"./fr-ch": 256,
-	"./fr-ch.js": 256,
-	"./fr.js": 254,
-	"./fy": 257,
-	"./fy.js": 257,
-	"./gd": 258,
-	"./gd.js": 258,
-	"./gl": 259,
-	"./gl.js": 259,
-	"./gom-latn": 260,
-	"./gom-latn.js": 260,
-	"./gu": 261,
-	"./gu.js": 261,
-	"./he": 262,
-	"./he.js": 262,
-	"./hi": 263,
-	"./hi.js": 263,
-	"./hr": 264,
-	"./hr.js": 264,
-	"./hu": 265,
-	"./hu.js": 265,
-	"./hy-am": 266,
-	"./hy-am.js": 266,
-	"./id": 267,
-	"./id.js": 267,
-	"./is": 268,
-	"./is.js": 268,
-	"./it": 269,
-	"./it.js": 269,
-	"./ja": 270,
-	"./ja.js": 270,
-	"./jv": 271,
-	"./jv.js": 271,
-	"./ka": 272,
-	"./ka.js": 272,
-	"./kk": 273,
-	"./kk.js": 273,
-	"./km": 274,
-	"./km.js": 274,
-	"./kn": 275,
-	"./kn.js": 275,
-	"./ko": 276,
-	"./ko.js": 276,
-	"./ky": 277,
-	"./ky.js": 277,
-	"./lb": 278,
-	"./lb.js": 278,
-	"./lo": 279,
-	"./lo.js": 279,
-	"./lt": 280,
-	"./lt.js": 280,
-	"./lv": 281,
-	"./lv.js": 281,
-	"./me": 282,
-	"./me.js": 282,
-	"./mi": 283,
-	"./mi.js": 283,
-	"./mk": 284,
-	"./mk.js": 284,
-	"./ml": 285,
-	"./ml.js": 285,
-	"./mr": 286,
-	"./mr.js": 286,
-	"./ms": 287,
-	"./ms-my": 288,
-	"./ms-my.js": 288,
-	"./ms.js": 287,
-	"./mt": 289,
-	"./mt.js": 289,
-	"./my": 290,
-	"./my.js": 290,
-	"./nb": 291,
-	"./nb.js": 291,
-	"./ne": 292,
-	"./ne.js": 292,
-	"./nl": 293,
-	"./nl-be": 294,
-	"./nl-be.js": 294,
-	"./nl.js": 293,
-	"./nn": 295,
-	"./nn.js": 295,
-	"./pa-in": 296,
-	"./pa-in.js": 296,
-	"./pl": 297,
-	"./pl.js": 297,
-	"./pt": 298,
-	"./pt-br": 299,
-	"./pt-br.js": 299,
-	"./pt.js": 298,
-	"./ro": 300,
-	"./ro.js": 300,
-	"./ru": 301,
-	"./ru.js": 301,
-	"./sd": 302,
-	"./sd.js": 302,
-	"./se": 303,
-	"./se.js": 303,
-	"./si": 304,
-	"./si.js": 304,
-	"./sk": 305,
-	"./sk.js": 305,
-	"./sl": 306,
-	"./sl.js": 306,
-	"./sq": 307,
-	"./sq.js": 307,
-	"./sr": 308,
-	"./sr-cyrl": 309,
-	"./sr-cyrl.js": 309,
-	"./sr.js": 308,
-	"./ss": 310,
-	"./ss.js": 310,
-	"./sv": 311,
-	"./sv.js": 311,
-	"./sw": 312,
-	"./sw.js": 312,
-	"./ta": 313,
-	"./ta.js": 313,
-	"./te": 314,
-	"./te.js": 314,
-	"./tet": 315,
-	"./tet.js": 315,
-	"./tg": 316,
-	"./tg.js": 316,
-	"./th": 317,
-	"./th.js": 317,
-	"./tl-ph": 318,
-	"./tl-ph.js": 318,
-	"./tlh": 319,
-	"./tlh.js": 319,
-	"./tr": 320,
-	"./tr.js": 320,
-	"./tzl": 321,
-	"./tzl.js": 321,
-	"./tzm": 322,
-	"./tzm-latn": 323,
-	"./tzm-latn.js": 323,
-	"./tzm.js": 322,
-	"./ug-cn": 324,
-	"./ug-cn.js": 324,
-	"./uk": 325,
-	"./uk.js": 325,
-	"./ur": 326,
-	"./ur.js": 326,
-	"./uz": 327,
-	"./uz-latn": 328,
-	"./uz-latn.js": 328,
-	"./uz.js": 327,
-	"./vi": 329,
-	"./vi.js": 329,
-	"./x-pseudo": 330,
-	"./x-pseudo.js": 330,
-	"./yo": 331,
-	"./yo.js": 331,
-	"./zh-cn": 332,
-	"./zh-cn.js": 332,
-	"./zh-hk": 333,
-	"./zh-hk.js": 333,
-	"./zh-tw": 334,
-	"./zh-tw.js": 334
+	"./af": 214,
+	"./af.js": 214,
+	"./ar": 215,
+	"./ar-dz": 216,
+	"./ar-dz.js": 216,
+	"./ar-kw": 217,
+	"./ar-kw.js": 217,
+	"./ar-ly": 218,
+	"./ar-ly.js": 218,
+	"./ar-ma": 219,
+	"./ar-ma.js": 219,
+	"./ar-sa": 220,
+	"./ar-sa.js": 220,
+	"./ar-tn": 221,
+	"./ar-tn.js": 221,
+	"./ar.js": 215,
+	"./az": 222,
+	"./az.js": 222,
+	"./be": 223,
+	"./be.js": 223,
+	"./bg": 224,
+	"./bg.js": 224,
+	"./bm": 225,
+	"./bm.js": 225,
+	"./bn": 226,
+	"./bn.js": 226,
+	"./bo": 227,
+	"./bo.js": 227,
+	"./br": 228,
+	"./br.js": 228,
+	"./bs": 229,
+	"./bs.js": 229,
+	"./ca": 230,
+	"./ca.js": 230,
+	"./cs": 231,
+	"./cs.js": 231,
+	"./cv": 232,
+	"./cv.js": 232,
+	"./cy": 233,
+	"./cy.js": 233,
+	"./da": 234,
+	"./da.js": 234,
+	"./de": 235,
+	"./de-at": 236,
+	"./de-at.js": 236,
+	"./de-ch": 237,
+	"./de-ch.js": 237,
+	"./de.js": 235,
+	"./dv": 238,
+	"./dv.js": 238,
+	"./el": 239,
+	"./el.js": 239,
+	"./en-au": 240,
+	"./en-au.js": 240,
+	"./en-ca": 241,
+	"./en-ca.js": 241,
+	"./en-gb": 242,
+	"./en-gb.js": 242,
+	"./en-ie": 243,
+	"./en-ie.js": 243,
+	"./en-il": 244,
+	"./en-il.js": 244,
+	"./en-nz": 245,
+	"./en-nz.js": 245,
+	"./eo": 246,
+	"./eo.js": 246,
+	"./es": 247,
+	"./es-do": 248,
+	"./es-do.js": 248,
+	"./es-us": 249,
+	"./es-us.js": 249,
+	"./es.js": 247,
+	"./et": 250,
+	"./et.js": 250,
+	"./eu": 251,
+	"./eu.js": 251,
+	"./fa": 252,
+	"./fa.js": 252,
+	"./fi": 253,
+	"./fi.js": 253,
+	"./fo": 254,
+	"./fo.js": 254,
+	"./fr": 255,
+	"./fr-ca": 256,
+	"./fr-ca.js": 256,
+	"./fr-ch": 257,
+	"./fr-ch.js": 257,
+	"./fr.js": 255,
+	"./fy": 258,
+	"./fy.js": 258,
+	"./gd": 259,
+	"./gd.js": 259,
+	"./gl": 260,
+	"./gl.js": 260,
+	"./gom-latn": 261,
+	"./gom-latn.js": 261,
+	"./gu": 262,
+	"./gu.js": 262,
+	"./he": 263,
+	"./he.js": 263,
+	"./hi": 264,
+	"./hi.js": 264,
+	"./hr": 265,
+	"./hr.js": 265,
+	"./hu": 266,
+	"./hu.js": 266,
+	"./hy-am": 267,
+	"./hy-am.js": 267,
+	"./id": 268,
+	"./id.js": 268,
+	"./is": 269,
+	"./is.js": 269,
+	"./it": 270,
+	"./it.js": 270,
+	"./ja": 271,
+	"./ja.js": 271,
+	"./jv": 272,
+	"./jv.js": 272,
+	"./ka": 273,
+	"./ka.js": 273,
+	"./kk": 274,
+	"./kk.js": 274,
+	"./km": 275,
+	"./km.js": 275,
+	"./kn": 276,
+	"./kn.js": 276,
+	"./ko": 277,
+	"./ko.js": 277,
+	"./ky": 278,
+	"./ky.js": 278,
+	"./lb": 279,
+	"./lb.js": 279,
+	"./lo": 280,
+	"./lo.js": 280,
+	"./lt": 281,
+	"./lt.js": 281,
+	"./lv": 282,
+	"./lv.js": 282,
+	"./me": 283,
+	"./me.js": 283,
+	"./mi": 284,
+	"./mi.js": 284,
+	"./mk": 285,
+	"./mk.js": 285,
+	"./ml": 286,
+	"./ml.js": 286,
+	"./mr": 287,
+	"./mr.js": 287,
+	"./ms": 288,
+	"./ms-my": 289,
+	"./ms-my.js": 289,
+	"./ms.js": 288,
+	"./mt": 290,
+	"./mt.js": 290,
+	"./my": 291,
+	"./my.js": 291,
+	"./nb": 292,
+	"./nb.js": 292,
+	"./ne": 293,
+	"./ne.js": 293,
+	"./nl": 294,
+	"./nl-be": 295,
+	"./nl-be.js": 295,
+	"./nl.js": 294,
+	"./nn": 296,
+	"./nn.js": 296,
+	"./pa-in": 297,
+	"./pa-in.js": 297,
+	"./pl": 298,
+	"./pl.js": 298,
+	"./pt": 299,
+	"./pt-br": 300,
+	"./pt-br.js": 300,
+	"./pt.js": 299,
+	"./ro": 301,
+	"./ro.js": 301,
+	"./ru": 302,
+	"./ru.js": 302,
+	"./sd": 303,
+	"./sd.js": 303,
+	"./se": 304,
+	"./se.js": 304,
+	"./si": 305,
+	"./si.js": 305,
+	"./sk": 306,
+	"./sk.js": 306,
+	"./sl": 307,
+	"./sl.js": 307,
+	"./sq": 308,
+	"./sq.js": 308,
+	"./sr": 309,
+	"./sr-cyrl": 310,
+	"./sr-cyrl.js": 310,
+	"./sr.js": 309,
+	"./ss": 311,
+	"./ss.js": 311,
+	"./sv": 312,
+	"./sv.js": 312,
+	"./sw": 313,
+	"./sw.js": 313,
+	"./ta": 314,
+	"./ta.js": 314,
+	"./te": 315,
+	"./te.js": 315,
+	"./tet": 316,
+	"./tet.js": 316,
+	"./tg": 317,
+	"./tg.js": 317,
+	"./th": 318,
+	"./th.js": 318,
+	"./tl-ph": 319,
+	"./tl-ph.js": 319,
+	"./tlh": 320,
+	"./tlh.js": 320,
+	"./tr": 321,
+	"./tr.js": 321,
+	"./tzl": 322,
+	"./tzl.js": 322,
+	"./tzm": 323,
+	"./tzm-latn": 324,
+	"./tzm-latn.js": 324,
+	"./tzm.js": 323,
+	"./ug-cn": 325,
+	"./ug-cn.js": 325,
+	"./uk": 326,
+	"./uk.js": 326,
+	"./ur": 327,
+	"./ur.js": 327,
+	"./uz": 328,
+	"./uz-latn": 329,
+	"./uz-latn.js": 329,
+	"./uz.js": 328,
+	"./vi": 330,
+	"./vi.js": 330,
+	"./x-pseudo": 331,
+	"./x-pseudo.js": 331,
+	"./yo": 332,
+	"./yo.js": 332,
+	"./zh-cn": 333,
+	"./zh-cn.js": 333,
+	"./zh-hk": 334,
+	"./zh-hk.js": 334,
+	"./zh-tw": 335,
+	"./zh-tw.js": 335
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -651,9 +783,9 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 440;
+webpackContext.id = 441;
 
 /***/ })
 
-},[335]);
+},[336]);
 //# sourceMappingURL=main.js.map

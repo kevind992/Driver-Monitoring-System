@@ -6,6 +6,7 @@ import {HttpModule} from '@angular/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ChartsPage } from '../pages/charts/charts';
+import { DataPage } from '../pages/data/data';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -17,7 +18,8 @@ import { ChartsModule } from 'ng2-charts';
   declarations: [
     MyApp,
     HomePage,
-    ChartsPage
+    ChartsPage,
+    DataPage
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,8 @@ import { ChartsModule } from 'ng2-charts';
   entryComponents: [
     MyApp,
     HomePage,
-    ChartsPage
+    ChartsPage,
+    DataPage
   ],
   providers: [
     StatusBar,

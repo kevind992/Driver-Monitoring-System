@@ -11,10 +11,9 @@
   <button ion-button full (click)="loadLogs()">Load Data</button>
   
   <ion-list>
-    <ion-card ion-item *ngFor="let item of items">
+    <ion-card ion-item *ngFor="let item of items" (click)="getData(item)">
       <ion-card-header>
         {{item.date}}
-        <!-- {{item._id}} -->
       </ion-card-header>
       <ion-card-content>
           <ion-item-group>
@@ -23,13 +22,13 @@
               Average Speed:  {{item.repAvgSpeed}}
               <br>
               Distance Traveled:  {{item.repDistance}}
+              <br>
+              RPM Data:  {{item.rpmList}}
           </ion-item-group>
           
       </ion-card-content>
 
     </ion-card>
-
-
 
   </ion-list>
 

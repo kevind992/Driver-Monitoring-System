@@ -21,31 +21,33 @@ import { NgForOf } from '@angular/common';
 export class ChartsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
-
+    // first load overrides hardcoded data
+    this.loadLogs()
   }
 
-  // items:any;
   items;
+  count;
 
   // Arrays for data
-  rpmArray: number[] = [];
-  // spdArray: number[] = [];
-  //dstArray: number[] = [];
-
   public lineChartData: Array<any> = [
-    { data: [65, 59, 80, 81, 56, 55, 40]}
+    { data: []}
+  ];
+
+  public rpmArray: Array<any> = [
+    { data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}
   ];
 
   public spdArray: Array<any> = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }
+    { data: []}
   ];
   public dstArray: Array<any> = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }
+    { data: []}
   ];
 
   loadLogs() {
     this.http.get('http://167.99.202.75/api/data').map(data => data.json()).subscribe(data => {
       this.items = data;
+      this.count = data.length;
 
       for (let item of this.items) {
         this.rpmArray.push(Number(item.repHighestRPM));
@@ -58,35 +60,30 @@ export class ChartsPage {
         alert('oops! ' + err);
       });
 
-
-      //TO DO:change to all three
-    let _lineChartData: Array<any> = new Array(this.lineChartData.length);
     // temp arrays with new data
-    // let _rpmData: Array<any> = new Array(this.rpmArray.length);
+    let _rpmData: Array<any> = new Array(this.rpmArray.length);
     let _spdData: Array<any> = new Array(this.spdArray.length);
     let _dstData: Array<any> = new Array(this.dstArray.length);
 
-    // loop over each array
+    // loop over array
+
     for (let i = 0; i < this.lineChartData.length; i++) {
-      _lineChartData[i] = { data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label };
-      _spdData[i] = { data: new Array(this.spdArray[i].data.length), label: this.spdArray[i].label };
-      _dstData[i] = { data: new Array(this.dstArray[i].data.length), label: this.dstArray[i].label };
-      for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-        _lineChartData[i].data[j] = this.rpmArray[j]; // replace with data from json
+      _rpmData[i] = { data: new Array(this.rpmArray[i].data.length)};
+      _spdData[i] = { data: new Array(this.spdArray[i].data.length)};
+      _dstData[i] = { data: new Array(this.dstArray[i].data.length)};
+      for (let j = 0; j < this.rpmArray[i].data.length; j++) {
+        _rpmData[i].data[j] = this.rpmArray[j]; // replace with data from json
         _spdData[i].data[j] = this.spdArray[j];
         _dstData[i].data[j] = this.dstArray[j];
       }
     }
     // rpm
-    this.lineChartData = _lineChartData;
+    this.rpmArray = _rpmData;
     this.spdArray = _spdData;
     this.dstArray = _dstData;
-
-    console.log("loaded")
-
   }
 
-  public lineChartLabels: Array<any> = ['', '', '', '', '', '', ''];//TO DO: add dates here
+  public lineChartLabels: Array<any> = ['', '', '', '', '', '', '', '', '', '', '', '', ''];//TO DO: add dates here
   public lineChartOptions: any = {
     responsive: true
   };
@@ -123,8 +120,6 @@ export class ChartsPage {
   ionViewDidLoad() {
     // first load overrides hardcoded data
     this.loadLogs()
-
-    // console.log('ionViewDidLoad ChartsPage');
   }
 
 }
