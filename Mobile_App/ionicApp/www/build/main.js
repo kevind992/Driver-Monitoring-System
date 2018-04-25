@@ -337,7 +337,7 @@ var HomePage = (function () {
     };
     HomePage.prototype.checkRating = function () {
         for (var i = 0; i < 5; i++) {
-            if (this.items[i].repHighestRPM >= 500)
+            if (this.items[i].repHighestRPM >= 3500)
                 this.rating = true;
         }
     };
