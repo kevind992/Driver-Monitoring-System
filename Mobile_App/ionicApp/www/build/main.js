@@ -317,36 +317,33 @@ var HomePage = (function () {
         this.navCtrl = navCtrl;
         this.http = http;
         this.rating = false;
-        // this.loadLogs();
+        this.loadLogs();
     }
     HomePage.prototype.loadLogs = function () {
         var _this = this;
         this.http.get('http://167.99.202.75/api/data').map(function (data) { return data.json(); }).subscribe(function (data) {
             _this.items = data;
-            for (var index = 0; index < _this.items.length; index++) {
-                console.log("check" + _this.items);
-            }
             _this.items.reverse();
+            // check last 5
+            _this.checkRating();
         }, function (err) {
             alert('oops' + err);
         });
-        // check last 5
-        this.checkRating();
     };
     HomePage.prototype.checkRating = function () {
-        //console.log("check" + this.items[0]);
-        // this.items.forEach(item => {
-        // });
-        // this.items.forEach(element => {
-        //   if (element.repHighestRPM > 3500) {
-        //     this.rating = true;
-        //     console.log("true");
-        //   }
-        //   else {
-        //     this.rating = false;
-        //     console.log("false");
-        //   }
-        // });
+        var _this = this;
+        this.items.forEach(function (item) {
+        });
+        this.items.forEach(function (element) {
+            if (element.repHighestRPM > 3500) {
+                _this.rating = true;
+                console.log("true");
+            }
+            else {
+                _this.rating = false;
+                console.log("false");
+            }
+        });
         // for (let item of this.items) {
         //   // if (item.repHighestRPM > 3500) {
         //   //       this.rating = true;
@@ -363,8 +360,7 @@ var HomePage = (function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__data_data__["a" /* DataPage */], item);
     };
     HomePage.prototype.ionViewDidLoad = function () {
-        this.loadLogs();
-        console.log('onLoad test');
+        // this.loadLogs()
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
