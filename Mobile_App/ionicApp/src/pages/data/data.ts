@@ -80,7 +80,6 @@ export class DataPage {
   }
 
   get date() {
-    console.log(this.item.date);
     return (this.item.date);
 }
 

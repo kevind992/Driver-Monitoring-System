@@ -4,6 +4,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { DataPage } from '../data/data';
+import { AlertController } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -11,8 +12,9 @@ import { DataPage } from '../data/data';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public http:Http) {
-    // this.loadLogs();
+  constructor(public navCtrl: NavController, public http:Http, public alertCtrl: AlertController) {
+    this.loadLogs();
+    
   }
 
   items: any;
@@ -21,55 +23,52 @@ export class HomePage {
   loadLogs() {
     this.http.get('http://167.99.202.75/api/data').map(data => data.json()).subscribe(data => {
       this.items = data;
-      for (let index = 0; index < this.items.length; index++) {
-        console.log("check" + this.items);
-      }
       this.items.reverse();
+
+      // check last 5
+      this.checkRating();
     },
   (err) => {
     alert('oops' + err);
   });
-  // check last 5
-  this.checkRating();
+  
   }
 
   checkRating() {
-    //console.log("check" + this.items[0]);
-    // this.items.forEach(item => {
-      
-    // });
-    // this.items.forEach(element => {
-    //   if (element.repHighestRPM > 3500) {
-    //     this.rating = true;
-    //     console.log("true");
-    //   }
-    //   else {
-    //     this.rating = false;
-    //     console.log("false");
-    //   }
-      
-    // });
+    for (let i = 0; i < 5; i++) {
+      if (this.items[i].repHighestRPM >= 800) // check if the driver is going over 3500 rpm over the last five records
+        this.rating = true;
+    }
+  }
 
-    // for (let item of this.items) {
-    //   // if (item.repHighestRPM > 3500) {
-    //   //       this.rating = true;
-    //   //       console.log("true");
-    //   //     }
-    //   //     else {
-    //   //       this.rating = false;
-    //   //       console.log("false");
-    //   //     }
-    // }
+  doAlert() {
+    if (this.rating == true) {
+      let alert = this.alertCtrl.create({
+        title: 'Driver Rating',
+        subTitle: 'Bad Driver!',
+        buttons: ['OK']
+      });
+      alert.present();
+    }
+
+    else if (this.rating == false) {
+      let alert = this.alertCtrl.create({
+        title: 'Driver Rating',
+        subTitle: 'Good Driver!',
+        buttons: ['OK']
+      });
+      alert.present();
+    }
     
   }
+  
   getData(item){
     // push item to DataPage
     this.navCtrl.push(DataPage, item);
   }
 
   ionViewDidLoad() {
-    this.loadLogs()
-    console.log('onLoad test')
+    // this.loadLogs()
   }
 
 }

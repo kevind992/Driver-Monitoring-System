@@ -25682,6 +25682,12 @@ page-home .main {
   background-color: whitesmoke;
 }
 
+page-home ion-card.rating-card {
+  margin-bottom: -1em;
+  margin-top: 1em;
+  background-color: 197;
+}
+
 page-home ion-card.reports-card {
   margin-bottom: 2em;
   margin-top: 2em;

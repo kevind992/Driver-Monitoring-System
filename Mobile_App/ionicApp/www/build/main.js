@@ -117,7 +117,7 @@ var ChartsPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'page-charts',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/charts/charts.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>Log Charts</ion-title>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n  </ion-navbar>\n  \n\n</ion-header>\n\n\n<ion-content padding>\n    <button ion-button full (click)="loadLogs()">Load Data</button>\n\n  <ion-card>\n    <ion-card-header>\n      Highest RPM\n    </ion-card-header>\n    <div class="row">\n        <div class="col-md-6">\n          <div style="display: block;">\n          <canvas baseChart width="300" height="400"\n                      [datasets]="rpmArray"\n                      [labels]="lineChartLabels"\n                      [options]="lineChartOptions"\n                      [colors]="lineChartColors"\n                      [legend]="lineChartLegend"\n                      [chartType]="lineChartType"\n                      (chartHover)="chartHovered($event)"\n                      (chartClick)="chartClicked($event)">\n            </canvas>\n          </div>\n        </div>\n      </div>\n\n  </ion-card>\n  <ion-card>\n      <ion-card-header>\n          Average Speed\n      </ion-card-header>\n      <div class="row">\n          <div class="col-md-6">\n            <div style="display: block;">\n            <canvas baseChart width="300" height="400"\n                        [datasets]="spdArray"\n                        [labels]="lineChartLabels"\n                        [options]="lineChartOptions"\n                        [colors]="lineChartColors"\n                        [legend]="lineChartLegend"\n                        [chartType]="lineChartType"\n                        (chartHover)="chartHovered($event)"\n                        (chartClick)="chartClicked($event)"></canvas>\n            </div>\n          </div>\n        </div>\n    </ion-card>\n    <ion-card>\n        <ion-card-header>\n          Distance\n        </ion-card-header>\n        <div class="row">\n            <div class="col-md-6">\n              <div style="display: block;">\n              <canvas baseChart width="300" height="400"\n                          [datasets]="dstArray"\n                          [labels]="lineChartLabels"\n                          [options]="lineChartOptions"\n                          [colors]="lineChartColors"\n                          [legend]="lineChartLegend"\n                          [chartType]="lineChartType"\n                          (chartHover)="chartHovered($event)"\n                          (chartClick)="chartClicked($event)"></canvas>\n              </div>\n            </div>\n          </div>\n      </ion-card>\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/charts/charts.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]])
     ], ChartsPage);
     return ChartsPage;
 }());
@@ -211,7 +211,6 @@ var DataPage = (function () {
     };
     Object.defineProperty(DataPage.prototype, "date", {
         get: function () {
-            console.log(this.item.date);
             return (this.item.date);
         },
         enumerable: true,
@@ -232,7 +231,7 @@ var DataPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'page-data',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/data/data.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>data</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding >\n\n    <ion-title >{{date}}</ion-title>\n\n    <ion-card>\n        <ion-card-header>\n          RPM\n        </ion-card-header>\n        <div class="row">\n            <div class="col-md-6">\n              <div style="display: block;">\n              <canvas baseChart width="300" height="400"\n                          [datasets]="rpmData"\n                          [labels]="lineChartLabels"\n                          [options]="lineChartOptions"\n                          [colors]="lineChartColors"\n                          [legend]="lineChartLegend"\n                          [chartType]="lineChartType"\n                          (chartHover)="chartHovered($event)"\n                          (chartClick)="chartClicked($event)">\n                </canvas>\n              </div>\n            </div>\n          </div>\n      </ion-card>\n\n      <ion-card>\n          <ion-card-header>\n            Speed\n          </ion-card-header>\n          <div class="row">\n              <div class="col-md-6">\n                <div style="display: block;">\n                <canvas baseChart width="300" height="400"\n                            [datasets]="spdData"\n                            [labels]="lineChartLabels"\n                            [options]="lineChartOptions"\n                            [colors]="lineChartColors"\n                            [legend]="lineChartLegend"\n                            [chartType]="lineChartType"\n                            (chartHover)="chartHovered($event)"\n                            (chartClick)="chartClicked($event)">\n                  </canvas>\n                </div>\n              </div>\n            </div>\n        </ion-card>\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/data/data.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]])
     ], DataPage);
     return DataPage;
 }());
@@ -312,68 +311,65 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var HomePage = (function () {
-    function HomePage(navCtrl, http) {
+    function HomePage(navCtrl, http, alertCtrl) {
         this.navCtrl = navCtrl;
         this.http = http;
+        this.alertCtrl = alertCtrl;
         this.rating = false;
-        // this.loadLogs();
+        this.loadLogs();
     }
     HomePage.prototype.loadLogs = function () {
         var _this = this;
         this.http.get('http://167.99.202.75/api/data').map(function (data) { return data.json(); }).subscribe(function (data) {
             _this.items = data;
-            for (var index = 0; index < _this.items.length; index++) {
-                console.log("check" + _this.items);
-            }
             _this.items.reverse();
+            // check last 5
+            _this.checkRating();
         }, function (err) {
             alert('oops' + err);
         });
-        // check last 5
-        this.checkRating();
     };
     HomePage.prototype.checkRating = function () {
-        //console.log("check" + this.items[0]);
-        // this.items.forEach(item => {
-        // });
-        // this.items.forEach(element => {
-        //   if (element.repHighestRPM > 3500) {
-        //     this.rating = true;
-        //     console.log("true");
-        //   }
-        //   else {
-        //     this.rating = false;
-        //     console.log("false");
-        //   }
-        // });
-        // for (let item of this.items) {
-        //   // if (item.repHighestRPM > 3500) {
-        //   //       this.rating = true;
-        //   //       console.log("true");
-        //   //     }
-        //   //     else {
-        //   //       this.rating = false;
-        //   //       console.log("false");
-        //   //     }
-        // }
+        for (var i = 0; i < 5; i++) {
+            if (this.items[i].repHighestRPM >= 800)
+                this.rating = true;
+        }
+    };
+    HomePage.prototype.doAlert = function () {
+        if (this.rating == true) {
+            var alert = this.alertCtrl.create({
+                title: 'Driver Rating',
+                subTitle: 'Bad Driver!',
+                buttons: ['OK']
+            });
+            alert.present();
+        }
+        else if (this.rating == false) {
+            var alert = this.alertCtrl.create({
+                title: 'Driver Rating',
+                subTitle: 'Good Driver!',
+                buttons: ['OK']
+            });
+            alert.present();
+        }
     };
     HomePage.prototype.getData = function (item) {
         // push item to DataPage
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__data_data__["a" /* DataPage */], item);
     };
     HomePage.prototype.ionViewDidLoad = function () {
-        this.loadLogs();
-        console.log('onLoad test');
+        // this.loadLogs()
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-home',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Trip Logs</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding class="main">\n\n\n    <ion-card class="reports-card" ion-item *ngFor="let item of items" (click)="getData(item)">\n      <ion-card-header>\n        {{item.date}}\n      </ion-card-header>\n\n          <ion-item>\n              <ion-icon name="ios-speedometer" item-start large></ion-icon>\n              <h2>Highest RPM:</h2>\n              <p>{{item.repHighestRPM}} RPM</p>\n          </ion-item>\n\n          <ion-item>\n            <ion-icon name="ios-car" item-start large></ion-icon>\n            <h2>Average Speed:</h2>\n            <p>{{item.repAvgSpeed}} KPH</p>\n          </ion-item>\n\n            \n          <ion-item>\n            <ion-icon name="ios-navigate" item-start large></ion-icon>\n            <h2>Distance Traveled:</h2>\n            <p>{{item.repDistance}} K</p>\n          </ion-item>\n          <ion-icon name="ios-arrow-forward" item-end></ion-icon>\n\n    </ion-card>\n\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Trip Logs</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding class="main">\n\n  <!-- put rating here -->\n  <button ion-button block color="dark" (click)="doAlert()">Show Basic Alert</button>\n  <ion-card class="rating-card">\n      <ion-item>\n          Bad driver: {{rating}}\n      </ion-item>\n\n\n  </ion-card>\n\n    <ion-card class="reports-card" ion-item *ngFor="let item of items" (click)="getData(item)">\n      <ion-card-header>\n        {{item.date}}\n      </ion-card-header>\n\n          <ion-item>\n              <ion-icon name="ios-speedometer" item-start large></ion-icon>\n              <h2>Highest RPM:</h2>\n              <p>{{item.repHighestRPM}} RPM</p>\n          </ion-item>\n\n          <ion-item>\n            <ion-icon name="ios-car" item-start large></ion-icon>\n            <h2>Average Speed:</h2>\n            <p>{{item.repAvgSpeed}} KPH</p>\n          </ion-item>\n\n            \n          <ion-item>\n            <ion-icon name="ios-navigate" item-start large></ion-icon>\n            <h2>Distance Traveled:</h2>\n            <p>{{item.repDistance}} K</p>\n          </ion-item>\n          <ion-icon name="ios-arrow-forward" item-end></ion-icon>\n\n    </ion-card>\n\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _c || Object])
     ], HomePage);
     return HomePage;
-    var _a, _b;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=home.js.map
@@ -443,7 +439,7 @@ var AppModule = (function () {
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* HttpModule */],
-                __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* MyApp */], {}, {
+                __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* MyApp */], {}, {
                     links: [
                         { loadChildren: '../pages/charts/charts.module#ChartsPageModule', name: 'ChartsPage', segment: 'charts', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/data/data.module#DataPageModule', name: 'DataPage', segment: 'data', priority: 'low', defaultHistory: [] }
@@ -451,7 +447,7 @@ var AppModule = (function () {
                 }),
                 __WEBPACK_IMPORTED_MODULE_10_ng2_charts__["ChartsModule"]
             ],
-            bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* IonicApp */]],
+            bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicApp */]],
             entryComponents: [
                 __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* MyApp */],
                 __WEBPACK_IMPORTED_MODULE_5__pages_home_home__["a" /* HomePage */],
@@ -461,7 +457,7 @@ var AppModule = (function () {
             providers: [
                 __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__["a" /* StatusBar */],
                 __WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__["a" /* SplashScreen */],
-                { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["ErrorHandler"], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicErrorHandler */] }
+                { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["ErrorHandler"], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] }
             ]
         })
     ], AppModule);
@@ -531,14 +527,14 @@ var MyApp = (function () {
         this.nav.setRoot(page.component);
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Nav */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Nav */])
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: "\n    <ion-tabs>\n      <ion-tab tabIcon=\"car\" [root]=\"tab1\"></ion-tab>\n      <ion-tab tabIcon=\"clipboard\" [root]=\"tab2\"></ion-tab>\n    </ion-tabs>"
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);
     return MyApp;
 }());

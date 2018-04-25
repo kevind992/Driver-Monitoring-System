@@ -9,6 +9,15 @@
 
 <ion-content padding class="main">
 
+  <!-- put rating here -->
+  <button ion-button block color="dark" (click)="doAlert()">Show Basic Alert</button>
+  <ion-card class="rating-card">
+      <ion-item>
+          Bad driver: {{rating}}
+      </ion-item>
+
+
+  </ion-card>
 
     <ion-card class="reports-card" ion-item *ngFor="let item of items" (click)="getData(item)">
       <ion-card-header>
