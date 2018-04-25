@@ -1,17 +1,32 @@
 page-home {
 
-    ion-card {
-        margin-bottom: 2em;
-      }
+  .main {
+    background-color: whitesmoke;
+  }
+
+    ion-card.reports-card {
+      margin-bottom: 2em;
+      margin-top: 2em;
+      background-color: white
+    }
     
       ion-card-content {
-        background-color: #F4F5F8;
+        //background-color: #F4F5F8;
       }
-    
-      ion-card img {
-        width: auto;
-        height: 44px;
-        display: block;
-        margin: 20px auto;
+    //   ion-card img {
+    //     width: auto;
+    //     height: 44px;
+    //     display: block;
+    //     margin: 20px auto;
+    // }    
+
+
+    ion-card.reports-card ion-card-header {
+      color: map-get($colors, primary);
+    }
+
+    ion-card.reports-card ion-list {
+      background-color: aqua
+
     }
 }
