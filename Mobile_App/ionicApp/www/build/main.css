@@ -25685,7 +25685,6 @@ page-home .main {
 page-home ion-card.rating-card {
   margin-bottom: -1em;
   margin-top: 1em;
-  background-color: 197;
 }
 
 page-home ion-card.reports-card {
@@ -25699,6 +25698,13 @@ page-home ion-card.reports-card ion-card-header {
   border-bottom: 1px solid grey;
 }
 
-page-home ion-card.reports-card ion-list {
+page-home .rating-item {
   background-color: aqua;
+}
+
+page-home ion-card.rating-card ion-list {
+  background-color: aqua;
+  background-color: #000;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }

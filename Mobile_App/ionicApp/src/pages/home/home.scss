@@ -7,7 +7,7 @@ page-home {
   ion-card.rating-card {
     margin-bottom: -1em;
     margin-top: 1em;
-    background-color: green($color: #15c50f)
+    //background-color: green($color: #15c50f)
   }
 
   ion-card.reports-card {
@@ -21,8 +21,16 @@ page-home {
     border-bottom: 1px solid grey;
   }
 
-  ion-card.reports-card ion-list {
-    background-color: aqua
+  .rating-item {
+    background-color: aqua;
+    
+  }
+
+  ion-card.rating-card ion-list {
+    background-color: aqua;
+    background-color: #000; // black
+    box-shadow: none;
+
 
   }
 }

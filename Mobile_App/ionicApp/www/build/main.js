@@ -6,7 +6,7 @@ webpackJsonp([2],{
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChartsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(85);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(163);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
@@ -132,7 +132,7 @@ var ChartsPage = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DataPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -292,7 +292,7 @@ module.exports = webpackAsyncContext;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(85);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(163);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
@@ -317,9 +317,13 @@ var HomePage = (function () {
         this.navCtrl = navCtrl;
         this.http = http;
         this.alertCtrl = alertCtrl;
+        this.buttonColor = "primary";
         this.rating = false;
         this.loadLogs();
     }
+    HomePage.prototype.someAction = function () {
+        this.buttonColor = "light";
+    };
     HomePage.prototype.loadLogs = function () {
         var _this = this;
         this.http.get('http://167.99.202.75/api/data').map(function (data) { return data.json(); }).subscribe(function (data) {
@@ -333,26 +337,26 @@ var HomePage = (function () {
     };
     HomePage.prototype.checkRating = function () {
         for (var i = 0; i < 5; i++) {
-            if (this.items[i].repHighestRPM >= 800)
+            if (this.items[i].repHighestRPM >= 500)
                 this.rating = true;
         }
     };
     HomePage.prototype.doAlert = function () {
         if (this.rating == true) {
-            var alert = this.alertCtrl.create({
-                title: 'Driver Rating',
-                subTitle: 'Bad Driver!',
+            var alert_1 = this.alertCtrl.create({
+                title: 'Driver Rating:',
+                subTitle: 'You have exceded 3500 RPM recently.  Keep your RPM down to save on fuel and emissions!',
                 buttons: ['OK']
             });
-            alert.present();
+            alert_1.present();
         }
         else if (this.rating == false) {
-            var alert = this.alertCtrl.create({
-                title: 'Driver Rating',
-                subTitle: 'Good Driver!',
+            var alert_2 = this.alertCtrl.create({
+                title: 'Driver Rating:',
+                subTitle: 'You have not exceded 3500 RPM, Keep it up!',
                 buttons: ['OK']
             });
-            alert.present();
+            alert_2.present();
         }
     };
     HomePage.prototype.getData = function (item) {
@@ -364,12 +368,11 @@ var HomePage = (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-home',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Trip Logs</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding class="main">\n\n  <!-- put rating here -->\n  <button ion-button block color="dark" (click)="doAlert()">Show Basic Alert</button>\n  <ion-card class="rating-card">\n      <ion-item>\n          Bad driver: {{rating}}\n      </ion-item>\n\n\n  </ion-card>\n\n    <ion-card class="reports-card" ion-item *ngFor="let item of items" (click)="getData(item)">\n      <ion-card-header>\n        {{item.date}}\n      </ion-card-header>\n\n          <ion-item>\n              <ion-icon name="ios-speedometer" item-start large></ion-icon>\n              <h2>Highest RPM:</h2>\n              <p>{{item.repHighestRPM}} RPM</p>\n          </ion-item>\n\n          <ion-item>\n            <ion-icon name="ios-car" item-start large></ion-icon>\n            <h2>Average Speed:</h2>\n            <p>{{item.repAvgSpeed}} KPH</p>\n          </ion-item>\n\n            \n          <ion-item>\n            <ion-icon name="ios-navigate" item-start large></ion-icon>\n            <h2>Distance Traveled:</h2>\n            <p>{{item.repDistance}} K</p>\n          </ion-item>\n          <ion-icon name="ios-arrow-forward" item-end></ion-icon>\n\n    </ion-card>\n\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Trip Logs</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding class="main">\n\n  <!-- put rating here -->\n  <!-- <button ion-button block color="dark" (click)="doAlert()">Show Rating</button> -->\n  <!-- <ion-card class="rating-card">\n      <ion-item class="rating-item">\n          Bad driver: {{rating}}\n      </ion-item>\n  </ion-card> -->\n  <button *ngIf="!rating" ion-button full color="secondary" (click)="doAlert()">You are an eco driver</button>\n  <button *ngIf="rating" ion-button full color="danger" (click)="doAlert()">You are not an eco driver!</button>\n\n    <ion-card class="reports-card" ion-item *ngFor="let item of items" (click)="getData(item)">\n      <ion-card-header>\n        {{item.date}}\n      </ion-card-header>\n\n          <ion-item>\n              <ion-icon name="ios-speedometer" item-start large></ion-icon>\n              <h2>Highest RPM:</h2>\n              <p>{{item.repHighestRPM}} RPM</p>\n          </ion-item>\n\n          <ion-item>\n            <ion-icon name="ios-car" item-start large></ion-icon>\n            <h2>Average Speed:</h2>\n            <p>{{item.repAvgSpeed}} KPH</p>\n          </ion-item>\n\n            \n          <ion-item>\n            <ion-icon name="ios-navigate" item-start large></ion-icon>\n            <h2>Distance Traveled:</h2>\n            <p>{{item.repDistance}} K</p>\n          </ion-item>\n          <ion-icon name="ios-arrow-forward" item-end></ion-icon>\n\n    </ion-card>\n\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
     ], HomePage);
     return HomePage;
-    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=home.js.map
@@ -397,7 +400,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(85);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(402);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home__ = __webpack_require__(207);
@@ -474,7 +477,7 @@ var AppModule = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(203);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(207);

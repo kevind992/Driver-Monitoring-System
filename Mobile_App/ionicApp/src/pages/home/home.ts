@@ -12,6 +12,12 @@ import { AlertController } from 'ionic-angular';
 })
 export class HomePage {
 
+  private buttonColor: string = "primary";
+
+    someAction() {
+        this.buttonColor = "light";
+    }
+
   constructor(public navCtrl: NavController, public http:Http, public alertCtrl: AlertController) {
     this.loadLogs();
     
@@ -36,7 +42,7 @@ export class HomePage {
 
   checkRating() {
     for (let i = 0; i < 5; i++) {
-      if (this.items[i].repHighestRPM >= 800) // check if the driver is going over 3500 rpm over the last five records
+      if (this.items[i].repHighestRPM >= 3500) // check if the driver is going over 3500 rpm over the last five records
         this.rating = true;
     }
   }
@@ -44,8 +50,8 @@ export class HomePage {
   doAlert() {
     if (this.rating == true) {
       let alert = this.alertCtrl.create({
-        title: 'Driver Rating',
-        subTitle: 'Bad Driver!',
+        title: 'Driver Rating:',
+        subTitle: 'You have exceded 3500 RPM recently.  Keep your RPM down to save on fuel and emissions!',
         buttons: ['OK']
       });
       alert.present();
@@ -53,8 +59,8 @@ export class HomePage {
 
     else if (this.rating == false) {
       let alert = this.alertCtrl.create({
-        title: 'Driver Rating',
-        subTitle: 'Good Driver!',
+        title: 'Driver Rating:',
+        subTitle: 'You have not exceded 3500 RPM, Keep it up!',
         buttons: ['OK']
       });
       alert.present();
