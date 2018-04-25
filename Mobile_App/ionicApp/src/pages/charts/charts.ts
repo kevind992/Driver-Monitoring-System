@@ -10,9 +10,6 @@ import { ChartsModule } from 'ng2-charts';
 import * as $ from "jquery";
 import { NgForOf } from '@angular/common';
 
-// charts
-// https://www.djamware.com/post/598953f880aca768e4d2b12b/creating-beautiful-charts-easily-using-ionic-3-and-angular-4
-
 @IonicPage()
 @Component({
   selector: 'page-charts',

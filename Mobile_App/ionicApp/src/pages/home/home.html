@@ -7,29 +7,36 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <button ion-button full (click)="loadLogs()">Load Data</button>
-  
-  <ion-list>
-    <ion-card ion-item *ngFor="let item of items" (click)="getData(item)">
+<ion-content padding class="main">
+
+
+    <ion-card class="reports-card" ion-item *ngFor="let item of items" (click)="getData(item)">
       <ion-card-header>
         {{item.date}}
       </ion-card-header>
-      <ion-card-content>
-          <ion-item-group>
-              Highest RPM:  {{item.repHighestRPM}}
-              <br>
-              Average Speed:  {{item.repAvgSpeed}}
-              <br>
-              Distance Traveled:  {{item.repDistance}}
-              <br>
-              RPM Data:  {{item.rpmList}}
-          </ion-item-group>
-          
-      </ion-card-content>
+
+          <ion-item>
+              <ion-icon name="ios-speedometer" item-start large></ion-icon>
+              <h2>Highest RPM:</h2>
+              <p>{{item.repHighestRPM}} RPM</p>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="ios-car" item-start large></ion-icon>
+            <h2>Average Speed:</h2>
+            <p>{{item.repAvgSpeed}} KPH</p>
+          </ion-item>
+
+            
+          <ion-item>
+            <ion-icon name="ios-navigate" item-start large></ion-icon>
+            <h2>Distance Traveled:</h2>
+            <p>{{item.repDistance}} K</p>
+          </ion-item>
+          <ion-icon name="ios-arrow-forward" item-end></ion-icon>
 
     </ion-card>
 
-  </ion-list>
+
 
 </ion-content>

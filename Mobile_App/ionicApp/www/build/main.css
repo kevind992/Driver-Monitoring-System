@@ -25678,17 +25678,21 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
-page-home ion-card {
+page-home .main {
+  background-color: whitesmoke;
+}
+
+page-home ion-card.reports-card {
   margin-bottom: 2em;
+  margin-top: 2em;
+  background-color: white;
 }
 
-page-home ion-card-content {
-  background-color: #F4F5F8;
+page-home ion-card.reports-card ion-card-header {
+  color: #488aff;
+  border-bottom: 1px solid grey;
 }
 
-page-home ion-card img {
-  width: auto;
-  height: 44px;
-  display: block;
-  margin: 20px auto;
+page-home ion-card.reports-card ion-list {
+  background-color: aqua;
 }
