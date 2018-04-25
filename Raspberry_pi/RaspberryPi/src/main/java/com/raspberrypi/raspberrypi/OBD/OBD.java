@@ -7,6 +7,7 @@ import com.raspberrypi.raspberrypi.OBD.commands.control.*;
 import com.raspberrypi.raspberrypi.OBD.commands.engine.RPMCommand;
 import com.raspberrypi.raspberrypi.OBD.commands.protocol.*;
 import com.raspberrypi.raspberrypi.OBD.enums.ObdProtocols;
+import com.raspberrypi.raspberrypi.OBD.exceptions.NonNumericResponseException;
 import com.raspberrypi.raspberrypi.Report.DataTypes;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -81,10 +82,13 @@ public class OBD {
             data.setDistEnd(endDist);
 
             //Running CloseCommand()
+            new ObdResetCommand().run(socket.getInputStream(),socket.getOutputStream());
             new CloseCommand().run(socket.getInputStream(), socket.getOutputStream());
 
 
-        } catch (Exception e) {
+        } catch (NonNumericResponseException e) {
+            System.out.println("Non Numeric Response Exception..");
+        } catch (InterruptedException e){
             e.printStackTrace();
         }
 
