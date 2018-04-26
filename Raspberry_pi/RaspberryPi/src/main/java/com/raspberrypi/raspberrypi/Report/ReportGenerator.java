@@ -35,7 +35,7 @@ public class ReportGenerator {
             highestRPM = calHighestRPM();
             dist = calDistance(data.getDistStart(),data.getDistEnd());
 
-            //Adding the 6 values to Data Object
+            //Adding the 7 values to Data Object
             calData.setDate(getDate());
             calData.setTime(getTime());
             calData.setRepAvgSpeed(String.valueOf(avgSpeed));

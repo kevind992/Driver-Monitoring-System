@@ -4,20 +4,24 @@ import java.util.ArrayList;
 
 public class DataTypes {
 
+    // Variables
     private int distStart;
     private int distEnd;
     private ArrayList<Integer> rpm;
     private ArrayList<Integer> speed;
 
+    // No Argument Constructor
     public DataTypes(){
         super();
     }
 
+    // Argument Constructor
     public DataTypes(ArrayList<Integer> rpm, ArrayList<Integer> speed) {
         this.rpm = rpm;
         this.speed = speed;
     }
 
+    // Getters and Setters
     public ArrayList<Integer> getRpm() { return rpm; }
 
     public void setRpm(ArrayList<Integer> rpm) {
