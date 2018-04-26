@@ -13,6 +13,7 @@ public class Data implements Serializable {
     @Id // Setting the string id as the document id
     private String id;
     private String date;
+    private String time;
     private String repAvgSpeed;
     private String repHighestRPM;
     private String repDistance;
@@ -25,9 +26,10 @@ public class Data implements Serializable {
     }
 
     //Argument Constructor
-    public Data(String dateString, String repAvgSpeed, String repHighestRPM, String repDistance, ArrayList<Integer> speedList, ArrayList<Integer> rpmList) {
+    public Data(String dateString, String time, String repAvgSpeed, String repHighestRPM, String repDistance, ArrayList<Integer> speedList, ArrayList<Integer> rpmList) {
 
         this.date = dateString;
+        this.time = time;
         this.repAvgSpeed = repAvgSpeed;
         this.repHighestRPM = repHighestRPM;
         this.repDistance = repDistance;
@@ -44,6 +46,13 @@ public class Data implements Serializable {
     }
     public String getDate() {
         return date;
+    }
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
     public void setDate(String date) {
         this.date = date;

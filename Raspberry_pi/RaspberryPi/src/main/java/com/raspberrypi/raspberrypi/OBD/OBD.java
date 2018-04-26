@@ -72,8 +72,9 @@ public class OBD {
                     rpmCmd.run(socket.getInputStream(), socket.getOutputStream());
 
                     String tmp = speedCom.getCalculatedResult();
-
-                    if(!Character.isDigit(tmp.charAt(0))){continue;}
+                    for(int i=0; i<tmp.length(); i++){
+                        if(!Character.isDigit(tmp.charAt(i))){continue;}
+                    }
 
                     speed = speedCom.getMetricSpeed();
 
@@ -81,8 +82,10 @@ public class OBD {
                     speedArray.add(count,speed);
 
                     String tmp1 = rpmCmd.getCalculatedResult();
+                    for(int i=0; i<tmp1.length(); i++){
+                        if(!Character.isDigit(tmp1.charAt(i))){continue;}
+                    }
 
-                    if(!Character.isDigit(tmp1.charAt(0))){continue;}
 
                     rpm = Integer.parseInt(rpmCmd.getCalculatedResult());
                     rpmArray.add(count,rpm);

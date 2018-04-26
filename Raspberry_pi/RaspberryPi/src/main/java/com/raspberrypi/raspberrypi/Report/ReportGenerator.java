@@ -6,6 +6,7 @@ import com.raspberrypi.raspberrypi.OBD.OBD;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 
@@ -36,6 +37,7 @@ public class ReportGenerator {
 
             //Adding the 6 values to Data Object
             calData.setDate(getDate());
+            calData.setTime(getTime());
             calData.setRepAvgSpeed(String.valueOf(avgSpeed));
             calData.setRepHighestRPM(String.valueOf(highestRPM));
             calData.setRepDistance(String.valueOf(dist));
@@ -91,11 +93,22 @@ public class ReportGenerator {
     }
     // Method for getting current date
     private String getDate(){
+
         // Format for the date
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         // Getting current date
         Date date = new Date();
         // Returning today's date
         return dateFormat.format(date);
+    }
+    // Method for getting current time
+    private String getTime(){
+
+        // Instance of Calendar
+        Calendar cal = Calendar.getInstance();
+        // Setting format
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+
+        return timeFormat.format(cal.getTime());
     }
 }
