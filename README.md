@@ -46,3 +46,4 @@ Due to multiple technologies being used within this project we decided to split 
 - https://www.youtube.com/watch?v=Hu-cyytqfp8
 - https://www.raspberrypi.org/forums/viewtopic.php?t=125922
 - https://www.raspberrypi.org/forums/viewtopic.php?t=174327#p1115281
+- https://www.djamware.com/post/598953f880aca768e4d2b12b/creating-beautiful-charts-easily-using-ionic-3-and-angular-4
