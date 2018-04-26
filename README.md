@@ -1,10 +1,10 @@
 # README.md
 ## Introduction
-Within this repository containes our 3rd year group project for the module, Professional Practice in IT. For our project we developed a Driver monitoring system which uses an OBDII dongle to connect to a car, the OBDII dongle pulls the car sensor data onto a Raspberry Pi 3, does some calculations and generates a report. Once the report is created, the Raspberry pi will send the report to be stored on a MongoDB which is on a Digital Droplet. On the Digital Droplet we also have a node.js server which creates an API. To be able to view all the reports we created a Ionic application which gets all the reports from the API.
+Within this repository contains our 3rd year group project for the module, Professional Practice in IT. For our project we developed a Driver monitoring system which uses an OBDII dongle to connect to a car, the OBDII dongle pulls the car sensor data onto a Raspberry Pi 3, does some calculations and generates a report. The Raspberry Pi starts the application without having to touch a mouse or keyboard. Just power it up and start driving. Once the report is created, the Raspberry pi will send the report to be stored on a MongoDB which is on a Digital Droplet. On the Digital Droplet we also have a node.js server which creates an API. To be able to view all the reports we created a Ionic application which gets all the reports from the API.
 ## Installation and Running
 For installing and running the Driver Monitoring System please refer to the word documents within the Documents folder in the main repository. 
 ## Repository Structure
-Due to multiple technologies being used within this project we decided to split them up into different folders. 
+Due to multiple technologies being used within this project we decided to split them up into different folders. If you intend on running the code navigate into the particular section (i.e. Raspberry Pi) you wish to open and open that within your IDE. 
 - The three word documents are within the Documents folder. 
 - All the code for the Raspberry Pi / Laptop are within the Raspberry Pi folder. 
 - All the code within that is being used on the Digital Droplet are within the Server folder. 
