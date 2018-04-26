@@ -21,7 +21,7 @@
 
     <ion-card class="reports-card" ion-item *ngFor="let item of items" (click)="getData(item)">
       <ion-card-header>
-        {{item.date}}
+        {{item.time}} | {{item.date}}
       </ion-card-header>
 
           <ion-item>
