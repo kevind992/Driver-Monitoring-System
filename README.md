@@ -37,3 +37,12 @@ Due to multiple technologies being used within this project we decided to split 
 - Michael Curley
 - Shane Daniels
 ## References
+- https://www.elmelectronics.com/help/obd/tips/#UnderstandingOBD
+- https://www.elmelectronics.com/help/obd/tips/#327_Commands
+- https://www.theregister.co.uk/2017/01/11/mongodb_ransomware_followup/
+- https://www.youtube.com/watch?v=eB9Fq9I5ocs
+- https://stackoverflow.com/questions/12701259/how-to-make-a-node-js-application-run-permanently
+- https://www.digitalocean.com/community/tutorials/how-to-use-the-mongodb-one-click-application
+- https://www.youtube.com/watch?v=Hu-cyytqfp8
+- https://www.raspberrypi.org/forums/viewtopic.php?t=125922
+- https://www.raspberrypi.org/forums/viewtopic.php?t=174327#p1115281
