@@ -10,32 +10,39 @@ Data = require('./models/data.js');
 
 //Connecting to MongoDB using Mongoose
 var options = {
-        user: "student1",
-        pass: "software2018",
-        auth: {
-                authdb: 'admin'
-        }
+	
+         user: "student",
+         pass: "software2018",
+         auth: {
+                 authdb: 'admin'
+         }
 };
 
-var mongooseConnectionString = 'mongodb:/' + '/167.99.202.48:27017/reports';
+var mongooseConnectionString = 'mongodb:/' + '/167.99.202.75:27017/reports';
+
+
+
+//mongoose.connect('mongodb:/'+'/student:software2018@167.99.202.48:27$
 
 mongoose.connect(mongooseConnectionString, options);
+
 console.log('Connected to mongoose..');
+
 var db = mongoose.connection;
 
 app.get('/',function(req, res){
-        res.send('Please use /api/data');
+         res.send('Please use /api/data');
 });
 
 app.get('/api/data',function(req, res){
-        console.log(res.body);
-		 Data.getData(function(err, data){
+         console.log(res.body);
+         Data.getData(function(err, data){
 
-                if(err){
+                 if(err){
                         throw err;
-                }
-                res.json(data);
-        });
+                 }
+                 res.json(data);
+         });
 });
 
 app.listen(80);
