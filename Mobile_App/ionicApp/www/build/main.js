@@ -343,20 +343,20 @@ var HomePage = (function () {
     };
     HomePage.prototype.doAlert = function () {
         if (this.rating == true) {
-            var alert_1 = this.alertCtrl.create({
+            var alert = this.alertCtrl.create({
                 title: 'Driver Rating:',
                 subTitle: 'You have exceded 3500 RPM recently.  Keep your RPM down to save on fuel and emissions!',
                 buttons: ['OK']
             });
-            alert_1.present();
+            alert.present();
         }
         else if (this.rating == false) {
-            var alert_2 = this.alertCtrl.create({
+            var alert = this.alertCtrl.create({
                 title: 'Driver Rating:',
                 subTitle: 'You have not exceded 3500 RPM, Keep it up!',
                 buttons: ['OK']
             });
-            alert_2.present();
+            alert.present();
         }
     };
     HomePage.prototype.getData = function (item) {
@@ -370,9 +370,10 @@ var HomePage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'page-home',template:/*ion-inline-start:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Trip Logs</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding class="main">\n\n  <!-- put rating here -->\n  <!-- <button ion-button block color="dark" (click)="doAlert()">Show Rating</button> -->\n  <!-- <ion-card class="rating-card">\n      <ion-item class="rating-item">\n          Bad driver: {{rating}}\n      </ion-item>\n  </ion-card> -->\n  <button *ngIf="!rating" ion-button full color="secondary" (click)="doAlert()">You are an eco driver</button>\n  <button *ngIf="rating" ion-button full color="danger" (click)="doAlert()">You are not an eco driver!</button>\n\n    <ion-card class="reports-card" ion-item *ngFor="let item of items" (click)="getData(item)">\n      <ion-card-header>\n        {{item.time}} | {{item.date}}\n      </ion-card-header>\n\n          <ion-item>\n              <ion-icon name="ios-speedometer" item-start large></ion-icon>\n              <h2>Highest RPM:</h2>\n              <p>{{item.repHighestRPM}} RPM</p>\n          </ion-item>\n\n          <ion-item>\n            <ion-icon name="ios-car" item-start large></ion-icon>\n            <h2>Average Speed:</h2>\n            <p>{{item.repAvgSpeed}} KPH</p>\n          </ion-item>\n\n            \n          <ion-item>\n            <ion-icon name="ios-navigate" item-start large></ion-icon>\n            <h2>Distance Traveled:</h2>\n            <p>{{item.repDistance}} K</p>\n          </ion-item>\n          <ion-icon name="ios-arrow-forward" item-end></ion-icon>\n\n    </ion-card>\n\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/shanedaniels/programing/year3/semerster2/GroupOBD/3rd-Year-Project/Mobile_App/ionicApp/src/pages/home/home.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _c || Object])
     ], HomePage);
     return HomePage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=home.js.map
